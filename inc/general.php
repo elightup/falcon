@@ -21,6 +21,7 @@ class Falcon_General
 		// Disable emojis.
 		add_action( 'init', array( $this, 'disable_emojis' ) );
 
+		// Disable self ping.
 		add_action( 'pre_ping', array( __CLASS__, 'no_self_ping' ) );
 	}
 
