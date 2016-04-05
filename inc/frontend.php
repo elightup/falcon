@@ -33,7 +33,9 @@ class Falcon_Frontend
 	 */
 	public function unversion( $src )
 	{
-		return remove_query_arg( 'ver', $src );
+		$src = remove_query_arg( 'ver', $src );
+		$src = str_replace( array( 'https:', 'http:' ), '', $src );
+		return $src;
 	}
 
 	/**
