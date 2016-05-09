@@ -6,7 +6,7 @@ Tested up to: 4.4.2
 Stable tag: 1.0.1
 License: GPLv2 or later
 
-**Falcon** is a minimalist WordPress plugin which cleans up your website and optimizes it for best performance.
+Falcon is a minimalist WordPress plugin which cleans up your website and optimizes it for best performance.
 
 == Description ==
 
