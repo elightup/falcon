@@ -6,6 +6,8 @@
 * Disables emojis.
 * Disables self ping.
 * Removes query string in JS and CSS file.
+* Uses jQuery from Google CDN
+* Sets scheme-less URLs for JS and CSS files, e.g. removes 'http:' and 'https:' from URLs.
 * Cleans up header.
 * Removes styles for recent comments widget.
 
