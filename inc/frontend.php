@@ -61,6 +61,6 @@ class Falcon_Frontend
 	public function jquery_cdn()
 	{
 		wp_deregister_script( 'jquery' );
-		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js', '', '2.2.2', true );
+		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js', '', '2.2.4', true );
 	}
 }
