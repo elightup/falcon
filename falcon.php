@@ -3,7 +3,7 @@
  * Plugin Name: Falcon
  * Plugin URI: http://gretathemes.com
  * Description: The best WordPress optimization plugin.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: GretaThemes
  * Author URI: http://gretathemes.com
  * License: GPL2+

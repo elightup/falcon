@@ -2,8 +2,8 @@
 Contributors: gretathemes
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 4.3
-Tested up to: 4.4.2
-Stable tag: 1.0.1
+Tested up to: 4.5.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 
 Falcon is a minimalist WordPress plugin which cleans up your website and optimizes it for best performance.
@@ -46,6 +46,12 @@ The plugin doesn't have any settings page or configuration. Just install and for
 The plugin doesn't have any settings page or configuration. Just install and forget!
 
 == Changelog ==
+
+= 1.0.3 =
+* Update jQuery to 2.2.4
+
+= 1.0.2 =
+* Use jQuery from Google CDN
 
 = 1.0.1 =
 * Sets scheme-less URLs for JS and CSS files, e.g. removes 'http:' and 'https:' from URLs.

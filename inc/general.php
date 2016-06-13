@@ -22,7 +22,7 @@ class Falcon_General
 		add_action( 'init', array( $this, 'disable_emojis' ) );
 
 		// Disable self ping.
-		add_action( 'pre_ping', array( __CLASS__, 'no_self_ping' ) );
+		add_action( 'pre_ping', array( $this, 'no_self_ping' ) );
 	}
 
 	/**
