@@ -1,43 +1,38 @@
 <?php
 /**
  * Optimization for both frontend and backend.
+ *
  * @package Falcon
+ * @author  GretaThemes <info@gretathemes.com>
+ * @link    https://gretathemes.com
  */
+
+namespace Falcon;
 
 /**
  * General optimization class.
- * @package Falcon
  */
-class Falcon_General
-{
+class General {
 	/**
-	 * Add hooks when class is loaded.
+	 * Add hooks.
 	 */
-	public function __construct()
-	{
-		// Disable heartbeat.
+	public function __construct() {
 		add_action( 'init', array( $this, 'disable_heartbeat' ), 1 );
-
-		// Disable emojis.
 		add_action( 'init', array( $this, 'disable_emojis' ) );
-
-		// Disable self ping.
 		add_action( 'pre_ping', array( $this, 'no_self_ping' ) );
 	}
 
 	/**
 	 * Disable heartbeat.
 	 */
-	public function disable_heartbeat()
-	{
+	public function disable_heartbeat() {
 		wp_deregister_script( 'heartbeat' );
 	}
 
 	/**
 	 * Disable emojis.
 	 */
-	public function disable_emojis()
-	{
+	public function disable_emojis() {
 		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 		remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -54,8 +49,7 @@ class Falcon_General
 	 * @param  array $plugins
 	 * @return array
 	 */
-	public function disable_emojis_tinymce( $plugins )
-	{
+	public function disable_emojis_tinymce( $plugins ) {
 		return is_array( $plugins ) ? array_diff( $plugins, array( 'wpemoji' ) ) : array();
 	}
 
@@ -64,13 +58,10 @@ class Falcon_General
 	 * @link http://wordpress.stackexchange.com/a/1852
 	 * @param array $links
 	 */
-	public function no_self_ping( $links )
-	{
+	public function no_self_ping( $links ) {
 		$home_url = home_url();
-		foreach ( $links as $l => $link )
-		{
-			if ( false !== strpos( $link, $home_url ) )
-			{
+		foreach ( $links as $l => $link ) {
+			if ( false !== strpos( $link, $home_url ) ) {
 				unset( $links[$l] );
 			}
 		}

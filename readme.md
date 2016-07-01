@@ -10,6 +10,7 @@
 * Sets scheme-less URLs for JS and CSS files, e.g. removes 'http:' and 'https:' from URLs.
 * Cleans up header.
 * Removes styles for recent comments widget.
+* Remove Jetpack devicex script.
 
 The plugin doesn't require any configuration. It automatically does everything behind the scene. Just install and forget.
 
