@@ -27,7 +27,7 @@ class Embed {
 	 * - Completely removes the related JavaScript.
 	 */
 	public function disable() {
-		/* @var WP $wp */
+		/* @var \WP $wp */
 		global $wp;
 
 		// Remove the embed query var.

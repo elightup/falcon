@@ -16,8 +16,8 @@ class Media {
 	/**
 	 * Add hooks.
 	 */
-	public function init() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'dequeue' ) );
+	public function __construct() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'dequeue' ), 20 );
 
 		// No styles for recent comments widget.
 		add_filter( 'show_recent_comments_widget_style', '__return_false' );
