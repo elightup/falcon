@@ -27,7 +27,7 @@ class Media {
 		add_filter( 'style_loader_src', array( $this, 'unversion' ) );
 
 		// Use jQuery from Google CDN.
-		add_action( 'init', array( $this, 'jquery_cdn' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'jquery_cdn' ) );
 	}
 
 	/**
@@ -40,12 +40,15 @@ class Media {
 
 	/**
 	 * Remove version for scripts and styles.
-	 * @param string $src
+	 *
+	 * @param  string $src
+	 *
 	 * @return string
 	 */
 	public function unversion( $src ) {
 		$src = remove_query_arg( 'ver', $src );
 		$src = str_replace( array( 'https:', 'http:' ), '', $src );
+
 		return $src;
 	}
 
@@ -54,6 +57,6 @@ class Media {
 	 */
 	public function jquery_cdn() {
 		wp_deregister_script( 'jquery' );
-		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js', '', '2.2.4', true );
+		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js', '', '2.2.4', true );
 	}
 }

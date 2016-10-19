@@ -11,11 +11,10 @@
 * Cleans up header.
 * Removes styles for recent comments widget.
 * Remove Jetpack devicex script.
-
-The plugin doesn't require any configuration. It automatically does everything behind the scene. Just install and forget.
+* Load CSS asynchronously (and selectively).
 
 **Falcon** is created and maintained FREE on [Github](https://github.com/gretathemes/falcon). Please open a [new issue](https://github.com/gretathemes/falcon/issues) to add a suggestion or report a bug.
 
-If you like this plugin, you might also like our [premium WordPress themes](http://gretathemes.com).
+If you like this plugin, you might also like our [premium WordPress themes](https://gretathemes.com).
 
-Visit [GretaThemes](http://gretathemes.com).
+Visit [GretaThemes](https://gretathemes.com).

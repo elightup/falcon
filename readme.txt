@@ -2,8 +2,8 @@
 Contributors: gretathemes
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 4.3
-Tested up to: 4.5.3
-Stable tag: 1.1.1
+Tested up to: 4.6.1
+Stable tag: 1.2
 License: GPLv2 or later
 
 Falcon is a minimalist WordPress plugin which cleans up your website and optimizes it for best performance.
@@ -23,22 +23,21 @@ Falcon is a minimalist WordPress plugin which cleans up your website and optimiz
 * Cleans up header.
 * Removes styles for recent comments widget.
 * Remove Jetpack devicex script.
+* Load CSS asynchronously (and selectively).
 
-The plugin doesn't require any configuration. It automatically does everything behind the scene. Just install and forget.
+Note that Falcon requires PHP 5.4+ to run.
 
 **Falcon** is created and maintained FREE on [Github](https://github.com/gretathemes/falcon). Please open a [new issue](https://github.com/gretathemes/falcon/issues) to add a suggestion or report a bug.
 
-If you like this plugin, you might also like our [premium WordPress themes](http://gretathemes.com).
+If you like this plugin, you might also like our [premium WordPress themes](https://gretathemes.com).
 
-Visit [GretaThemes](http://gretathemes.com).
+Visit [GretaThemes](https://gretathemes.com).
 
 == Installation ==
 
-1. Unzip the download package
-1. Upload `falcon` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
+Go to *Dashboad | Plugins | Add New* and search for **Falcon**. Then install and activate the plugin.
 
-The plugin doesn't have any settings page or configuration. Just install and forget!
+To configure the async CSS loading, go to *Settings | Falcon*.
 
 == Frequently Asked Questions ==
 
@@ -47,6 +46,11 @@ The plugin doesn't have any settings page or configuration. Just install and for
 The plugin doesn't have any settings page or configuration. Just install and forget!
 
 == Changelog ==
+
+= 1.2 =
+* New: Load CSS asynchronously (and selectively).
+* Fix: No error in the login page.
+* Requires PHP 5.4
 
 = 1.1.1 =
 * Fix not loading file for media.

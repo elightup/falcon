@@ -2,17 +2,18 @@
 /**
  * Plugin Name: Disable Embeds
  * Description: Don't like the enhanced embeds in WordPress 4.4? Easily disable the feature using this plugin.
- * Version:     1.2.0
+ * Version:     1.3.0
  * Author:      Pascal Birchler
  * Author URI:  https://pascalbirchler.com
  * License:     GPLv2+
  *
  * @package disable-embeds
  */
+
 namespace Falcon;
 
 class Embed {
-	/** 
+	/**
 	 * Add hooks.
 	 */
 	public function __construct() {
@@ -27,7 +28,7 @@ class Embed {
 	 * - Completely removes the related JavaScript.
 	 */
 	public function disable() {
-		/* @var \WP $wp */
+		/* @var WP $wp */
 		global $wp;
 
 		// Remove the embed query var.
@@ -49,10 +50,13 @@ class Embed {
 
 		// Remove oEmbed-specific JavaScript from the front-end and back-end.
 		remove_action( 'wp_head', 'wp_oembed_add_host_js' );
-		add_filter( 'tiny_mce_plugins', array( $this, 'disable_embeds_tiny_mce_plugin' ) );
+		add_filter( 'tiny_mce_plugins', [ $this, 'disable_embeds_tiny_mce_plugin' ] );
 
 		// Remove all embeds rewrite rules.
-		add_filter( 'rewrite_rules_array', array( $this, 'disable_embeds_rewrites' ) );
+		add_filter( 'rewrite_rules_array', [ $this, 'disable_embeds_rewrites' ] );
+
+		// Remove filter of the oEmbed result before any HTTP requests are made.
+		remove_filter( 'pre_oembed_result', 'wp_filter_pre_oembed_result', 10 );
 	}
 
 	/**
@@ -61,6 +65,7 @@ class Embed {
 	 * @since 1.0.0
 	 *
 	 * @param array $plugins List of TinyMCE plugins.
+	 *
 	 * @return array The modified list.
 	 */
 	public function disable_embeds_tiny_mce_plugin( $plugins ) {
@@ -73,6 +78,7 @@ class Embed {
 	 * @since 1.2.0
 	 *
 	 * @param array $rules WordPress rewrite rules.
+	 *
 	 * @return array Rewrite rules without embeds rules.
 	 */
 	public function disable_embeds_rewrites( $rules ) {

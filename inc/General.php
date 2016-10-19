@@ -46,7 +46,9 @@ class General {
 
 	/**
 	 * Filter function used to remove the tinymce emoji plugin.
+	 *
 	 * @param  array $plugins
+	 *
 	 * @return array
 	 */
 	public function disable_emojis_tinymce( $plugins ) {
@@ -55,14 +57,16 @@ class General {
 
 	/**
 	 * Stop self pinging
-	 * @link http://wordpress.stackexchange.com/a/1852
+	 *
+	 * @link  http://wordpress.stackexchange.com/a/1852
+	 *
 	 * @param array $links
 	 */
 	public function no_self_ping( $links ) {
 		$home_url = home_url();
 		foreach ( $links as $l => $link ) {
 			if ( false !== strpos( $link, $home_url ) ) {
-				unset( $links[$l] );
+				unset( $links[ $l ] );
 			}
 		}
 	}

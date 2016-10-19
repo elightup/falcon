@@ -10,8 +10,10 @@ namespace Falcon;
 
 /**
  * PSR-4 autoloader class.
+ * @link https://github.com/php-fig/fig-standards/wiki/PSR-4-Example-Implementations
  */
-class Psr4AutoloaderClass {
+class Autoloader
+{
 	/**
 	 * An associative array where the key is a namespace prefix and the value
 	 * is an array of base directories for classes in that namespace.
@@ -23,10 +25,11 @@ class Psr4AutoloaderClass {
 	/**
 	 * Register loader with SPL autoloader stack.
 	 *
-	 * @return void
+	 * @return null
 	 */
-	public function register() {
-		spl_autoload_register( array( $this, 'loadClass' ) );
+	public function register()
+	{
+		spl_autoload_register(array($this, 'loadClass'));
 	}
 
 	/**
@@ -38,26 +41,27 @@ class Psr4AutoloaderClass {
 	 * @param bool $prepend If true, prepend the base directory to the stack
 	 * instead of appending it; this causes it to be searched first rather
 	 * than last.
-	 *
-	 * @return void
+	 * @return null
 	 */
-	public function addNamespace( $prefix, $base_dir, $prepend = false ) {
+	public function addNamespace($prefix, $base_dir, $prepend = false)
+	{
 		// normalize namespace prefix
-		$prefix = trim( $prefix, '\\' ) . '\\';
+		$prefix = trim($prefix, '\\') . '\\';
 
 		// normalize the base directory with a trailing separator
-		$base_dir = rtrim( $base_dir, DIRECTORY_SEPARATOR ) . '/';
+		$base_dir = rtrim($base_dir, '/') . DIRECTORY_SEPARATOR;
+		$base_dir = rtrim($base_dir, DIRECTORY_SEPARATOR) . '/';
 
 		// initialize the namespace prefix array
-		if ( isset( $this->prefixes[ $prefix ] ) === false ) {
-			$this->prefixes[ $prefix ] = array();
+		if (isset($this->prefixes[$prefix]) === false) {
+			$this->prefixes[$prefix] = array();
 		}
 
 		// retain the base directory for the namespace prefix
-		if ( $prepend ) {
-			array_unshift( $this->prefixes[ $prefix ], $base_dir );
+		if ($prepend) {
+			array_unshift($this->prefixes[$prefix], $base_dir);
 		} else {
-			array_push( $this->prefixes[ $prefix ], $base_dir );
+			array_push($this->prefixes[$prefix], $base_dir);
 		}
 	}
 
@@ -65,33 +69,33 @@ class Psr4AutoloaderClass {
 	 * Loads the class file for a given class name.
 	 *
 	 * @param string $class The fully-qualified class name.
-	 *
 	 * @return mixed The mapped file name on success, or boolean false on
 	 * failure.
 	 */
-	public function loadClass( $class ) {
+	public function loadClass($class)
+	{
 		// the current namespace prefix
 		$prefix = $class;
 
 		// work backwards through the namespace names of the fully-qualified
 		// class name to find a mapped file name
-		while ( false !== $pos = strrpos( $prefix, '\\' ) ) {
+		while (false !== $pos = strrpos($prefix, '\\')) {
 
 			// retain the trailing namespace separator in the prefix
-			$prefix = substr( $class, 0, $pos + 1 );
+			$prefix = substr($class, 0, $pos + 1);
 
 			// the rest is the relative class name
-			$relative_class = substr( $class, $pos + 1 );
+			$relative_class = substr($class, $pos + 1);
 
 			// try to load a mapped file for the prefix and relative class
-			$mapped_file = $this->loadMappedFile( $prefix, $relative_class );
-			if ( $mapped_file ) {
+			$mapped_file = $this->loadMappedFile($prefix, $relative_class);
+			if ($mapped_file) {
 				return $mapped_file;
 			}
 
 			// remove the trailing namespace separator for the next iteration
 			// of strrpos()
-			$prefix = rtrim( $prefix, '\\' );
+			$prefix = rtrim($prefix, '\\');
 		}
 
 		// never found a mapped file
@@ -103,28 +107,31 @@ class Psr4AutoloaderClass {
 	 *
 	 * @param string $prefix The namespace prefix.
 	 * @param string $relative_class The relative class name.
-	 *
 	 * @return mixed Boolean false if no mapped file can be loaded, or the
 	 * name of the mapped file that was loaded.
 	 */
-	protected function loadMappedFile( $prefix, $relative_class ) {
+	protected function loadMappedFile($prefix, $relative_class)
+	{
 		// are there any base directories for this namespace prefix?
-		if ( isset( $this->prefixes[ $prefix ] ) === false ) {
+		if (! isset($this->prefixes[$prefix])) {
 			return false;
 		}
 
 		// look through base directories for this namespace prefix
-		foreach ( $this->prefixes[ $prefix ] as $base_dir ) {
+		foreach ($this->prefixes[$prefix] as $base_dir) {
 
 			// replace the namespace prefix with the base directory,
 			// replace namespace separators with directory separators
 			// in the relative class name, append with .php
 			$file = $base_dir
-			        . str_replace( '\\', '/', $relative_class )
+			        . str_replace('\\', DIRECTORY_SEPARATOR, $relative_class)
+			        . '.php';
+			$file = $base_dir
+			        . str_replace('\\', '/', $relative_class)
 			        . '.php';
 
 			// if the mapped file exists, require it
-			if ( $this->requireFile( $file ) ) {
+			if ($this->requireFile($file)) {
 				// yes, we're done
 				return $file;
 			}
@@ -138,17 +145,14 @@ class Psr4AutoloaderClass {
 	 * If a file exists, require it from the file system.
 	 *
 	 * @param string $file The file to require.
-	 *
 	 * @return bool True if the file exists, false if not.
 	 */
-	protected function requireFile( $file ) {
-		$file = strtolower( $file );
-		if ( file_exists( $file ) ) {
+	protected function requireFile($file)
+	{
+		if (file_exists($file)) {
 			require $file;
-
 			return true;
 		}
-
 		return false;
 	}
 }
