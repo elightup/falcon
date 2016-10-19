@@ -3,7 +3,7 @@
  * Plugin Name: Falcon
  * Plugin URI: https://gretathemes.com
  * Description: The best WordPress optimization plugin.
- * Version: 1.2
+ * Version: 1.2.1
  * Author: GretaThemes
  * Author URI: https://gretathemes.com
  * License: GPL2+
@@ -13,7 +13,7 @@
 
 namespace Falcon;
 
-require 'inc/Autoloader.php';
+require __DIR__ . '/inc/Autoloader.php';
 $loader = new Autoloader;
 $loader->addNamespace( 'Falcon', __DIR__ . '/inc' );
 $loader->register();
