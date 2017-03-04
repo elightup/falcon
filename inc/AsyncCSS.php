@@ -60,6 +60,11 @@ class AsyncCSS {
 		$handles = isset( $option['async_css_handles'] ) ? $option['async_css_handles'] : '';
 		$handles = array_filter( array_map( 'trim', explode( ',', $handles . ',' ) ) );
 
+		// Make sure $handle does not contain suffix -css added automatically by WordPress.
+		array_walk( $handles, function ( &$handle ) {
+			$handle = preg_replace( '/-css$/', '', $handle );
+		} );
+
 		return $handles;
 	}
 }
