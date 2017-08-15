@@ -42,6 +42,7 @@ class General {
 		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 
 		add_filter( 'tiny_mce_plugins', array( $this, 'disable_emojis_tinymce' ) );
+		add_filter( 'wp_resource_hints', array( $this, 'disable_emojis_remove_dns_prefetch' ), 10, 2 );
 	}
 
 	/**
@@ -53,6 +54,19 @@ class General {
 	 */
 	public function disable_emojis_tinymce( $plugins ) {
 		return is_array( $plugins ) ? array_diff( $plugins, array( 'wpemoji' ) ) : array();
+	}
+	
+	public function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
+		if ( 'dns-prefetch' == $relation_type ) {
+			// Strip out any URLs referencing the WordPress.org emoji location
+			$emoji_svg_url_bit = 'https://s.w.org/images/core/emoji/';
+			foreach ( $urls as $key => $url ) {
+				if ( strpos( $url, $emoji_svg_url_bit ) !== false ) {
+					unset( $urls[$key] );
+				}
+			}
+		}
+		return $urls;
 	}
 
 	/**
