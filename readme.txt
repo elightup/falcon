@@ -1,9 +1,9 @@
 === Falcon - WordPress Optimization ===
-Contributors: rilwis, gretathemes, metabox
+Contributors: elightup, rilwis
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 4.3
-Tested up to: 4.9.6
-Stable tag: 1.3.0
+Tested up to: 5.3
+Stable tag: 1.3.1
 License: GPLv2 or later
 
 Falcon is a minimalist WordPress plugin which cleans up your website and optimizes it for best performance.
@@ -40,6 +40,10 @@ Go to *Dashboad | Plugins | Add New* and search for **Falcon**. Then install and
 The plugin doesn't have any settings page or configuration. Just install and forget!
 
 == Changelog ==
+
+= 1.3.1 =
+* Update compatibility with the latest version of WordPress
+* Fix not working with WP-CLI
 
 = 1.3.0 =
 * Remove settings page

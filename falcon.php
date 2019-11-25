@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name: Falcon
- * Plugin URI: https://gretathemes.com
+ * Plugin URI:  https://elightup.com/products/
  * Description: The best WordPress optimization plugin.
- * Version: 1.3.0
- * Author: GretaThemes
- * Author URI: https://gretathemes.com
- * License: GPL2+
+ * Version:     1.3.1
+ * Author:      eLightUp
+ * Author URI:  https://elightup.com
+ * License:     GPL2+
  * Text Domain: falcon
  * Domain Path: /languages/
  *
@@ -14,7 +14,7 @@
  */
 
 namespace Falcon;
-require 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 new General;
 new Embed;
