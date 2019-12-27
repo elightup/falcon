@@ -22,4 +22,6 @@ new Embed;
 if ( ! is_admin() ) {
 	new Header;
 	new Media;
+} else {
+	new Recommendation;
 }
