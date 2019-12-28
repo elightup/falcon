@@ -18,6 +18,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 new General;
 new Embed;
+new Settings;
 
 if ( ! is_admin() ) {
 	new Header;
@@ -25,3 +26,7 @@ if ( ! is_admin() ) {
 } else {
 	new Recommendation;
 }
+
+add_action( 'init', function () {
+	load_plugin_textdomain( 'falcon', false, plugin_basename( __DIR__ ) . '/languages/' );
+} );
