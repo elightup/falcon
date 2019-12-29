@@ -24,8 +24,8 @@ class Settings {
 						<h3><?php esc_html_e( 'General', 'falcon' ) ?></h3>
 						<p>
 							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_heartbeats"<?php checked( self::is_feature_active( 'no_heartbeats' ) ) ?>>
-								<?php esc_html_e( 'Disable heartbeats', 'falcon' ) ?>
+								<input type="checkbox" name="falcon[features][]" value="no_heartbeat"<?php checked( self::is_feature_active( 'no_heartbeat' ) ) ?>>
+								<?php esc_html_e( 'Disable heartbeat', 'falcon' ) ?>
 							</label>
 						</p>
 						<p>

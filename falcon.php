@@ -9,20 +9,20 @@
  * License:     GPL2+
  * Text Domain: falcon
  * Domain Path: /languages/
- *
- * @package Falcon
  */
 
 namespace Falcon;
 require __DIR__ . '/vendor/autoload.php';
 
 new General;
-new Embed;
 new Settings;
+
+if ( Settings::is_feature_active( 'no_embeds' ) ) {
+	require __DIR__ . '/vendor/disable-embeds/disable-embeds.php';
+}
 
 if ( ! is_admin() ) {
 	new Header;
-	new Media;
 } else {
 	new Recommendation;
 }

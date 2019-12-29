@@ -1,37 +1,34 @@
 <?php
-/**
- * Optimization for both frontend and backend.
- *
- * @package Falcon
- * @author  GretaThemes <info@gretathemes.com>
- * @link    https://gretathemes.com
- */
-
 namespace Falcon;
 
-/**
- * General optimization class.
- */
 class General {
-	/**
-	 * Add hooks.
-	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'disable_heartbeat' ), 1 );
-		add_action( 'init', array( $this, 'disable_emojis' ) );
-		add_action( 'pre_ping', array( $this, 'no_self_ping' ) );
+		if ( Settings::is_feature_active( 'no_heartbeat' ) ) {
+			add_action( 'init', array( $this, 'disable_heartbeat' ), 1 );
+		}
+		if ( Settings::is_feature_active( 'no_emojis' ) ) {
+			add_action( 'init', array( $this, 'disable_emojis' ) );
+		}
+		if ( Settings::is_feature_active( 'no_self_pings' ) ) {
+			add_action( 'pre_ping', array( $this, 'stop_self_pings' ) );
+		}
+		if ( Settings::is_feature_active( 'no_recent_comments_widget_style' ) ) {
+			add_filter( 'show_recent_comments_widget_style', '__return_false' );
+		}
+		if ( Settings::is_feature_active( 'no_query_string' ) ) {
+			add_filter( 'script_loader_src', [ $this, 'remove_query_string' ] );
+			add_filter( 'style_loader_src', [ $this, 'remove_query_string' ] );
+		}
+		if ( Settings::is_feature_active( 'schema_less_urls' ) ) {
+			add_filter( 'script_loader_src', [ $this, 'remove_protocol' ] );
+			add_filter( 'style_loader_src', [ $this, 'remove_protocol' ] );
+		}
 	}
 
-	/**
-	 * Disable heartbeat.
-	 */
 	public function disable_heartbeat() {
 		wp_deregister_script( 'heartbeat' );
 	}
 
-	/**
-	 * Disable emojis.
-	 */
 	public function disable_emojis() {
 		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
@@ -41,47 +38,38 @@ class General {
 		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 
-		add_filter( 'tiny_mce_plugins', array( $this, 'disable_emojis_tinymce' ) );
-		add_filter( 'wp_resource_hints', array( $this, 'disable_emojis_remove_dns_prefetch' ), 10, 2 );
+		add_filter( 'tiny_mce_plugins', [ $this, 'disable_emojis_tinymce' ] );
+		add_filter( 'wp_resource_hints', [ $this, 'remove_emojis_dns_prefetch' ], 10, 2 );
 	}
 
-	/**
-	 * Filter function used to remove the tinymce emoji plugin.
-	 *
-	 * @param  array $plugins
-	 *
-	 * @return array
-	 */
 	public function disable_emojis_tinymce( $plugins ) {
-		return is_array( $plugins ) ? array_diff( $plugins, array( 'wpemoji' ) ) : array();
+		return is_array( $plugins ) ? array_diff( $plugins, ['wpemoji'] ) : [];
 	}
-	
-	public function disable_emojis_remove_dns_prefetch( $urls, $relation_type ) {
-		if ( 'dns-prefetch' == $relation_type ) {
-			// Strip out any URLs referencing the WordPress.org emoji location
-			$emoji_svg_url_bit = 'https://s.w.org/images/core/emoji/';
-			foreach ( $urls as $key => $url ) {
-				if ( strpos( $url, $emoji_svg_url_bit ) !== false ) {
-					unset( $urls[$key] );
-				}
-			}
+
+	public function remove_emojis_dns_prefetch( $urls, $relation_type ) {
+		if ( 'dns-prefetch' !== $relation_type ) {
+			return $urls;
 		}
-		return $urls;
+		return array_filter( $urls, function( $url ) {
+			return false === strpos( $url, 'https://s.w.org/images/core/emoji/' );
+		} );
 	}
 
 	/**
-	 * Stop self pinging
-	 *
-	 * @link  http://wordpress.stackexchange.com/a/1852
-	 *
-	 * @param array $links
+	 * @link http://wordpress.stackexchange.com/a/1852
 	 */
-	public function no_self_ping( $links ) {
+	public function stop_self_pings( &$links ) {
 		$home_url = home_url();
-		foreach ( $links as $l => $link ) {
-			if ( false !== strpos( $link, $home_url ) ) {
-				unset( $links[ $l ] );
-			}
-		}
+		$links = array_filter( $links, function( $link ) {
+			return false === strpos( $link, $home_url );
+		} );
+	}
+
+	public function remove_query_string( $url ) {
+		return remove_query_arg( 'ver', $url );
+	}
+
+	public function remove_protocol( $url ) {
+		return str_replace( [ 'https:', 'http:' ], '', $url );
 	}
 }

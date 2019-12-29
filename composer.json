@@ -1,7 +1,29 @@
 {
-    "autoload": {
-        "psr-4": {
-            "Falcon\\": "src/"
-        }
+  "repositories": [
+    {
+      "type":"composer",
+      "url":"https://wpackagist.org"
     }
+  ],
+  "require": {
+    "wpackagist-plugin/disable-embeds": "^1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Falcon\\": "src/"
+    }
+  },
+  "extra": {
+    "installer-paths": {
+      "vendor/{$name}": ["vendor:wpackagist-plugin"]
+    },
+    "light-ignore-plugin": {
+      "composer": [
+        "LICENSE"
+      ],
+      "disable-embeds": [
+        "*.txt"
+      ]
+    }
+  }
 }
