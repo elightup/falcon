@@ -37,7 +37,7 @@ class Settings {
 						<p>
 							<label>
 								<input type="checkbox" name="falcon[features][]" value="no_embeds"<?php checked( self::is_feature_active( 'no_embeds' ) ) ?>>
-								<?php esc_html_e( 'Prevent others from embedding your site and vise-versa.', 'falcon' ) ?>
+								<?php esc_html_e( 'Disable embeds, e.g. prevent others from embedding your site and vise-versa', 'falcon' ) ?>
 							</label>
 						</p>
 						<p>

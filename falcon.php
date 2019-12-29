@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Falcon
  * Plugin URI:  https://elightup.com/products/
- * Description: The best WordPress optimization plugin.
- * Version:     1.3.1
+ * Description: A WordPress cleanup and performance optimization plugin.
+ * Version:     2.0.0
  * Author:      eLightUp
  * Author URI:  https://elightup.com
  * License:     GPL2+

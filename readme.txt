@@ -1,33 +1,36 @@
-=== Falcon - WordPress Optimization ===
+=== Falcon ===
 Contributors: elightup, rilwis
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 4.3
-Tested up to: 5.3
-Stable tag: 1.3.1
+Tested up to: 5.3.2
+Stable tag: 2.0.0
+Requires PHP: 5.6
 License: GPLv2 or later
 
-Falcon is a minimalist WordPress plugin which cleans up your website and optimizes it for best performance.
+Falcon is a WordPress plugin which cleans up your website and optimizes it for a better performance.
 
 == Description ==
 
-**Falcon** is a minimalist WordPress plugin which **cleans up your website and optimizes it for best performance**.
+**Falcon** is a WordPress plugin which **cleans up your website and optimizes it for a better performance**.
 
 ### What does Falcon do?
 
-* Disables heartbeats.
-* Disables emojis.
-* Disables self ping.
-* Removes query string in JS and CSS file.
-* Sets scheme-less URLs for JS and CSS files, e.g. removes 'http:' and 'https:' from URLs.
-* Cleans up header.
+* Disable heartbeat
+* Disable emojis
+* Disable embeds, e.g. prevent others from embedding your site and vise-versa
+* Disable self pings
+* Remove query string for JavaScript and CSS files
+* Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
 * Removes styles for recent comments widget.
-* Remove Jetpack devicex script.
+* Cleanup header
 
-Note that Falcon requires PHP 5.4+ to run.
+**Falcon** is created and maintained FREE on [Github](https://github.com/elightup/falcon). Please open a [new issue](https://github.com/elightup/falcon/issues) to add a suggestion or report a bug.
 
-**Falcon** is created and maintained FREE on [Github](https://github.com/rilwis/falcon). Please open a [new issue](https://github.com/rilwis/falcon/issues) to add a suggestion or report a bug.
+If you like this plugin, you might also like our other WordPress products:
 
-If you like this plugin, you might also like our [WordPress custom fields](https://metabox.io) plugin and [premium WordPress themes](https://gretathemes.com).
+- [Meta Box](https://metabox.io) - Lightweight yet powerful WordPress custom fields plugin
+- [Slim SEO](https://wpslimseo.com) - Automated & fast SEO plugin for WordPress
+- [GretaThemes](https://gretathemes.com) - Premium WordPress themes that clean, simple and just work
 
 == Installation ==
 
@@ -36,8 +39,6 @@ Go to *Dashboad | Plugins | Add New* and search for **Falcon**. Then install and
 == Frequently Asked Questions ==
 
 == Screenshots ==
-
-The plugin doesn't have any settings page or configuration. Just install and forget!
 
 == Changelog ==
 

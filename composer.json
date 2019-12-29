@@ -1,4 +1,23 @@
 {
+  "name": "elightup/falcon",
+  "type": "wordpress-plugin",
+  "keywords": [
+    "wordpress",
+    "wordpress-plugin",
+    "performance",
+    "optimization"
+  ],
+  "description": "Falcon is a WordPress plugin which cleans up your website and optimizes it for a better performance.",
+  "homepage": "https://elightup.com",
+  "license": "GPL-2.0",
+  "authors": [
+    {
+      "name": "Tran Ngoc Tuan Anh",
+      "email": "anhtnt@elightup.com",
+      "homepage": "https://elightup.com",
+      "role": "Developer"
+    }
+  ],
   "repositories": [
     {
       "type":"composer",
