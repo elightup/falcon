@@ -42,6 +42,10 @@ Go to *Dashboad | Plugins | Add New* and search for **Falcon**. Then install and
 
 == Changelog ==
 
+= 2.0.0 =
+- Re-add settings page
+- Update disble embeds module
+
 = 1.3.1 =
 * Update compatibility with the latest version of WordPress
 * Fix not working with WP-CLI
