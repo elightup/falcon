@@ -3,7 +3,7 @@ Contributors: elightup, rilwis
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 4.3
 Tested up to: 5.3.2
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 Requires PHP: 5.6
 License: GPLv2 or later
 
@@ -41,6 +41,9 @@ Go to *Dashboad | Plugins | Add New* and search for **Falcon**. Then install and
 == Screenshots ==
 
 == Changelog ==
+
+= 2.0.1 =
+- Fix auto-deployment
 
 = 2.0.0 =
 - Re-add settings page
