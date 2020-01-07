@@ -61,13 +61,13 @@ class Settings {
 						<p>
 							<label>
 								<input type="checkbox" name="falcon[features][]" value="no_recent_comments_widget_style"<?php checked( self::is_feature_active( 'no_recent_comments_widget_style' ) ) ?>>
-								<?= wp_kses_post( __( 'Removes styles for recent comments widget', 'falcon' ) ) ?>
+								<?php esc_html_e( 'Removes styles for recent comments widget', 'falcon' ) ?>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox" name="falcon[features][]" value="no_jquery_migrate"<?php checked( self::is_feature_active( 'no_jquery_migrate' ) ) ?>>
-								<?= wp_kses_post( __( 'Removes jQuery Migrate', 'falcon' ) ) ?>
+								<?php esc_html_e( 'Removes jQuery Migrate', 'falcon' ) ?>
 							</label>
 						</p>
 
@@ -75,37 +75,37 @@ class Settings {
 						<p>
 							<label>
 								<input type="checkbox" name="falcon[features][]" value="no_feed_links"<?php checked( self::is_feature_active( 'no_feed_links' ) ) ?>>
-								<?= wp_kses_post( __( 'Remove feed links', 'falcon' ) ) ?>
+								<?php esc_html_e( 'Remove feed links', 'falcon' ) ?>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox" name="falcon[features][]" value="no_rsd_link"<?php checked( self::is_feature_active( 'no_rsd_link' ) ) ?>>
-								<?= wp_kses_post( __( 'Remove RSD link', 'falcon' ) ) ?>
+								<?php esc_html_e( 'Remove RSD link', 'falcon' ) ?>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox" name="falcon[features][]" value="no_wlwmanifest_link"<?php checked( self::is_feature_active( 'no_wlwmanifest_link' ) ) ?>>
-								<?= wp_kses_post( __( 'Remove wlwmanifest link', 'falcon' ) ) ?>
+								<?php esc_html_e( 'Remove wlwmanifest link', 'falcon' ) ?>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox" name="falcon[features][]" value="no_adjacent_posts_links"<?php checked( self::is_feature_active( 'no_adjacent_posts_links' ) ) ?>>
-								<?= wp_kses_post( __( 'Remove adjacent posts links', 'falcon' ) ) ?>
+								<?php esc_html_e( 'Remove adjacent posts links', 'falcon' ) ?>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox" name="falcon[features][]" value="no_wp_generator"<?php checked( self::is_feature_active( 'no_wp_generator' ) ) ?>>
-								<?= wp_kses_post( __( 'Remove WordPress version number', 'falcon' ) ) ?>
+								<?php esc_html_e( 'Remove WordPress version number', 'falcon' ) ?>
 							</label>
 						</p>
 						<p>
 							<label>
 								<input type="checkbox" name="falcon[features][]" value="no_shortlink"<?php checked( self::is_feature_active( 'no_shortlink' ) ) ?>>
-								<?= wp_kses_post( __( 'Remove shortlink', 'falcon' ) ) ?>
+								<?php esc_html_e( 'Remove shortlink', 'falcon' ) ?>
 							</label>
 						</p>
 						<?php submit_button( esc_html__( 'Save Changes', 'falcon' ) ); ?>
