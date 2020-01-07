@@ -23,6 +23,9 @@ class General {
 			add_filter( 'script_loader_src', [ $this, 'remove_protocol' ] );
 			add_filter( 'style_loader_src', [ $this, 'remove_protocol' ] );
 		}
+		if ( Settings::is_feature_active( 'no_jquery_migrate' ) ) {
+			add_action( 'wp_default_scripts', array( $this, 'remove_jquery_migrate' ) );
+		}
 	}
 
 	public function disable_heartbeat() {
@@ -71,5 +74,19 @@ class General {
 
 	public function remove_protocol( $url ) {
 		return str_replace( [ 'https:', 'http:' ], '', $url );
+	}
+
+	public function remove_jquery_migrate( $scripts ) {
+		if ( ! is_admin() && isset( $scripts->registered[ 'jquery' ] ) ) {
+			$script = $scripts->registered[ 'jquery' ];
+			
+			if ( $script->deps ) { // Check if the script has any dependencies
+				$script->deps = array_diff( 
+									$script->deps, array(
+										'jquery-migrate'
+									)
+								);
+			}
+		}
 	}
 }

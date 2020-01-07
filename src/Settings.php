@@ -64,6 +64,12 @@ class Settings {
 								<?= wp_kses_post( __( 'Removes styles for recent comments widget', 'falcon' ) ) ?>
 							</label>
 						</p>
+						<p>
+							<label>
+								<input type="checkbox" name="falcon[features][]" value="no_jquery_migrate"<?php checked( self::is_feature_active( 'no_jquery_migrate' ) ) ?>>
+								<?= wp_kses_post( __( 'Removes jQuery Migrate', 'falcon' ) ) ?>
+							</label>
+						</p>
 
 						<h3><?php esc_html_e( 'Header Cleanup', 'falcon' ) ?></h3>
 						<p>
