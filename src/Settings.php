@@ -19,7 +19,7 @@ class Settings {
 				<div id="post-body" class="metabox-holder columns-2">
 					<form method="POST" action="" id="post-body-content">
 						<?php wp_nonce_field( 'save' ) ?>
-						<p><?php esc_html_e( 'Select the features you want the plugin to do to clean up your website and optimize for a better performance.', 'slim-seo' ); ?></p>
+						<p><?php esc_html_e( 'Select the features you want the plugin to do to clean up your website and optimize for a better performance.', 'falcon' ); ?></p>
 
 						<h3><?php esc_html_e( 'General', 'falcon' ) ?></h3>
 						<p>
