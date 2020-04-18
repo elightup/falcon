@@ -63,7 +63,7 @@ class General {
 	 */
 	public function stop_self_pings( &$links ) {
 		$home_url = home_url();
-		$links = array_filter( $links, function( $link ) {
+		$links    = array_filter( $links, function( $link ) use ( $home_url ) {
 			return false === strpos( $link, $home_url );
 		} );
 	}
