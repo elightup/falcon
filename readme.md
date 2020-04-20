@@ -1,5 +1,7 @@
 **Falcon** is a WordPress plugin which **cleans up your website and optimizes it for a better performance**.
 
+[Download the plugin from WordPress.org](https://wordpress.org/plugins/falcon/)
+
 ## What does Falcon do?
 
 * Disable heartbeat
