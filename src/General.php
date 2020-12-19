@@ -77,7 +77,7 @@ class General {
 	}
 
 	public function remove_jquery_migrate( $scripts ) {
-		if ( is_admin() || empty( $scripts->registered['jquery'] ) ) {
+		if ( empty( $scripts->registered['jquery'] ) ) {
 			return;
 		}
 		$script = $scripts->registered['jquery'];
