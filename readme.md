@@ -1,8 +1,8 @@
-**Falcon** is a WordPress plugin which **cleans up your website and optimizes it for a better performance**.
+# Falcon - WordPress Optimizations & Tweaks
 
-[Download the plugin from WordPress.org](https://wordpress.org/plugins/falcon/)
+**Falcon** is lightweight WordPress plugin that provide a list of optimizations and tweaks that help you improve the performance and user experience for your WordPress sites.
 
-## What does Falcon do?
+### Features
 
 * Disable heartbeat
 * Disable emojis

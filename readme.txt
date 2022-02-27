@@ -1,19 +1,19 @@
-=== Falcon ===
+=== Falcon - WordPress Optimizations & Tweaks ===
 Contributors: elightup, rilwis, truongwp
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 4.3
-Tested up to: 5.6
-Stable tag: 2.0.4
+Tested up to: 5.9.1
+Stable tag: 2.0.5
 Requires PHP: 5.6
 License: GPLv2 or later
 
-Falcon is a WordPress plugin which cleans up your website and optimizes it for a better performance.
+A lightweight WordPress optimization and tweak plugin for a better performance
 
 == Description ==
 
-**Falcon** is a WordPress plugin which **cleans up your website and optimizes it for a better performance**.
+**Falcon** is lightweight WordPress plugin that provide a list of optimizations and tweaks that help you improve the performance and user experience for your WordPress sites.
 
-### What does Falcon do?
+### Features
 
 * Disable heartbeat
 * Disable emojis
@@ -41,6 +41,9 @@ Go to *Dashboad | Plugins | Add New* and search for **Falcon**. Then install and
 == Screenshots ==
 
 == Changelog ==
+
+= 2.0.5 =
+- Update compatibility tag
 
 = 2.0.4 =
 - Fix missing vendor folder

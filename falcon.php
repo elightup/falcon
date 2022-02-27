@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Falcon
- * Plugin URI:  https://elightup.com/products/
- * Description: A WordPress cleanup and performance optimization plugin.
- * Version:     2.0.4
+ * Plugin URI:  https://elightup.com
+ * Description: WordPress optimizations & tweaks
+ * Version:     2.0.5
  * Author:      eLightUp
  * Author URI:  https://elightup.com
  * License:     GPL2+
@@ -23,8 +23,6 @@ if ( Settings::is_feature_active( 'no_embeds' ) ) {
 
 if ( ! is_admin() ) {
 	new Header;
-} else {
-	new Recommendation;
 }
 
 add_action( 'init', function () {
