@@ -38,6 +38,7 @@ class Settings {
 							$this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ) );
 							$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ) );
 							$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );
+							$this->checkbox( 'no_embeds', __( 'Disable embeds, e.g. prevent others from embedding your site and vise-versa', 'falcon' ) );
 							$this->checkbox( 'no_revisions', __( 'Disable revisions', 'falcon' ) );
 							$this->checkbox( 'no_self_pings', __( 'Disable self pings', 'falcon' ) );
 							?>
