@@ -51,6 +51,7 @@ class Settings {
 							$this->checkbox( 'no_adjacent_posts_links', __( 'Remove adjacent posts links', 'falcon' ) );
 							$this->checkbox( 'no_wp_generator', __( 'Remove WordPress version number', 'falcon' ) );
 							$this->checkbox( 'no_shortlink', __( 'Remove shortlink', 'falcon' ) );
+							$this->checkbox( 'no_rest_link', __( 'Remove REST API link', 'falcon' ) );
 							?>
 						</div>
 						<div class="tab-pane hidden" id="tab-assets">
