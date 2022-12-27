@@ -95,6 +95,7 @@ class Settings {
 	}
 
 	public function enqueue() {
+		wp_enqueue_style( 'falcon-settings', FALCON_URL . 'assets/settings.css', [], filemtime( FALCON_DIR . '/assets/settings.css' ) );
 		wp_enqueue_script( 'falcon-settings', FALCON_URL . 'assets/settings.js', [], filemtime( FALCON_DIR . '/assets/settings.js' ), true );
 	}
 
@@ -103,7 +104,7 @@ class Settings {
 			return;
 		}
 
-		$data = isset( $_POST['falcon'] ) ? $_POST['falcon'] : [];
+		$data = $_POST['falcon'] ?? [];
 		update_option( 'falcon', $data );
 
 		add_settings_error( null, 'falcon', __( 'Settings updated.', 'falcon' ), 'success' );
@@ -117,8 +118,9 @@ class Settings {
 	private function checkbox( $name, $label ) {
 		?>
 		<p>
-			<label>
+			<label class="switch">
 				<input type="checkbox" name="falcon[features][]" value="<?= esc_attr( $name ) ?>"<?php checked( self::is_feature_active( $name ) ) ?>>
+				<span class="switch-icon"></span>
 				<?= wp_kses_post( $label ) ?>
 			</label>
 		</p>
