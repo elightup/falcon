@@ -12,6 +12,7 @@
  */
 
 namespace Falcon;
+
 require __DIR__ . '/vendor/autoload.php';
 
 new General;
