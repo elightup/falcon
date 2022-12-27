@@ -92,6 +92,8 @@ class Settings {
 
 		$data = isset( $_POST['falcon'] ) ? $_POST['falcon'] : [];
 		update_option( 'falcon', $data );
+
+		add_settings_error( null, 'falcon', __( 'Settings updated.', 'falcon' ), 'success' );
 	}
 
 	public static function is_feature_active( string $name ) : bool {
