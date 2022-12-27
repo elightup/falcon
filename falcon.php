@@ -18,13 +18,9 @@ define( 'FALCON_DIR', __DIR__ );
 
 require __DIR__ . '/vendor/autoload.php';
 
-new General;
 new Settings;
 
-if ( Settings::is_feature_active( 'no_embeds' ) ) {
-	require __DIR__ . '/vendor/disable-embeds/disable-embeds.php';
-}
-
+new General;
 new Admin;
 if ( ! is_admin() ) {
 	new Header;

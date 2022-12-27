@@ -10,6 +10,7 @@ class General extends Base {
 		'no_heartbeat',
 		'no_xmlrpc',
 		'no_emojis',
+		'no_embeds',
 		'no_revisions',
 		'no_self_pings',
 	];
@@ -90,6 +91,10 @@ class General extends Base {
 		return array_filter( $urls, function( $url ) {
 			return false === strpos( $url, 'https://s.w.org/images/core/emoji/' );
 		} );
+	}
+
+	public function no_embeds() {
+		require FALCON_DIR . '/vendor/disable-embeds/disable-embeds.php';
 	}
 
 	public function no_revisions() {
