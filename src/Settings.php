@@ -80,12 +80,23 @@ class Settings {
 					<div id="postbox-container-1" class="postbox-container">
 						<div class="postbox">
 							<h3 class="hndle">
+								<span><?php esc_html_e( 'Write a review for Falcon', 'falcon' ) ?></span>
+							</h3>
+							<div class="inside">
+								<p><?php esc_html_e( 'If you like Falcon, please write a review on WordPress.org to help us spread the word. We really appreciate that!', 'falcon' ) ?></p>
+								<p><a href="https://wordpress.org/support/plugin/falcon/reviews/?filter=5" class="button" target="_blank" rel="noopenner noreferrer"><?php esc_html_e( 'Write a review', 'falcon' ) ?></a></p>
+							</div>
+						</div>
+						<div class="postbox">
+							<h3 class="hndle">
 								<span><?php esc_html_e( 'Our WordPress Plugins', 'falcon' ) ?></span>
 							</h3>
 							<div class="inside">
 								<p><?php esc_html_e( 'Like this plugin? Check out our other WordPress plugins:', 'falcon' ) ?></p>
-								<p><a href="https://wordpress.org/plugins/meta-box/" target="_blank">Meta Box</a> - <?php esc_html_e( 'Lightweight yet powerful WordPress custom fields plugin', 'falcon' ) ?></p>
-								<p><a href="https://wordpress.org/plugins/slim-seo/" target="_blank">Slim SEO</a> - <?php esc_html_e( 'Automated & fast SEO plugin for WordPress', 'falcon' ) ?></p>
+								<p><a href="https://wordpress.org/plugins/meta-box/" target="_blank"><strong>Meta Box</strong></a> - <?php esc_html_e( 'The most powerful WordPress plugin for creating custom post types and custom fields.', 'falcon' ) ?></p>
+								<p><a href="https://wordpress.org/plugins/slim-seo/" target="_blank"><strong>Slim SEO</strong></a> - <?php esc_html_e( 'A fast, lightweight and full-featured SEO plugin for WordPress with minimal configuration.', 'falcon' ) ?></p>
+								<p><a href="https://wpslimseo.com/slim-seo-schema/" target="_blank"><strong>Slim SEO Schema</strong></a> - <?php esc_html_e( 'The best plugin to add schemas (structured data, rich snippets) to WordPress.', 'falcon' ) ?></p>
+								<p><a href="https://gretathemes.com" target="_blank"><strong>GretaThemes</strong></a> - <?php esc_html_e( 'Free and premium WordPress themes that clean, simple and just work.', 'falcon' ) ?></p>
 							</div>
 						</div>
 					</div>
