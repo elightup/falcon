@@ -1,10 +1,10 @@
 === Falcon - WordPress Optimizations & Tweaks ===
 Contributors: elightup, rilwis, truongwp
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
-Requires at least: 4.3
-Tested up to: 5.9.1
-Stable tag: 2.0.5
-Requires PHP: 5.6
+Requires at least: 5.9
+Tested up to: 6.1.1
+Stable tag: 2.1.0
+Requires PHP: 7.2
 License: GPLv2 or later
 
 A lightweight WordPress optimization and tweak plugin for a better performance
@@ -15,33 +15,70 @@ A lightweight WordPress optimization and tweak plugin for a better performance
 
 ### Features
 
-* [Disable Gutenberg](https://metabox.io/disable-gutenberg-without-using-plugins/)
-* [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
-* Disable REST API
-* Disable heartbeat
-* Disable emojis
-* Disable embeds, e.g. prevent others from embedding your site and vise-versa
-* Disable self pings
-* Remove query string for JavaScript and CSS files
-* Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
-* Removes styles for recent comments widget.
-* Cleanup header
+Falcon offers a comprehensive list of options for you to tweak and optimize your WordPress websites. These options are divided into the following categories:
+
+#### General
+
+- [Disable Gutenberg](https://metabox.io/disable-gutenberg-without-using-plugins/) (the block editor)
+- Disable REST API
+- Disable heartbeat
+- [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
+- Disable emojis
+- Disable embeds, e.g. prevent others from embedding your site and vise-versa
+- Disable revisions
+- Disable self pings
+
+#### Assets
+
+- Remove query string for JavaScript and CSS files
+- Removes jQuery Migrate
+- Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
+- Removes styles for recent comments widget
+
+#### Header
+
+- Remove feed links
+- Remove RSD link
+- Remove wlwmanifest link
+- Remove adjacent posts links
+- Remove WordPress version number
+- Remove shortlink
+- Remove REST API link
+
+#### Admin
+
+- Show site icon on login page
+- Remove update nags
+- Remove footer text
+- Remove default dashboard widgets
+- Remove WordPress logo in the admin bar
+- Remove admin email confirmation
+
+### You might also like
 
 If you like this plugin, you might also like our other WordPress products:
 
-- [Meta Box](https://metabox.io) - Lightweight yet powerful WordPress custom fields plugin
-- [Slim SEO](https://wpslimseo.com) - Automated & fast SEO plugin for WordPress
-- [GretaThemes](https://gretathemes.com) - Premium WordPress themes that clean, simple and just work
+- [Meta Box](https://metabox.io) - The most powerful WordPress plugin for creating custom post types and custom fields.
+- [Slim SEO](https://wpslimseo.com) - A fast, lightweight and full-featured SEO plugin for WordPress with minimal configuration.
+- [Slim SEO Schema](https://wpslimseo.com/slim-seo-schema/) - The best plugin to add schemas (structured data, rich snippets) to WordPress.
+- [GretaThemes](https://gretathemes.com) - Free and premium WordPress themes that clean, simple and just work.
 
 == Installation ==
 
-Go to *Dashboad | Plugins | Add New* and search for **Falcon**. Then install and activate the plugin.
+Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install and activate the plugin.
 
 == Frequently Asked Questions ==
 
 == Screenshots ==
 
 == Changelog ==
+
+= 2.1.0 - 2022-12-27 =
+- Add disable XML-RPC
+- Add disable Gutenberg
+- Add disable REST API
+- Add a set of admin tweaks
+- Organize features in tabs and update styling
 
 = 2.0.5 =
 - Update compatibility tag
