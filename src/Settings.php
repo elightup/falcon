@@ -35,6 +35,7 @@ class Settings {
 						<div class="tab-pane" id="tab-general">
 							<?php
 							$this->checkbox( 'no_gutenberg', __( 'Disable Gutenberg (the block editor)', 'falcon' ) );
+							$this->checkbox( 'no_rest_api', __( 'Disable REST API', 'falcon' ) );
 							$this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ) );
 							$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ) );
 							$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );

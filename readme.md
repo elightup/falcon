@@ -6,6 +6,7 @@
 
 * [Disable Gutenberg](https://metabox.io/disable-gutenberg-without-using-plugins/)
 * [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
+* Disable REST API
 * Disable heartbeat
 * Disable emojis
 * Disable embeds, e.g. prevent others from embedding your site and vise-versa

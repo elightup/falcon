@@ -1,9 +1,12 @@
 <?php
 namespace Falcon;
 
+use WP_Error;
+
 class General extends Base {
 	protected $features = [
 		'no_gutenberg',
+		'no_rest_api',
 		'no_heartbeat',
 		'no_xmlrpc',
 		'no_emojis',
@@ -30,6 +33,20 @@ class General extends Base {
 
 		// Remove inline global CSS on the front end.
 		wp_dequeue_style( 'global-styles' );
+	}
+
+	public function no_rest_api() {
+		remove_action( 'wp_head', 'rest_output_link_wp_head' );
+		remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' );
+		remove_action( 'template_redirect', 'rest_output_link_header', 11 );
+
+		add_filter( 'rest_authentication_errors', [ $this, 'no_public_rest_api' ] );
+	}
+
+	public function no_public_rest_api( $access ) {
+		return is_user_logged_in()
+			? $access
+			: new WP_Error( 'rest_login_required', __( 'REST API restricted to authenticated users.', 'falcon' ), [ 'status' => rest_authorization_required_code() ] );
 	}
 
 	public function no_heartbeat() {
