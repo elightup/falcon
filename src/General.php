@@ -3,6 +3,15 @@ namespace Falcon;
 
 class General {
 	public function __construct() {
+		if ( Settings::is_feature_active( 'no_gutenberg' ) ) {
+			// Disable Gutenberg on the back end.
+			add_filter( 'use_block_editor_for_post', '__return_false' );
+
+			// Disable Gutenberg for widgets.
+			add_filter( 'use_widgets_block_editor', '__return_false' );
+
+			add_action( 'wp_enqueue_scripts', [ $this, 'remove_gutenberg_assets' ], 20 );
+		}
 		if ( Settings::is_feature_active( 'no_xmlrpc' ) ) {
 			add_filter( 'xmlrpc_enabled', '__return_false' );
 			add_filter( 'pings_open', '__return_false' );
@@ -30,6 +39,17 @@ class General {
 		if ( Settings::is_feature_active( 'no_jquery_migrate' ) ) {
 			add_action( 'wp_default_scripts', [ $this, 'remove_jquery_migrate' ] );
 		}
+	}
+
+	public function remove_gutenberg_assets() {
+		// Remove CSS on the front end.
+		wp_dequeue_style( 'wp-block-library' );
+
+		// Remove Gutenberg theme.
+		wp_dequeue_style( 'wp-block-library-theme' );
+
+		// Remove inline global CSS on the front end.
+		wp_dequeue_style( 'global-styles' );
 	}
 
 	public function disable_heartbeat() {

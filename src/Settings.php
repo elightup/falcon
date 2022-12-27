@@ -29,6 +29,7 @@ class Settings {
 
 						<h3><?php esc_html_e( 'General', 'falcon' ) ?></h3>
 						<?php
+						$this->checkbox( 'no_gutenberg', __( 'Disable Gutenberg (the block editor)', 'falcon' ) );
 						$this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ) );
 						$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ) );
 						$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );

@@ -15,6 +15,7 @@ A lightweight WordPress optimization and tweak plugin for a better performance
 
 ### Features
 
+* [Disable Gutenberg](https://metabox.io/disable-gutenberg-without-using-plugins/)
 * [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
 * Disable heartbeat
 * Disable emojis
@@ -24,8 +25,6 @@ A lightweight WordPress optimization and tweak plugin for a better performance
 * Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
 * Removes styles for recent comments widget.
 * Cleanup header
-
-**Falcon** is created and maintained FREE on [Github](https://github.com/elightup/falcon). Please open a [new issue](https://github.com/elightup/falcon/issues) to add a suggestion or report a bug.
 
 If you like this plugin, you might also like our other WordPress products:
 
