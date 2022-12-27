@@ -1,33 +1,24 @@
 <?php
 namespace Falcon;
 
-class General {
-	public function __construct() {
-		if ( Settings::is_feature_active( 'no_gutenberg' ) ) {
-			// Disable Gutenberg on the back end.
-			add_filter( 'use_block_editor_for_post', '__return_false' );
+class General extends Base {
+	protected $features = [
+		'no_gutenberg',
+		'no_heartbeat',
+		'no_xmlrpc',
+		'no_emojis',
+		'no_revisions',
+		'no_self_pings',
+	];
 
-			// Disable Gutenberg for widgets.
-			add_filter( 'use_widgets_block_editor', '__return_false' );
+	public function no_gutenberg() {
+		// Disable Gutenberg on the back end.
+		add_filter( 'use_block_editor_for_post', '__return_false' );
 
-			add_action( 'wp_enqueue_scripts', [ $this, 'remove_gutenberg_assets' ], 20 );
-		}
-		if ( Settings::is_feature_active( 'no_revisions' ) ) {
-			add_filter( 'wp_revisions_to_keep', '__return_zero' );
-		}
-		if ( Settings::is_feature_active( 'no_xmlrpc' ) ) {
-			add_filter( 'xmlrpc_enabled', '__return_false' );
-			add_filter( 'pings_open', '__return_false' );
-		}
-		if ( Settings::is_feature_active( 'no_heartbeat' ) ) {
-			add_action( 'init', [ $this, 'disable_heartbeat' ], 1 );
-		}
-		if ( Settings::is_feature_active( 'no_emojis' ) ) {
-			add_action( 'init', [ $this, 'disable_emojis' ] );
-		}
-		if ( Settings::is_feature_active( 'no_self_pings' ) ) {
-			add_action( 'pre_ping', [ $this, 'stop_self_pings' ] );
-		}
+		// Disable Gutenberg for widgets.
+		add_filter( 'use_widgets_block_editor', '__return_false' );
+
+		add_action( 'wp_enqueue_scripts', [ $this, 'remove_gutenberg_assets' ], 20 );
 	}
 
 	public function remove_gutenberg_assets() {
@@ -41,8 +32,21 @@ class General {
 		wp_dequeue_style( 'global-styles' );
 	}
 
-	public function disable_heartbeat() {
+	public function no_heartbeat() {
+		add_action( 'init', [ $this, 'remove_heartbeat_script' ], 1 );
+	}
+
+	public function remove_heartbeat_script() {
 		wp_deregister_script( 'heartbeat' );
+	}
+
+	public function no_xmlrpc() {
+		add_filter( 'xmlrpc_enabled', '__return_false' );
+		add_filter( 'pings_open', '__return_false' );
+	}
+
+	public function no_emojis() {
+		add_action( 'init', [ $this, 'disable_emojis' ] );
 	}
 
 	public function disable_emojis() {
@@ -71,10 +75,18 @@ class General {
 		} );
 	}
 
+	public function no_revisions() {
+		add_filter( 'wp_revisions_to_keep', '__return_zero' );
+	}
+
+	public function no_self_pings() {
+		add_action( 'pre_ping', [ $this, 'remove_self_pings' ] );
+	}
+
 	/**
 	 * @link http://wordpress.stackexchange.com/a/1852
 	 */
-	public function stop_self_pings( &$links ) {
+	public function remove_self_pings( &$links ) {
 		$home_url = home_url();
 		$links    = array_filter( $links, function( $link ) use ( $home_url ) {
 			return false === strpos( $link, $home_url );
