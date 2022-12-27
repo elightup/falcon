@@ -82,7 +82,7 @@ class Settings {
 	}
 
 	public function enqueue() {
-		wp_enqueue_script( 'falcon-settings', FALCON_URL . 'assets/settings.js', [ 'jquery' ], filemtime( FALCON_DIR . '/assets/settings.js' ), true );
+		wp_enqueue_script( 'falcon-settings', FALCON_URL . 'assets/settings.js', [], filemtime( FALCON_DIR . '/assets/settings.js' ), true );
 	}
 
 	public function save() {
@@ -104,7 +104,7 @@ class Settings {
 		<p>
 			<label>
 				<input type="checkbox" name="falcon[features][]" value="<?= esc_attr( $name ) ?>"<?php checked( self::is_feature_active( $name ) ) ?>>
-				<?= esc_html( $label ) ?>
+				<?= wp_kses_post( $label ) ?>
 			</label>
 		</p>
 		<?php
