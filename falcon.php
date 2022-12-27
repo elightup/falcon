@@ -27,6 +27,7 @@ if ( Settings::is_feature_active( 'no_embeds' ) ) {
 
 if ( ! is_admin() ) {
 	new Header;
+	new Assets;
 }
 
 add_action( 'init', function () {
