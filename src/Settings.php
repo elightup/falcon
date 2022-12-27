@@ -71,6 +71,7 @@ class Settings {
 							$this->checkbox( 'no_footer_text', __( 'Remove footer text', 'falcon' ) );
 							$this->checkbox( 'no_dashboard_widgets', __( 'Remove default dashboard widgets', 'falcon' ) );
 							$this->checkbox( 'no_wp_logo', __( 'Remove WordPress logo in the admin bar', 'falcon' ) );
+							$this->checkbox( 'no_admin_email_confirm', __( 'Remove admin email confirmation', 'falcon' ) );
 							?>
 						</div>
 

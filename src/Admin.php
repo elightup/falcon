@@ -8,10 +8,11 @@ class Admin extends Base {
 		'no_footer_text',
 		'no_dashboard_widgets',
 		'no_wp_logo',
+		'no_admin_email_confirm',
 	];
 
 	public function login_site_icon() {
-		new Admin\Login;
+		new Login;
 	}
 
 	public function no_update_nags() {
@@ -50,5 +51,9 @@ class Admin extends Base {
 
 	public function remove_wp_logo( $wp_admin_bar ) {
 		$wp_admin_bar->remove_node( 'wp-logo' );
+	}
+
+	public function no_admin_email_confirm() {
+		add_filter( 'admin_email_check_interval', '__return_false' );
 	}
 }
