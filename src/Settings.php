@@ -28,98 +28,27 @@ class Settings {
 						<p><?php esc_html_e( 'Select the features you want the plugin to do to clean up your website and optimize for a better performance.', 'falcon' ); ?></p>
 
 						<h3><?php esc_html_e( 'General', 'falcon' ) ?></h3>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_heartbeat"<?php checked( self::is_feature_active( 'no_heartbeat' ) ) ?>>
-								<?php esc_html_e( 'Disable heartbeat', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_xmlrpc"<?php checked( self::is_feature_active( 'no_xmlrpc' ) ) ?>>
-								<?php esc_html_e( 'Disable XML-RPC', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_emojis"<?php checked( self::is_feature_active( 'no_emojis' ) ) ?>>
-								<?php esc_html_e( 'Disable emojis', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_embeds"<?php checked( self::is_feature_active( 'no_embeds' ) ) ?>>
-								<?php esc_html_e( 'Disable embeds, e.g. prevent others from embedding your site and vise-versa', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_self_pings"<?php checked( self::is_feature_active( 'no_self_pings' ) ) ?>>
-								<?php esc_html_e( 'Disable self pings', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_query_string"<?php checked( self::is_feature_active( 'no_query_string' ) ) ?>>
-								<?php esc_html_e( 'Remove query string for JavaScript and CSS files', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="schema_less_urls"<?php checked( self::is_feature_active( 'schema_less_urls' ) ) ?>>
-								<?= wp_kses_post( __( 'Set scheme-less URLs for JavaScript and CSS files, e.g. remove <code>http:</code> and <code>https:</code> from URLs', 'falcon' ) ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_recent_comments_widget_style"<?php checked( self::is_feature_active( 'no_recent_comments_widget_style' ) ) ?>>
-								<?php esc_html_e( 'Removes styles for recent comments widget', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_jquery_migrate"<?php checked( self::is_feature_active( 'no_jquery_migrate' ) ) ?>>
-								<?php esc_html_e( 'Removes jQuery Migrate', 'falcon' ) ?>
-							</label>
-						</p>
+						<?php
+						$this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ) );
+						$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ) );
+						$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );
+						$this->checkbox( 'no_embeds', __( 'Disable embeds, e.g. prevent others from embedding your site and vise-versa', 'falcon' ) );
+						$this->checkbox( 'no_self_pings', __( 'Disable self pings', 'falcon' ) );
+						$this->checkbox( 'no_query_string', __( 'Remove query string for JavaScript and CSS files', 'falcon' ) );
+						$this->checkbox( 'schema_less_urls', __( 'Set scheme-less URLs for JavaScript and CSS files, e.g. remove <code>http:</code> and <code>https:</code> from URLs', 'falcon' ) );
+						$this->checkbox( 'no_recent_comments_widget_style', __( 'Removes styles for recent comments widget', 'falcon' ) );
+						$this->checkbox( 'no_jquery_migrate', __( 'Removes jQuery Migrate', 'falcon' ) );
+						?>
 
 						<h3><?php esc_html_e( 'Header Cleanup', 'falcon' ) ?></h3>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_feed_links"<?php checked( self::is_feature_active( 'no_feed_links' ) ) ?>>
-								<?php esc_html_e( 'Remove feed links', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_rsd_link"<?php checked( self::is_feature_active( 'no_rsd_link' ) ) ?>>
-								<?php esc_html_e( 'Remove RSD link', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_wlwmanifest_link"<?php checked( self::is_feature_active( 'no_wlwmanifest_link' ) ) ?>>
-								<?php esc_html_e( 'Remove wlwmanifest link', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_adjacent_posts_links"<?php checked( self::is_feature_active( 'no_adjacent_posts_links' ) ) ?>>
-								<?php esc_html_e( 'Remove adjacent posts links', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_wp_generator"<?php checked( self::is_feature_active( 'no_wp_generator' ) ) ?>>
-								<?php esc_html_e( 'Remove WordPress version number', 'falcon' ) ?>
-							</label>
-						</p>
-						<p>
-							<label>
-								<input type="checkbox" name="falcon[features][]" value="no_shortlink"<?php checked( self::is_feature_active( 'no_shortlink' ) ) ?>>
-								<?php esc_html_e( 'Remove shortlink', 'falcon' ) ?>
-							</label>
-						</p>
+						<?php
+						$this->checkbox( 'no_feed_links', __( 'Remove feed links', 'falcon' ) );
+						$this->checkbox( 'no_rsd_link', __( 'Remove RSD link', 'falcon' ) );
+						$this->checkbox( 'no_wlwmanifest_link', __( 'Remove wlwmanifest link', 'falcon' ) );
+						$this->checkbox( 'no_adjacent_posts_links', __( 'Remove adjacent posts links', 'falcon' ) );
+						$this->checkbox( 'no_wp_generator', __( 'Remove WordPress version number', 'falcon' ) );
+						$this->checkbox( 'no_shortlink', __( 'Remove shortlink', 'falcon' ) );
+						?>
 						<?php submit_button( esc_html__( 'Save Changes', 'falcon' ) ); ?>
 					</form>
 					<div id="postbox-container-1" class="postbox-container">
@@ -152,5 +81,16 @@ class Settings {
 	public static function is_feature_active( string $name ) : bool {
 		$data = get_option( 'falcon', null );
 		return null === $data ? true : in_array( $name, $data['features'], true );
+	}
+
+	private function checkbox( $name, $label ) {
+		?>
+		<p>
+			<label>
+				<input type="checkbox" name="falcon[features][]" value="<?= esc_attr( $name ) ?>"<?php checked( self::is_feature_active( $name ) ) ?>>
+				<?= esc_html( $label ) ?>
+			</label>
+		</p>
+		<?php
 	}
 }
