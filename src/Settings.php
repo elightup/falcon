@@ -15,6 +15,7 @@ class Settings {
 			[ $this, 'render' ]
 		);
 		add_action( "load-$page", [ $this, 'save' ] );
+		add_action( "admin_print_styles-$page", [ $this, 'enqueue' ] );
 	}
 
 	public function render() {
@@ -25,31 +26,41 @@ class Settings {
 				<div id="post-body" class="metabox-holder columns-2">
 					<form method="POST" action="" id="post-body-content">
 						<?php wp_nonce_field( 'save' ) ?>
-						<p><?php esc_html_e( 'Select the features you want the plugin to do to clean up your website and optimize for a better performance.', 'falcon' ); ?></p>
 
-						<h3><?php esc_html_e( 'General', 'falcon' ) ?></h3>
-						<?php
-						$this->checkbox( 'no_gutenberg', __( 'Disable Gutenberg (the block editor)', 'falcon' ) );
-						$this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ) );
-						$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ) );
-						$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );
-						$this->checkbox( 'no_embeds', __( 'Disable embeds, e.g. prevent others from embedding your site and vise-versa', 'falcon' ) );
-						$this->checkbox( 'no_self_pings', __( 'Disable self pings', 'falcon' ) );
-						$this->checkbox( 'no_query_string', __( 'Remove query string for JavaScript and CSS files', 'falcon' ) );
-						$this->checkbox( 'schema_less_urls', __( 'Set scheme-less URLs for JavaScript and CSS files, e.g. remove <code>http:</code> and <code>https:</code> from URLs', 'falcon' ) );
-						$this->checkbox( 'no_recent_comments_widget_style', __( 'Removes styles for recent comments widget', 'falcon' ) );
-						$this->checkbox( 'no_jquery_migrate', __( 'Removes jQuery Migrate', 'falcon' ) );
-						?>
+						<nav class="nav-tab-wrapper">
+							<a href="#tab-general" class="nav-tab nav-tab-active"><?php esc_html_e( 'General', 'falcon' ) ?></a></li>
+							<a href="#tab-header" class="nav-tab"><?php esc_html_e( 'Header', 'falcon' ) ?></a></li>
+							<a href="#tab-assets" class="nav-tab"><?php esc_html_e( 'Assets', 'falcon' ) ?></a></li>
+						</nav>
+						<div class="tab-pane" id="tab-general">
+							<?php
+							$this->checkbox( 'no_gutenberg', __( 'Disable Gutenberg (the block editor)', 'falcon' ) );
+							$this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ) );
+							$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ) );
+							$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );
+							$this->checkbox( 'no_embeds', __( 'Disable embeds, e.g. prevent others from embedding your site and vise-versa', 'falcon' ) );
+							$this->checkbox( 'no_self_pings', __( 'Disable self pings', 'falcon' ) );
+							?>
+						</div>
+						<div class="tab-pane hidden" id="tab-header">
+							<?php
+							$this->checkbox( 'no_feed_links', __( 'Remove feed links', 'falcon' ) );
+							$this->checkbox( 'no_rsd_link', __( 'Remove RSD link', 'falcon' ) );
+							$this->checkbox( 'no_wlwmanifest_link', __( 'Remove wlwmanifest link', 'falcon' ) );
+							$this->checkbox( 'no_adjacent_posts_links', __( 'Remove adjacent posts links', 'falcon' ) );
+							$this->checkbox( 'no_wp_generator', __( 'Remove WordPress version number', 'falcon' ) );
+							$this->checkbox( 'no_shortlink', __( 'Remove shortlink', 'falcon' ) );
+							?>
+						</div>
+						<div class="tab-pane hidden" id="tab-assets">
+							<?php
+							$this->checkbox( 'no_query_string', __( 'Remove query string for JavaScript and CSS files', 'falcon' ) );
+							$this->checkbox( 'schema_less_urls', __( 'Set scheme-less URLs for JavaScript and CSS files, e.g. remove <code>http:</code> and <code>https:</code> from URLs', 'falcon' ) );
+							$this->checkbox( 'no_recent_comments_widget_style', __( 'Removes styles for recent comments widget', 'falcon' ) );
+							$this->checkbox( 'no_jquery_migrate', __( 'Removes jQuery Migrate', 'falcon' ) );
+							?>
+						</div>
 
-						<h3><?php esc_html_e( 'Header Cleanup', 'falcon' ) ?></h3>
-						<?php
-						$this->checkbox( 'no_feed_links', __( 'Remove feed links', 'falcon' ) );
-						$this->checkbox( 'no_rsd_link', __( 'Remove RSD link', 'falcon' ) );
-						$this->checkbox( 'no_wlwmanifest_link', __( 'Remove wlwmanifest link', 'falcon' ) );
-						$this->checkbox( 'no_adjacent_posts_links', __( 'Remove adjacent posts links', 'falcon' ) );
-						$this->checkbox( 'no_wp_generator', __( 'Remove WordPress version number', 'falcon' ) );
-						$this->checkbox( 'no_shortlink', __( 'Remove shortlink', 'falcon' ) );
-						?>
 						<?php submit_button( esc_html__( 'Save Changes', 'falcon' ) ); ?>
 					</form>
 					<div id="postbox-container-1" class="postbox-container">
@@ -68,6 +79,10 @@ class Settings {
 			</div>
 		</div>
 		<?php
+	}
+
+	public function enqueue() {
+		wp_enqueue_script( 'falcon-settings', FALCON_URL . 'assets/settings.js', [ 'jquery' ], filemtime( FALCON_DIR . '/assets/settings.js' ), true );
 	}
 
 	public function save() {

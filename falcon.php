@@ -13,6 +13,9 @@
 
 namespace Falcon;
 
+define( 'FALCON_URL', plugin_dir_url( __FILE__ ) );
+define( 'FALCON_DIR', __DIR__ );
+
 require __DIR__ . '/vendor/autoload.php';
 
 new General;
