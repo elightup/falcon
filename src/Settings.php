@@ -7,8 +7,14 @@ class Settings {
 	}
 
 	public function add_menu() {
-		$page_hook = add_options_page( esc_html__( 'Falcon', 'falcon' ), esc_html__( 'Falcon', 'falcon' ), 'manage_options', 'falcon', [ $this, 'render' ] );
-		add_action( "load-{$page_hook}", [ $this, 'save' ] );
+		$page = add_options_page(
+			__( 'Falcon', 'falcon' ),
+			__( 'Falcon', 'falcon' ),
+			'manage_options',
+			'falcon',
+			[ $this, 'render' ]
+		);
+		add_action( "load-$page", [ $this, 'save' ] );
 	}
 
 	public function render() {
@@ -26,6 +32,12 @@ class Settings {
 							<label>
 								<input type="checkbox" name="falcon[features][]" value="no_heartbeat"<?php checked( self::is_feature_active( 'no_heartbeat' ) ) ?>>
 								<?php esc_html_e( 'Disable heartbeat', 'falcon' ) ?>
+							</label>
+						</p>
+						<p>
+							<label>
+								<input type="checkbox" name="falcon[features][]" value="no_xmlrpc"<?php checked( self::is_feature_active( 'no_xmlrpc' ) ) ?>>
+								<?php esc_html_e( 'Disable XML-RPC', 'falcon' ) ?>
 							</label>
 						</p>
 						<p>
@@ -137,8 +149,8 @@ class Settings {
 		update_option( 'falcon', $data );
 	}
 
-	public static function is_feature_active( $feature ) {
+	public static function is_feature_active( string $name ) : bool {
 		$data = get_option( 'falcon', null );
-		return null === $data ? true : in_array( $feature, $data['features'], true );
+		return null === $data ? true : in_array( $name, $data['features'], true );
 	}
 }

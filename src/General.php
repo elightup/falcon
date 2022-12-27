@@ -3,6 +3,10 @@ namespace Falcon;
 
 class General {
 	public function __construct() {
+		if ( Settings::is_feature_active( 'no_xmlrpc' ) ) {
+			add_filter( 'xmlrpc_enabled', '__return_false' );
+			add_filter( 'pings_open', '__return_false' );
+		}
 		if ( Settings::is_feature_active( 'no_heartbeat' ) ) {
 			add_action( 'init', [ $this, 'disable_heartbeat' ], 1 );
 		}

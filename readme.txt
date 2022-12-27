@@ -15,6 +15,7 @@ A lightweight WordPress optimization and tweak plugin for a better performance
 
 ### Features
 
+* [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
 * Disable heartbeat
 * Disable emojis
 * Disable embeds, e.g. prevent others from embedding your site and vise-versa
