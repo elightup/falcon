@@ -12,6 +12,9 @@ class General {
 
 			add_action( 'wp_enqueue_scripts', [ $this, 'remove_gutenberg_assets' ], 20 );
 		}
+		if ( Settings::is_feature_active( 'no_revisions' ) ) {
+			add_filter( 'wp_revisions_to_keep', '__return_zero' );
+		}
 		if ( Settings::is_feature_active( 'no_xmlrpc' ) ) {
 			add_filter( 'xmlrpc_enabled', '__return_false' );
 			add_filter( 'pings_open', '__return_false' );
@@ -24,20 +27,6 @@ class General {
 		}
 		if ( Settings::is_feature_active( 'no_self_pings' ) ) {
 			add_action( 'pre_ping', [ $this, 'stop_self_pings' ] );
-		}
-		if ( Settings::is_feature_active( 'no_recent_comments_widget_style' ) ) {
-			add_filter( 'show_recent_comments_widget_style', '__return_false' );
-		}
-		if ( Settings::is_feature_active( 'no_query_string' ) ) {
-			add_filter( 'script_loader_src', [ $this, 'remove_query_string' ] );
-			add_filter( 'style_loader_src', [ $this, 'remove_query_string' ] );
-		}
-		if ( Settings::is_feature_active( 'schema_less_urls' ) ) {
-			add_filter( 'script_loader_src', [ $this, 'remove_protocol' ] );
-			add_filter( 'style_loader_src', [ $this, 'remove_protocol' ] );
-		}
-		if ( Settings::is_feature_active( 'no_jquery_migrate' ) ) {
-			add_action( 'wp_default_scripts', [ $this, 'remove_jquery_migrate' ] );
 		}
 	}
 
@@ -90,23 +79,5 @@ class General {
 		$links    = array_filter( $links, function( $link ) use ( $home_url ) {
 			return false === strpos( $link, $home_url );
 		} );
-	}
-
-	public function remove_query_string( $url ) {
-		return remove_query_arg( 'ver', $url );
-	}
-
-	public function remove_protocol( $url ) {
-		return str_replace( [ 'https:', 'http:' ], '', $url );
-	}
-
-	public function remove_jquery_migrate( $scripts ) {
-		if ( empty( $scripts->registered['jquery'] ) ) {
-			return;
-		}
-		$script = $scripts->registered['jquery'];
-		if ( $script->deps ) {
-			$script->deps = array_diff( $script->deps, [ 'jquery-migrate' ] );
-		}
 	}
 }
