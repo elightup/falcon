@@ -25,6 +25,7 @@ if ( Settings::is_feature_active( 'no_embeds' ) ) {
 	require __DIR__ . '/vendor/disable-embeds/disable-embeds.php';
 }
 
+new Admin;
 if ( ! is_admin() ) {
 	new Header;
 	new Assets;

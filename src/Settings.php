@@ -31,6 +31,7 @@ class Settings {
 							<a href="#tab-general" class="nav-tab nav-tab-active"><?php esc_html_e( 'General', 'falcon' ) ?></a></li>
 							<a href="#tab-header" class="nav-tab"><?php esc_html_e( 'Header', 'falcon' ) ?></a></li>
 							<a href="#tab-assets" class="nav-tab"><?php esc_html_e( 'Assets', 'falcon' ) ?></a></li>
+							<a href="#tab-admin" class="nav-tab"><?php esc_html_e( 'Admin', 'falcon' ) ?></a></li>
 						</nav>
 						<div class="tab-pane" id="tab-general">
 							<?php
@@ -61,6 +62,15 @@ class Settings {
 							$this->checkbox( 'no_jquery_migrate', __( 'Removes jQuery Migrate', 'falcon' ) );
 							$this->checkbox( 'schema_less_urls', __( 'Set scheme-less URLs for JavaScript and CSS files, e.g. remove <code>http:</code> and <code>https:</code> from URLs', 'falcon' ) );
 							$this->checkbox( 'no_recent_comments_widget_style', __( 'Removes styles for recent comments widget', 'falcon' ) );
+							?>
+						</div>
+						<div class="tab-pane hidden" id="tab-admin">
+							<?php
+							$this->checkbox( 'login_site_icon', __( 'Show site icon on login page', 'falcon' ) );
+							$this->checkbox( 'no_update_nags', __( 'Remove update nags', 'falcon' ) );
+							$this->checkbox( 'no_footer_text', __( 'Remove footer text', 'falcon' ) );
+							$this->checkbox( 'no_dashboard_widgets', __( 'Remove default dashboard widgets', 'falcon' ) );
+							$this->checkbox( 'no_wp_logo', __( 'Remove WordPress logo in the admin bar', 'falcon' ) );
 							?>
 						</div>
 
