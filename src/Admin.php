@@ -9,6 +9,7 @@ class Admin extends Base {
 		'no_dashboard_widgets',
 		'no_wp_logo',
 		'no_admin_email_confirm',
+		'no_application_passwords',
 	];
 
 	public function login_site_icon() {
@@ -55,5 +56,9 @@ class Admin extends Base {
 
 	public function no_admin_email_confirm() {
 		add_filter( 'admin_email_check_interval', '__return_false' );
+	}
+
+	public function no_application_passwords() {
+		add_filter( 'wp_is_application_passwords_available', '__return_false' );
 	}
 }
