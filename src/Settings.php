@@ -36,14 +36,14 @@ class Settings {
 						<div class="tab-pane" id="tab-general">
 							<?php
 							$this->checkbox( 'no_gutenberg', __( 'Disable Gutenberg (the block editor)', 'falcon' ) );
-							$this->checkbox( 'no_rest_api', __( 'Disable REST API', 'falcon' ) );
+							$this->checkbox( 'no_rest_api', __( 'Disable REST API for unauthenticated requests', 'falcon' ) );
 							$this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ) );
 							$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ) );
 							$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );
 							$this->checkbox( 'no_embeds', __( 'Disable embeds, e.g. prevent others from embedding your site and vise-versa', 'falcon' ) );
 							$this->checkbox( 'no_revisions', __( 'Disable revisions', 'falcon' ) );
 							$this->checkbox( 'no_self_pings', __( 'Disable self pings', 'falcon' ) );
-							$this->checkbox( 'no_privacy', __( 'Disable privacy tool', 'falcon' ) );
+							$this->checkbox( 'no_privacy', __( 'Disable privacy tools', 'falcon' ) );
 							?>
 						</div>
 						<div class="tab-pane hidden" id="tab-header">
