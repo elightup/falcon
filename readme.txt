@@ -3,7 +3,7 @@ Contributors: elightup, rilwis, truongwp
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 5.9
 Tested up to: 6.1.1
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 Requires PHP: 7.2
 License: GPLv2 or later
 
