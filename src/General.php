@@ -112,6 +112,8 @@ class General extends Base {
 
 	public function remove_menu() {
 		remove_submenu_page( 'options-general.php', 'options-privacy.php' );
+		remove_submenu_page( 'tools.php', 'export-personal-data.php' );
+		remove_submenu_page( 'tools.php', 'erase-personal-data.php' );
 	}
 
 	/**
