@@ -62,7 +62,7 @@ class Settings {
 							$this->checkbox( 'no_query_string', __( 'Remove query string for JavaScript and CSS files', 'falcon' ) );
 							$this->checkbox( 'no_jquery_migrate', __( 'Remove jQuery Migrate', 'falcon' ) );
 							$this->checkbox( 'schema_less_urls', __( 'Set scheme-less URLs for JavaScript and CSS files, e.g. remove <code>http:</code> and <code>https:</code> from URLs', 'falcon' ) );
-							$this->checkbox( 'no_recent_comments_widget_style', __( 'Removes styles for recent comments widget', 'falcon' ) );
+							$this->checkbox( 'no_recent_comments_widget_style', __( 'Remove styles for recent comments widget', 'falcon' ) );
 							$this->checkbox( 'cleanup_menu', __( 'Cleanup nav menu item ID & classes', 'falcon' ) );
 							?>
 						</div>
