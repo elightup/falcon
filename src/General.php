@@ -13,8 +13,6 @@ class General extends Base {
 		'no_embeds',
 		'no_revisions',
 		'no_self_pings',
-		'no_privacy',
-
 	];
 
 	public function no_gutenberg() {
@@ -105,14 +103,6 @@ class General extends Base {
 
 	public function no_self_pings() {
 		add_action( 'pre_ping', [ $this, 'remove_self_pings' ] );
-	}
-
-	public function no_privacy() {
-		add_action( 'admin_menu', [ $this, 'remove_menu' ] );
-	}
-
-	public function remove_menu() {
-		remove_submenu_page( 'options-general.php', 'options-privacy.php' );
 	}
 
 	/**
