@@ -63,6 +63,7 @@ class Settings {
 							$this->checkbox( 'no_jquery_migrate', __( 'Removes jQuery Migrate', 'falcon' ) );
 							$this->checkbox( 'schema_less_urls', __( 'Set scheme-less URLs for JavaScript and CSS files, e.g. remove <code>http:</code> and <code>https:</code> from URLs', 'falcon' ) );
 							$this->checkbox( 'no_recent_comments_widget_style', __( 'Removes styles for recent comments widget', 'falcon' ) );
+							$this->checkbox( 'no_id_class_menu', __( 'Removes id & class nav menu', 'falcon' ) );
 							?>
 						</div>
 						<div class="tab-pane hidden" id="tab-admin">

@@ -7,6 +7,7 @@ class Assets extends Base {
 		'no_jquery_migrate',
 		'schema_less_urls',
 		'no_recent_comments_widget_style',
+		'no_id_class_menu',
 	];
 
 	public function no_query_string() {
@@ -44,4 +45,27 @@ class Assets extends Base {
 	public function no_recent_comments_widget_style() {
 		add_filter( 'show_recent_comments_widget_style', '__return_false' );
 	}
+
+	public function no_id_class_menu() {
+		add_filter( 'nav_menu_item_id', '__return_empty_string' );
+		add_filter( 'nav_menu_css_class', [ $this, 'clear_menu_item_class' ], 10, 3 );
+		add_filter( 'page_css_class', [ $this, 'clear_page_css_class' ], 100, 3 );
+	}
+
+	public function clear_menu_item_class( $classes, $item, $args ) {
+		return array_intersect( $classes, [
+			'menu-item',
+			'current-menu-item',
+			'menu-item-has-children',
+		] );
+	}
+
+	public function clear_page_css_class( $classes ) {
+		return array_intersect( $classes, [
+			'page_item',
+			'page_item_has_children',
+			'current_page_item',
+		] );
+	}
+
 }

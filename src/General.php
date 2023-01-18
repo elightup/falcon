@@ -14,6 +14,7 @@ class General extends Base {
 		'no_revisions',
 		'no_self_pings',
 		'no_privacy',
+
 	];
 
 	public function no_gutenberg() {
