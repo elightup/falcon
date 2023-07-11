@@ -130,7 +130,13 @@ class Settings {
 
 	public static function is_feature_active( string $name ) : bool {
 		$data = get_option( 'falcon', null );
-		return null === $data ? true : in_array( $name, $data['features'], true );
+
+		$default_disabled = [
+			'no_cron',
+			'no_external_requests',
+		];
+
+		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'], true );
 	}
 
 	private function checkbox( $name, $label ) {
