@@ -44,6 +44,7 @@ class Settings {
 							$this->checkbox( 'no_revisions', __( 'Disable revisions', 'falcon' ) );
 							$this->checkbox( 'no_self_pings', __( 'Disable self pings', 'falcon' ) );
 							$this->checkbox( 'no_privacy', __( 'Disable privacy tools', 'falcon' ) );
+							$this->checkbox( 'no_cron', __( 'Disable cron', 'falcon' ) );
 							?>
 						</div>
 						<div class="tab-pane hidden" id="tab-header">

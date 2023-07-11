@@ -14,6 +14,7 @@ class General extends Base {
 		'no_revisions',
 		'no_self_pings',
 		'no_privacy',
+		'no_cron',
 	];
 
 	public function no_gutenberg() {
@@ -124,5 +125,11 @@ class General extends Base {
 		$links    = array_filter( $links, function( $link ) use ( $home_url ) {
 			return false === strpos( $link, $home_url );
 		} );
+	}
+
+	public function no_cron(): void {
+		if ( ! defined( 'DISABLE_WP_CRON' ) ) {
+			define( 'DISABLE_WP_CRON', true );
+		}
 	}
 }
