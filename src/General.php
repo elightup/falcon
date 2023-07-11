@@ -14,6 +14,7 @@ class General extends Base {
 		'no_self_pings',
 		'no_privacy',
 		'no_cron',
+		'no_auto_updates',
 	];
 
 	public function no_gutenberg() {
@@ -100,5 +101,9 @@ class General extends Base {
 		if ( ! defined( 'DISABLE_WP_CRON' ) ) {
 			define( 'DISABLE_WP_CRON', true );
 		}
+	}
+
+	public function no_auto_updates() {
+		add_filter( 'automatic_updater_disabled', '__return_true' );
 	}
 }
