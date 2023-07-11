@@ -9,7 +9,6 @@ class General extends Base {
 		'no_rest_api',
 		'no_heartbeat',
 		'no_xmlrpc',
-		'no_emojis',
 		'no_embeds',
 		'no_revisions',
 		'no_self_pings',
@@ -63,36 +62,6 @@ class General extends Base {
 	public function no_xmlrpc() {
 		add_filter( 'xmlrpc_enabled', '__return_false' );
 		add_filter( 'pings_open', '__return_false' );
-	}
-
-	public function no_emojis() {
-		add_action( 'init', [ $this, 'disable_emojis' ] );
-	}
-
-	public function disable_emojis() {
-		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-		remove_action( 'wp_print_styles', 'print_emoji_styles' );
-		remove_action( 'admin_print_styles', 'print_emoji_styles' );
-		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
-		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-
-		add_filter( 'tiny_mce_plugins', [ $this, 'disable_emojis_tinymce' ] );
-		add_filter( 'wp_resource_hints', [ $this, 'remove_emojis_dns_prefetch' ], 10, 2 );
-	}
-
-	public function disable_emojis_tinymce( $plugins ) {
-		return is_array( $plugins ) ? array_diff( $plugins, [ 'wpemoji' ] ) : [];
-	}
-
-	public function remove_emojis_dns_prefetch( $urls, $relation_type ) {
-		if ( 'dns-prefetch' !== $relation_type ) {
-			return $urls;
-		}
-		return array_filter( $urls, function( $url ) {
-			return false === strpos( $url, 'https://s.w.org/images/core/emoji/' );
-		} );
 	}
 
 	public function no_embeds() {

@@ -39,7 +39,6 @@ class Settings {
 							$this->checkbox( 'no_rest_api', __( 'Disable REST API for unauthenticated requests', 'falcon' ) );
 							$this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ) );
 							$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ) );
-							$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );
 							$this->checkbox( 'no_embeds', __( 'Disable embeds, e.g. prevent others from embedding your site and vise-versa', 'falcon' ) );
 							$this->checkbox( 'no_revisions', __( 'Disable revisions', 'falcon' ) );
 							$this->checkbox( 'no_self_pings', __( 'Disable self pings', 'falcon' ) );
@@ -65,6 +64,7 @@ class Settings {
 							$this->checkbox( 'schema_less_urls', __( 'Set scheme-less URLs for JavaScript and CSS files, e.g. remove <code>http:</code> and <code>https:</code> from URLs', 'falcon' ) );
 							$this->checkbox( 'no_recent_comments_widget_style', __( 'Remove styles for recent comments widget', 'falcon' ) );
 							$this->checkbox( 'cleanup_menu', __( 'Cleanup nav menu item ID & classes', 'falcon' ) );
+							$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );
 							?>
 						</div>
 						<div class="tab-pane hidden" id="tab-admin">
