@@ -2,9 +2,9 @@
 Contributors: elightup, rilwis, truongwp
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 5.9
-Tested up to: 6.1.1
-Stable tag: 2.2.0
-Requires PHP: 7.2
+Tested up to: 6.2.2
+Stable tag: 2.3.0
+Requires PHP: 7.4
 License: GPLv2 or later
 
 A lightweight WordPress optimization and tweak plugin for a better performance
@@ -23,11 +23,13 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Disable REST API for unauthenticated requests
 - Disable heartbeat
 - [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
-- Disable emojis
 - Disable embeds, e.g. prevent others from embedding your site and vise-versa
 - Disable revisions
 - Disable self pings
 - Disable privacy tools
+- Disable cron
+- Disable auto updates
+- Block external requests
 
 #### Assets
 
@@ -36,6 +38,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
 - Remove styles for recent comments widget
 - Cleanup nav menu item ID & classes
+- Disable emojis
 
 #### Header
 
@@ -63,7 +66,8 @@ If you like this plugin, you might also like our other WordPress products:
 
 - [Meta Box](https://metabox.io) - The most powerful WordPress plugin for creating custom post types and custom fields.
 - [Slim SEO](https://wpslimseo.com) - A fast, lightweight and full-featured SEO plugin for WordPress with minimal configuration.
-- [Slim SEO Schema](https://wpslimseo.com/slim-seo-schema/) - The best plugin to add schemas (structured data, rich snippets) to WordPress.
+- [Slim SEO Schema](https://wpslimseo.com/products/slim-seo-schema/) - The best plugin to add schemas (structured data, rich snippets) to WordPress.
+- [Slim SEO Link Manager](https://wpslimseo.com/products/slim-seo-link-manager/) - Build internal link easier in WordPress with real-time reports.
 - [GretaThemes](https://gretathemes.com) - Free and premium WordPress themes that clean, simple and just work.
 
 == Installation ==
@@ -75,6 +79,12 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.3.0 - 2023-07-11 =
+- Disable cron
+- Disable auto updates
+- Block external requests
+- Fix missing current ancestor class for menu
 
 = 2.2.0 - 2023-01-18 =
 - Cleanup nav menu item ID & classes
