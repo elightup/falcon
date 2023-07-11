@@ -53,19 +53,21 @@ class Assets extends Base {
 		add_filter( 'page_css_class', [ $this, 'remove_page_class' ] );
 	}
 
-	public function remove_menu_class( $classes ) {
+	public function remove_menu_class( array $classes ): array {
 		return array_intersect( $classes, [
 			'menu-item',
 			'current-menu-item',
+			'current-menu-ancestor',
 			'menu-item-has-children',
 		] );
 	}
 
-	public function remove_page_class( $classes ) {
+	public function remove_page_class( array $classes ): array {
 		return array_intersect( $classes, [
 			'page_item',
-			'page_item_has_children',
 			'current_page_item',
+			'current_page_ancestor',
+			'page_item_has_children',
 		] );
 	}
 
