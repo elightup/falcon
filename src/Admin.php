@@ -44,6 +44,12 @@ class Admin extends Base {
 
 		// Gutenberg.
 		remove_action( 'try_gutenberg_panel', 'wp_try_gutenberg_panel' );
+
+		// Popular plugins.
+		remove_meta_box( 'wc_admin_dashboard_setup', 'dashboard', 'normal' ); // WooCommerce.
+		remove_meta_box( 'themeisle', 'dashboard', 'normal' ); // WP CloudFlare Super Cache.
+		remove_meta_box( 'fluentform_stat_widget', 'dashboard', 'normal' ); // Fluent Form.
+		remove_meta_box( 'fluentsmtp_reports_widget', 'dashboard', 'normal' ); // Fluent SMTP.
 	}
 
 	public function no_wp_logo() {
