@@ -19,6 +19,7 @@ class Settings {
 	}
 
 	public function render() {
+		$option = get_option( 'falcon', [] );
 		?>
 		<div class="wrap">
 			<h1><?= esc_html( get_admin_page_title() ) ?></h1>
@@ -68,6 +69,11 @@ class Settings {
 							$this->checkbox( 'cleanup_menu', __( 'Cleanup nav menu item ID & classes', 'falcon' ) );
 							$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );
 							?>
+							<fieldset>
+								<label for="lazy-load-css"><?php esc_html_e( 'Lazy load CSS', 'falcon' ) ?></label>
+								<textarea id="lazy-load-css" class="large-text code" rows="10" name="falcon[lazy_load_css]"><?= esc_textarea( $option['lazy_load_css'] ?? '' ) ?></textarea>
+								<p class="description"><?php esc_html_e( 'Enter CSS handles or keywords of CSS files that you want to lazy load, one per line. This feature should be used only for unimportant CSS.', 'falcon' ) ?></p>
+							</fieldset>
 						</div>
 						<div class="tab-pane hidden" id="tab-admin">
 							<?php
@@ -128,7 +134,7 @@ class Settings {
 		add_settings_error( null, 'falcon', __( 'Settings updated.', 'falcon' ), 'success' );
 	}
 
-	public static function is_feature_active( string $name ) : bool {
+	public static function is_feature_active( string $name ): bool {
 		$data = get_option( 'falcon', null );
 
 		$default_disabled = [

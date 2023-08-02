@@ -61,3 +61,15 @@ input:checked + .switch-icon:before {
 .admin-color-sunrise .switch {
 	--color: var(--wp-admin-theme-color, #dd823b);
 }
+
+
+fieldset label {
+	font-size: 14px;
+	font-weight: 600;
+	display: block;
+	margin-top: 12px;
+	margin-bottom: 4px;
+}
+fieldset p {
+	font-style: italic;
+}
