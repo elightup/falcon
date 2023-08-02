@@ -2,8 +2,8 @@
 Contributors: elightup, rilwis, truongwp
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 5.9
-Tested up to: 6.2.2
-Stable tag: 2.3.0
+Tested up to: 6.3
+Stable tag: 2.4.0
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -33,6 +33,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 
 #### Assets
 
+- Lazy load CSS
 - Remove query string for JavaScript and CSS files
 - Remove jQuery Migrate
 - Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
@@ -69,6 +70,7 @@ If you like this plugin, you might also like our other WordPress products:
 - [Slim SEO Schema](https://wpslimseo.com/products/slim-seo-schema/) - The best plugin to add schemas (structured data, rich snippets) to WordPress.
 - [Slim SEO Link Manager](https://wpslimseo.com/products/slim-seo-link-manager/) - Build internal link easier in WordPress with real-time reports.
 - [GretaThemes](https://gretathemes.com) - Free and premium WordPress themes that clean, simple and just work.
+- [Auto Listings](https://wpautolistings.com) - The car sale and dealership plugin for WordPress.
 
 == Installation ==
 
@@ -79,6 +81,9 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.4.0 - 2023-08-02 =
+- Add lazy load CSS
 
 = 2.3.0 - 2023-07-11 =
 - Disable cron

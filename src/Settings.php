@@ -105,10 +105,9 @@ class Settings {
 							</h3>
 							<div class="inside">
 								<p><?php esc_html_e( 'Like this plugin? Check out our other WordPress plugins:', 'falcon' ) ?></p>
-								<p><a href="https://wordpress.org/plugins/meta-box/" target="_blank"><strong>Meta Box</strong></a> - <?php esc_html_e( 'The most powerful WordPress plugin for creating custom post types and custom fields.', 'falcon' ) ?></p>
-								<p><a href="https://wpslimseo.com/products/slim-seo-schema/" target="_blank"><strong>Slim SEO Schema</strong></a> - <?php esc_html_e( 'The best schema plugin for WordPress.', 'falcon' ) ?></p>
-								<p><a href="https://wpslimseo.com/products/slim-seo-link-manager/" target="_blank"><strong>Slim SEO Link Manager</strong></a> - <?php esc_html_e( 'Build internal link easier in WordPress.', 'falcon' ) ?></p>
-								<p><a href="https://gretathemes.com" target="_blank"><strong>GretaThemes</strong></a> - <?php esc_html_e( 'WordPress themes that clean, simple and just work.', 'falcon' ) ?></p>
+								<p><a href="https://elu.to/fsm" target="_blank"><strong>Meta Box</strong></a> - <?php esc_html_e( 'The most powerful WordPress plugin for creating custom post types and custom fields.', 'falcon' ) ?></p>
+								<p><a href="https://elu.to/fsss" target="_blank"><strong>Slim SEO Schema</strong></a> - <?php esc_html_e( 'The best plugin to add schemas (structured data, rich snippets) to WordPress.', 'falcon' ) ?></p>
+								<p><a href="https://elu.to/fssl" target="_blank"><strong>Slim SEO Link Manager</strong></a> - <?php esc_html_e( 'Build internal link easier in WordPress with real-time reports.', 'falcon' ) ?></p>
 							</div>
 						</div>
 					</div>
