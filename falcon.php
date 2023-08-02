@@ -25,4 +25,5 @@ new Admin;
 if ( ! is_admin() ) {
 	new Header;
 	new Assets;
+	new LazyLoadCSS;
 }
