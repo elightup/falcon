@@ -70,9 +70,9 @@ class Settings {
 							$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );
 							?>
 							<fieldset>
-								<label for="lazy-load-css"><?php esc_html_e( 'Lazy load CSS', 'falcon' ) ?></label>
+								<label for="lazy-load-css"><?php esc_html_e( 'Asynchronous load CSS', 'falcon' ) ?></label>
 								<textarea id="lazy-load-css" class="large-text code" rows="10" name="falcon[lazy_load_css]"><?= esc_textarea( $option['lazy_load_css'] ?? '' ) ?></textarea>
-								<p class="description"><?php esc_html_e( 'Enter CSS handles or keywords of CSS files that you want to lazy load, one per line. This feature should be used only for unimportant CSS.', 'falcon' ) ?></p>
+								<p class="description"><?php esc_html_e( 'Enter CSS handles or keywords of CSS files that you want to load asynchronously, one per line. This feature should be used only for unimportant CSS.', 'falcon' ) ?></p>
 							</fieldset>
 						</div>
 						<div class="tab-pane hidden" id="tab-admin">
