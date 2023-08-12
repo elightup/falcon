@@ -24,9 +24,6 @@
       "url":"https://wpackagist.org"
     }
   ],
-  "require": {
-    "wpackagist-plugin/disable-embeds": "^1"
-  },
   "autoload": {
     "psr-4": {
       "Falcon\\": "src/"
@@ -39,9 +36,6 @@
     "light-ignore-plugin": {
       "composer": [
         "LICENSE"
-      ],
-      "disable-embeds": [
-        "*.txt"
       ]
     }
   },
