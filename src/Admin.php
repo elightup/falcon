@@ -50,6 +50,7 @@ class Admin extends Base {
 		remove_meta_box( 'themeisle', 'dashboard', 'normal' ); // WP CloudFlare Super Cache.
 		remove_meta_box( 'fluentform_stat_widget', 'dashboard', 'normal' ); // Fluent Form.
 		remove_meta_box( 'fluentsmtp_reports_widget', 'dashboard', 'normal' ); // Fluent SMTP.
+		remove_meta_box( 'jetpack_summary_widget', 'dashboard', 'normal' ); // Jetpack.
 	}
 
 	public function no_wp_logo() {
