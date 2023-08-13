@@ -37,6 +37,9 @@ class General extends Base {
 
 		// Remove inline global CSS on the front end.
 		wp_dequeue_style( 'global-styles' );
+
+		// Remove classic-themes CSS for backwards compatibility for button blocks.
+		wp_dequeue_style( 'classic-theme-styles' );
 	}
 
 	public function no_rest_api() {
