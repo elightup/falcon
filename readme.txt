@@ -3,7 +3,7 @@ Contributors: elightup, rilwis, truongwp
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 5.9
 Tested up to: 6.3
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -33,7 +33,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 
 #### Assets
 
-- Lazy load CSS
+- Asynchronous load CSS
 - Remove query string for JavaScript and CSS files
 - Remove jQuery Migrate
 - Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
@@ -82,8 +82,12 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 
 == Changelog ==
 
+= 2.4.1 - 2023-08-14 =
+- Remove classic theme styles for button blocks
+- Remove Jetpack widget
+
 = 2.4.0 - 2023-08-02 =
-- Add lazy load CSS
+- Add asynchronous load CSS
 
 = 2.3.0 - 2023-07-11 =
 - Disable cron
