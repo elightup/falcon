@@ -2,6 +2,7 @@
 namespace Falcon;
 
 use WP_Error;
+use WP_Query;
 
 class General extends Base {
 	protected $features = [
@@ -16,6 +17,9 @@ class General extends Base {
 		'no_cron',
 		'no_auto_updates',
 		'no_external_requests',
+		'no_comments',
+		'search_posts_only',
+		'no_comment_url',
 	];
 
 	public function no_gutenberg() {
@@ -128,5 +132,40 @@ class General extends Base {
 		if ( ! defined( 'WP_HTTP_BLOCK_EXTERNAL' ) ) {
 			define( 'WP_HTTP_BLOCK_EXTERNAL', true );
 		}
+	}
+
+	public function no_comments() {
+		// No admin menu.
+		add_action( 'admin_menu', function () {
+			remove_menu_page( 'edit-comments.php' );
+		} );
+
+		// No admin bar.
+		add_action( 'wp_before_admin_bar_render', function () {
+			global $wp_admin_bar;
+			$wp_admin_bar->remove_menu( 'comments' );
+		} );
+
+		// Remove from posts and pages.
+		add_action( 'init', function () {
+			remove_post_type_support( 'post', 'comments' );
+			remove_post_type_support( 'page', 'comments' );
+		} );
+	}
+
+	public function search_posts_only() {
+		add_filter( 'pre_get_posts', function ( WP_Query $query ) {
+			if ( ! is_admin() && $query->is_search ) {
+				$query->set( 'post_type', 'post' );
+			}
+			return $query;
+		} );
+	}
+
+	public function no_comment_url() {
+		add_filter( 'comment_form_default_fields', function ( array $fields ): array {
+			unset( $fields['url'] );
+			return $fields;
+		} );
 	}
 }

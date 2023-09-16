@@ -41,12 +41,15 @@ class Settings {
 							$this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ) );
 							$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ) );
 							$this->checkbox( 'no_embeds', __( 'Disable embeds, e.g. prevent others from embedding your site and vise-versa', 'falcon' ) );
+							$this->checkbox( 'no_comments', __( 'Disable comments', 'falcon' ) );
+							$this->checkbox( 'no_comment_url', __( 'Remove website field from comment form', 'falcon' ) );
 							$this->checkbox( 'no_revisions', __( 'Disable revisions', 'falcon' ) );
 							$this->checkbox( 'no_self_pings', __( 'Disable self pings', 'falcon' ) );
 							$this->checkbox( 'no_privacy', __( 'Disable privacy tools', 'falcon' ) );
-							$this->checkbox( 'no_cron', __( 'Disable cron', 'falcon' ) );
 							$this->checkbox( 'no_auto_updates', __( 'Disable auto updates', 'falcon' ) );
+							$this->checkbox( 'no_cron', __( 'Disable cron', 'falcon' ) );
 							$this->checkbox( 'no_external_requests', __( 'Block external requests', 'falcon' ) );
+							$this->checkbox( 'search_posts_only', __( 'Search only posts', 'falcon' ) );
 							?>
 						</div>
 						<div class="tab-pane hidden" id="tab-header">
@@ -139,6 +142,7 @@ class Settings {
 		$default_disabled = [
 			'no_cron',
 			'no_external_requests',
+			'no_comments',
 		];
 
 		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'], true );
