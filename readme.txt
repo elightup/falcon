@@ -2,8 +2,8 @@
 Contributors: elightup, rilwis, truongwp
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 5.9
-Tested up to: 6.3
-Stable tag: 2.4.1
+Tested up to: 6.3.1
+Stable tag: 2.5.0
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -24,22 +24,16 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Disable heartbeat
 - [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
 - Disable embeds, e.g. prevent others from embedding your site and vise-versa
+- Disable comments
+- Remove website field from comment form
 - Disable revisions
 - Disable self pings
 - Disable privacy tools
 - Disable cron
 - Disable auto updates
 - Block external requests
-
-#### Assets
-
-- Asynchronous load CSS
-- Remove query string for JavaScript and CSS files
-- Remove jQuery Migrate
-- Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
-- Remove styles for recent comments widget
-- Cleanup nav menu item ID & classes
-- Disable emojis
+- Search only posts
+- Disable replacing text with formatted entities like smart quotes, dashes, ellipses, etc.
 
 #### Header
 
@@ -50,6 +44,19 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Remove WordPress version number
 - Remove shortlink
 - Remove REST API link
+
+#### Assets
+
+- **Asynchronous load CSS**
+- Remove query string for JavaScript and CSS files
+- Remove jQuery Migrate
+- Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
+- Remove styles for recent comments widget
+- Cleanup nav menu item ID & classes
+- Disable emojis
+- Disable scaling down big images
+- Disable automatic image rotation based on EXIF data
+- Disable thumbnail generation
 
 #### Admin
 
@@ -65,12 +72,12 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 
 If you like this plugin, you might also like our other WordPress products:
 
-- [Meta Box](https://metabox.io) - The most powerful WordPress plugin for creating custom post types and custom fields.
+- [Meta Box](https://metabox.io) - A powerful WordPress plugin for creating custom post types and custom fields.
 - [Slim SEO](https://wpslimseo.com) - A fast, lightweight and full-featured SEO plugin for WordPress with minimal configuration.
-- [Slim SEO Schema](https://wpslimseo.com/products/slim-seo-schema/) - The best plugin to add schemas (structured data, rich snippets) to WordPress.
+- [Slim SEO Schema](https://wpslimseo.com/products/slim-seo-schema/) - An advanced, powerful and flexible plugin to add schemas to WordPress.
 - [Slim SEO Link Manager](https://wpslimseo.com/products/slim-seo-link-manager/) - Build internal link easier in WordPress with real-time reports.
 - [GretaThemes](https://gretathemes.com) - Free and premium WordPress themes that clean, simple and just work.
-- [Auto Listings](https://wpautolistings.com) - The car sale and dealership plugin for WordPress.
+- [Auto Listings](https://wpautolistings.com) - A car sale and dealership plugin for WordPress.
 
 == Installation ==
 
@@ -81,6 +88,15 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.5.0 - 2023-09-18
+- Add: Disable comments
+- Add: Remove website field from comment form
+- Add: Search only posts
+- Add: Disable replacing text with formatted entities like smart quotes, dashes, ellipses, etc.
+- Add: Disable scaling down big images
+- Add: Disable automatic image rotation based on EXIF data
+- Add: Disable thumbnail generation
 
 = 2.4.1 - 2023-08-14 =
 - Remove classic theme styles for button blocks
