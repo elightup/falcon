@@ -72,6 +72,9 @@ class Settings {
 							$this->checkbox( 'no_recent_comments_widget_style', __( 'Remove styles for recent comments widget', 'falcon' ) );
 							$this->checkbox( 'cleanup_menu', __( 'Cleanup nav menu item ID & classes', 'falcon' ) );
 							$this->checkbox( 'no_emojis', __( 'Disable emojis', 'falcon' ) );
+							$this->checkbox( 'no_image_threshold', __( 'Disable scaling down big images', 'falcon' ) );
+							$this->checkbox( 'no_exif_rotate', __( 'Disable automatic image rotation based on EXIF data', 'falcon' ) );
+							$this->checkbox( 'no_thumbnails', __( 'Disable thumbnail generation', 'falcon' ) );
 							?>
 							<fieldset>
 								<label for="lazy-load-css"><?php esc_html_e( 'Asynchronous load CSS', 'falcon' ) ?></label>
@@ -144,6 +147,7 @@ class Settings {
 			'no_cron',
 			'no_external_requests',
 			'no_comments',
+			'no_thumbnails',
 		];
 
 		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'], true );

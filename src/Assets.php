@@ -9,6 +9,9 @@ class Assets extends Base {
 		'no_recent_comments_widget_style',
 		'cleanup_menu',
 		'no_emojis',
+		'no_image_threshold',
+		'no_exif_rotate',
+		'no_thumbnails',
 	];
 
 	public function no_query_string() {
@@ -96,8 +99,20 @@ class Assets extends Base {
 		if ( 'dns-prefetch' !== $type ) {
 			return $urls;
 		}
-		return array_filter( $urls, function( $url ) {
+		return array_filter( $urls, function ( $url ) {
 			return false === strpos( $url, 'https://s.w.org/images/core/emoji/' );
 		} );
+	}
+
+	public function no_image_threshold() {
+		add_filter( 'big_image_size_threshold', '__return_zero' );
+	}
+
+	public function no_exif_rotate() {
+		add_filter( 'wp_image_maybe_exif_rotate', '__return_false' );
+	}
+
+	public function no_thumbnails() {
+		add_filter( 'intermediate_image_sizes_advanced', '__return_empty_array' );
 	}
 }
