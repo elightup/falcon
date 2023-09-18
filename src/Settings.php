@@ -50,6 +50,7 @@ class Settings {
 							$this->checkbox( 'no_cron', __( 'Disable cron', 'falcon' ) );
 							$this->checkbox( 'no_external_requests', __( 'Block external requests', 'falcon' ) );
 							$this->checkbox( 'search_posts_only', __( 'Search only posts', 'falcon' ) );
+							$this->checkbox( 'no_texturize', __( 'Disable replacing text with formatted entities like smart quotes, dashes, ellipses, etc.', 'falcon' ) );
 							?>
 						</div>
 						<div class="tab-pane hidden" id="tab-header">

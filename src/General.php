@@ -21,6 +21,7 @@ class General extends Base {
 		'no_comments',
 		'search_posts_only',
 		'no_comment_url',
+		'no_texturize',
 	];
 
 	public function no_gutenberg() {
@@ -153,5 +154,9 @@ class General extends Base {
 			unset( $fields['url'] );
 			return $fields;
 		} );
+	}
+
+	public function no_texturize() {
+		add_filter( 'run_wptexturize', '__return_false' );
 	}
 }
