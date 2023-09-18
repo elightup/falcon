@@ -1,6 +1,7 @@
 <?php
 namespace Falcon;
 
+use Falcon\Components\DisableComments;
 use WP_Error;
 use WP_Query;
 
@@ -113,7 +114,7 @@ class General extends Base {
 	 */
 	public function remove_self_pings( &$links ) {
 		$home_url = home_url();
-		$links    = array_filter( $links, function( $link ) use ( $home_url ) {
+		$links    = array_filter( $links, function ( $link ) use ( $home_url ) {
 			return false === strpos( $link, $home_url );
 		} );
 	}
@@ -135,22 +136,7 @@ class General extends Base {
 	}
 
 	public function no_comments() {
-		// No admin menu.
-		add_action( 'admin_menu', function () {
-			remove_menu_page( 'edit-comments.php' );
-		} );
-
-		// No admin bar.
-		add_action( 'wp_before_admin_bar_render', function () {
-			global $wp_admin_bar;
-			$wp_admin_bar->remove_menu( 'comments' );
-		} );
-
-		// Remove from posts and pages.
-		add_action( 'init', function () {
-			remove_post_type_support( 'post', 'comments' );
-			remove_post_type_support( 'page', 'comments' );
-		} );
+		new DisableComments;
 	}
 
 	public function search_posts_only() {
