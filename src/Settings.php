@@ -33,6 +33,7 @@ class Settings {
 							<a href="#tab-header" class="nav-tab"><?php esc_html_e( 'Header', 'falcon' ) ?></a></li>
 							<a href="#tab-assets" class="nav-tab"><?php esc_html_e( 'Assets', 'falcon' ) ?></a></li>
 							<a href="#tab-admin" class="nav-tab"><?php esc_html_e( 'Admin', 'falcon' ) ?></a></li>
+							<a href="#tab-email" class="nav-tab"><?php esc_html_e( 'Email', 'falcon' ) ?></a></li>
 						</nav>
 						<div class="tab-pane" id="tab-general">
 							<?php
@@ -91,6 +92,11 @@ class Settings {
 							$this->checkbox( 'no_wp_logo', __( 'Remove WordPress logo in the admin bar', 'falcon' ) );
 							$this->checkbox( 'no_admin_email_confirm', __( 'Remove admin email confirmation', 'falcon' ) );
 							$this->checkbox( 'no_application_passwords', __( 'Remove application passwords', 'falcon' ) );
+							?>
+						</div>
+						<div class="tab-pane hidden" id="tab-email">
+							<?php
+							$this->checkbox( 'no_update_emails', __( 'Disable auto update email notification', 'falcon' ) );
 							?>
 						</div>
 
