@@ -1,20 +1,20 @@
-( function ( document ) {
-	const tabs = document.querySelectorAll( '.nav-tab' );
-	const panes = document.querySelectorAll( '.tab-pane' );
+{
+	const tabs = document.querySelectorAll( '.e-tab' );
+	const panes = document.querySelectorAll( '.e-tabPane' );
 
-	function clickHandle( e ) {
-		if ( ! e.target.classList.contains( 'nav-tab' ) ) {
+	const clickHandle = e => {
+		if ( !e.target.classList.contains( 'e-tab' ) ) {
 			return;
 		}
 
 		e.preventDefault();
 
-		tabs.forEach( tab => tab.classList.remove( 'nav-tab-active' ) );
-		e.target.classList.add( 'nav-tab-active' );
+		tabs.forEach( tab => tab.classList.remove( 'e-tab-active' ) );
+		e.target.classList.add( 'e-tab-active' );
 
 		panes.forEach( pane => pane.classList.add( 'hidden' ) );
-		document.querySelector( e.target.getAttribute( 'href' ) ).classList.remove( 'hidden' );
-	}
+		document.querySelector( `.e-tabPane[data-tab="${ e.target.dataset.tab }"]` ).classList.remove( 'hidden' );
+	};
 
-	document.querySelector( '.nav-tab-wrapper' ).addEventListener( 'click', clickHandle );
-} )( document );
+	document.querySelector( '.e-tabs' ).addEventListener( 'click', clickHandle );
+}

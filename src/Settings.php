@@ -21,21 +21,31 @@ class Settings {
 	public function render() {
 		$option = get_option( 'falcon', [] );
 		?>
-		<div class="wrap">
-			<h1><?= esc_html( get_admin_page_title() ) ?></h1>
-			<div id="poststuff">
-				<div id="post-body" class="metabox-holder columns-2">
-					<form method="POST" action="" id="post-body-content">
+		<form method="POST" action="" class="e-page">
+			<div class="e-header">
+				<div class="e-branding">
+					<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" fill="#4f5d73" r="32"/><g fill="#e0e0d1"><path d="M47.7 40.6c.2-.4.6-.6 1-.7s.9-.1 1.4.1l2.5 1.2c.5.2.8.6.9 1.1.2.5.1 1.1-.2 1.6s-.8.9-1.2 1c-.5.1-1 0-1.4-.3L48.4 43c-.4-.3-.7-.7-.8-1.1-.1-.5-.1-.9.1-1.3zM16.4 40.8c.5.7.1 1.8-.7 2.4l-2.3 1.6c-.9.6-2 .3-2.7-.7-.6-1-.2-2.3.7-2.7l2.5-1.2c1.1-.4 2.1-.1 2.5.6zM14 31.8c0 .9-.7 1.6-1.8 1.7l-2.8.3c-1 .1-2-.8-2-2s.9-2.1 1.9-2l2.8.2c1.1.2 1.9.9 1.9 1.8zM16.3 22.7c-.2.4-.6.6-1 .7s-.9.1-1.4-.1l-2.5-1.2c-.5-.2-.8-.6-.9-1.1-.2-.5-.1-1.1.2-1.6s.8-.9 1.2-1c.5-.1 1 0 1.4.3l2.3 1.6c.4.3.7.7.8 1.1.2.5.2 1-.1 1.3zM22.9 16.1c-.7.5-1.8.1-2.4-.7l-1.6-2.3c-.6-.9-.3-2 .7-2.7 1-.6 2.3-.2 2.7.7l1.2 2.5c.4 1 .1 2-.6 2.5zM31.9 13.6c-.9 0-1.6-.7-1.7-1.8L29.9 9c-.1-1 .8-2 2-2s2.1.9 2 1.9l-.2 2.8c-.2 1.1-.9 1.9-1.8 1.9zM41 16c-.4-.2-.6-.6-.7-1s-.1-.9.1-1.4l1.2-2.5c.2-.5.6-.8 1.1-.9.5-.2 1.1-.1 1.6.2s.9.8 1 1.2c.1.5 0 1-.3 1.4l-1.6 2.3c-.3.4-.7.7-1.1.8-.5.1-1 .1-1.3-.1zM47.6 22.5c-.5-.7-.1-1.8.7-2.4l2.3-1.6c.9-.6 2-.3 2.7.7.6 1 .2 2.3-.7 2.7L50 23.1c-.9.5-2 .2-2.4-.6zM50.1 31.5c0-.9.7-1.6 1.8-1.7l2.8-.3c1-.1 2 .8 2 2s-.9 2.1-1.9 2l-2.8-.2c-1.1-.1-1.9-.9-1.9-1.8z"/></g><path d="M41.6 24.4c-.4-.4-1.1-.5-1.5-.2l-4.7 2.9-3.1 1.9H32c-2.8 0-5 2.2-5 5v.3c.2 2.5 2.1 4.5 4.6 4.6h.3c2.8 0 5-2.2 5-5v-.3l1.9-3.1 2.9-4.7c.4-.4.3-1-.1-1.4z" fill="#231f20" opacity=".2"/><path d="M41.6 22.4c-.4-.4-1.1-.5-1.5-.2l-4.7 2.9-3.1 1.9H32c-2.8 0-5 2.2-5 5v.3c.2 2.5 2.1 4.5 4.6 4.6h.3c2.8 0 5-2.2 5-5v-.3l1.9-3.1 2.9-4.7c.4-.4.3-1-.1-1.4z" fill="#c75c5c"/><circle cx="32" cy="32" fill="#fff" r="5"/><path d="M40 49c0 1.7-1.3 3-3 3H27c-1.7 0-3-1.3-3-3v-2c0-1.7 1.3-3 3-3h10c1.7 0 3 1.3 3 3z" fill="#f5cf87"/></svg>
+					<h1><?= esc_html( get_admin_page_title() ) ?></h1>
+				</div>
+
+				<div class="e-tabs">
+					<span data-tab="general" class="e-tab e-tab-active"><?php esc_html_e( 'General', 'falcon' ) ?></span>
+					<span data-tab="header" class="e-tab"><?php esc_html_e( 'Header', 'falcon' ) ?></span>
+					<span data-tab="assets" class="e-tab"><?php esc_html_e( 'Assets', 'falcon' ) ?></span>
+					<span data-tab="admin" class="e-tab"><?php esc_html_e( 'Admin', 'falcon' ) ?></span>
+					<span data-tab="email" class="e-tab"><?php esc_html_e( 'Email', 'falcon' ) ?></span>
+				</div>
+
+				<?php submit_button( esc_html__( 'Save Changes', 'falcon' ) ); ?>
+			</div>
+			<div class="e-body wrap">
+				<div class="wp-header-end"></div>
+
+				<div class="e-wrapper">
+					<div class="e-content e-box">
 						<?php wp_nonce_field( 'save' ) ?>
 
-						<nav class="nav-tab-wrapper">
-							<a href="#tab-general" class="nav-tab nav-tab-active"><?php esc_html_e( 'General', 'falcon' ) ?></a></li>
-							<a href="#tab-header" class="nav-tab"><?php esc_html_e( 'Header', 'falcon' ) ?></a></li>
-							<a href="#tab-assets" class="nav-tab"><?php esc_html_e( 'Assets', 'falcon' ) ?></a></li>
-							<a href="#tab-admin" class="nav-tab"><?php esc_html_e( 'Admin', 'falcon' ) ?></a></li>
-							<a href="#tab-email" class="nav-tab"><?php esc_html_e( 'Email', 'falcon' ) ?></a></li>
-						</nav>
-						<div class="tab-pane" id="tab-general">
+						<div class="e-tabPane" data-tab="general">
 							<?php
 							$this->checkbox( 'no_gutenberg', __( 'Disable Gutenberg (the block editor)', 'falcon' ), __( 'Disable the block editor for all post types and use classic editor only.', 'falcon' ) );
 							$this->checkbox( 'no_rest_api', __( 'Disable REST API for unauthenticated requests', 'falcon' ), __( 'Improve your website security by disabling REST API access for non-authenticated users.', 'falcon' ) );
@@ -54,7 +64,7 @@ class Settings {
 							$this->checkbox( 'no_texturize', __( 'Disable texturize', 'falcon' ), __( 'Do not allow WordPress to auto replace some characters with their formatted forms like quotes, dashes, ellipses, etc.', 'falcon' ) );
 							?>
 						</div>
-						<div class="tab-pane hidden" id="tab-header">
+						<div class="e-tabPane hidden" data-tab="header">
 							<?php
 							$this->checkbox( 'no_feed_links', __( 'Remove feed links', 'falcon' ), __( 'Remove all RSS and Atom feed URLs from the website\'s head. This includes feeds for posts, categories, tags, comments, authors and search.', 'falcon' ) );
 							$this->checkbox( 'no_rsd_link', __( 'Remove RSD link', 'falcon' ), __( 'Remove the RDF URL from the website\'s head.', 'falcon' ) );
@@ -65,7 +75,7 @@ class Settings {
 							$this->checkbox( 'no_rest_link', __( 'Remove REST API link', 'falcon' ), __( 'Remove the REST API URL from the website\'s head.', 'falcon' ) );
 							?>
 						</div>
-						<div class="tab-pane hidden" id="tab-assets">
+						<div class="e-tabPane hidden" data-tab="assets">
 							<?php
 							$this->checkbox( 'no_query_string', __( 'Remove query string for JavaScript and CSS files', 'falcon' ), __( 'Remove "?ver=xxx" and other query string from JavaScript and CSS files. This will make browsers cache these files better.', 'falcon' ) );
 							$this->checkbox( 'no_jquery_migrate', __( 'Remove jQuery Migrate', 'falcon' ), __( 'Remove the old jQuery Migrate from both admin and frontend.', 'falcon' ) );
@@ -84,7 +94,7 @@ class Settings {
 								<p class="description"><?php esc_html_e( 'Enter CSS handles or keywords of CSS files that you want to load asynchronously, one per line. This feature should be used only for unimportant CSS.', 'falcon' ) ?></p>
 							</fieldset>
 						</div>
-						<div class="tab-pane hidden" id="tab-admin">
+						<div class="e-tabPane hidden" data-tab="admin">
 							<?php
 							$this->checkbox( 'login_site_icon', __( 'Show site icon on the login page', 'falcon' ), __( 'Use your website site icon as the logo on the login page.', 'falcon' ) );
 							$this->checkbox( 'no_update_nags', __( 'Remove update nags', 'falcon' ), __( 'Do not show update messages in the admin.', 'falcon' ) );
@@ -94,40 +104,31 @@ class Settings {
 							$this->checkbox( 'no_application_passwords', __( 'Remove application passwords', 'falcon' ), __( 'Disable the application passwords feature if you don\'t integrate your WordPress website with any external service.', 'falcon' ) );
 							?>
 						</div>
-						<div class="tab-pane hidden" id="tab-email">
+						<div class="e-tabPane hidden" data-tab="email">
 							<?php
 							$this->checkbox( 'no_admin_email_confirm', __( 'Remove admin email confirmation', 'falcon' ), __( 'Do not ask whether the admin email is correct.', 'falcon' ) );
 							$this->checkbox( 'no_update_emails', __( 'Disable auto update email notification', 'falcon' ), __( 'Do not send emails when there are any updates on your website.', 'falcon' ) );
 							?>
 						</div>
+					</div>
 
-						<?php submit_button( esc_html__( 'Save Changes', 'falcon' ) ); ?>
-					</form>
-					<div id="postbox-container-1" class="postbox-container">
-						<div class="postbox">
-							<h3 class="hndle">
-								<span><?php esc_html_e( 'Write a review for Falcon', 'falcon' ) ?></span>
-							</h3>
-							<div class="inside">
-								<p><?php esc_html_e( 'If you like Falcon, please write a review on WordPress.org to help us spread the word. We really appreciate that!', 'falcon' ) ?></p>
-								<p><a href="https://wordpress.org/support/plugin/falcon/reviews/?filter=5" class="button" target="_blank" rel="noopenner noreferrer"><?php esc_html_e( 'Write a review', 'falcon' ) ?></a></p>
-							</div>
+					<div class="e-sidebar">
+						<div class="e-widget e-box">
+							<h2 class="e-widget_title"><?php esc_html_e( 'Write a review for Falcon', 'falcon' ) ?></h2>
+							<p><?php esc_html_e( 'If you like Falcon, please write a review on WordPress.org to help us spread the word. We really appreciate that!', 'falcon' ) ?></p>
+							<p><a href="https://wordpress.org/support/plugin/falcon/reviews/?filter=5" class="button" target="_blank" rel="noopenner noreferrer"><?php esc_html_e( 'Write a review', 'falcon' ) ?></a></p>
 						</div>
-						<div class="postbox">
-							<h3 class="hndle">
-								<span><?php esc_html_e( 'Our WordPress Plugins', 'falcon' ) ?></span>
-							</h3>
-							<div class="inside">
-								<p><?php esc_html_e( 'Like this plugin? Check out our other WordPress plugins:', 'falcon' ) ?></p>
-								<p><a href="https://elu.to/fsm" target="_blank"><strong>Meta Box</strong></a> - <?php esc_html_e( 'The most powerful WordPress plugin for creating custom post types and custom fields.', 'falcon' ) ?></p>
-								<p><a href="https://elu.to/fsss" target="_blank"><strong>Slim SEO Schema</strong></a> - <?php esc_html_e( 'The best plugin to add schemas (structured data, rich snippets) to WordPress.', 'falcon' ) ?></p>
-								<p><a href="https://elu.to/fssl" target="_blank"><strong>Slim SEO Link Manager</strong></a> - <?php esc_html_e( 'Build internal link easier in WordPress with real-time reports.', 'falcon' ) ?></p>
-							</div>
+						<div class="e-widget e-box">
+							<h2 class="e-widget_title"><?php esc_html_e( 'Our WordPress Plugins', 'falcon' ) ?></h2>
+							<p><?php esc_html_e( 'Like this plugin? Check out our other WordPress plugins:', 'falcon' ) ?></p>
+							<p><a href="https://elu.to/fsm" target="_blank"><strong>Meta Box</strong></a> - <?php esc_html_e( 'The most powerful WordPress plugin for creating custom post types and custom fields.', 'falcon' ) ?></p>
+							<p><a href="https://elu.to/fsss" target="_blank"><strong>Slim SEO Schema</strong></a> - <?php esc_html_e( 'The best plugin to add schemas (structured data, rich snippets) to WordPress.', 'falcon' ) ?></p>
+							<p><a href="https://elu.to/fssl" target="_blank"><strong>Slim SEO Link Manager</strong></a> - <?php esc_html_e( 'Build internal link easier in WordPress with real-time reports.', 'falcon' ) ?></p>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 		<?php
 	}
 
