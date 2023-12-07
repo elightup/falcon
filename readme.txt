@@ -2,8 +2,8 @@
 Contributors: elightup, rilwis, truongwp
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 5.9
-Tested up to: 6.4.1
-Stable tag: 2.6.0
+Tested up to: 6.4.2
+Stable tag: 2.7.0
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -20,9 +20,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 #### General
 
 - [Disable Gutenberg](https://metabox.io/disable-gutenberg-without-using-plugins/) (the block editor)
-- Disable REST API for unauthenticated requests
 - Disable heartbeat
-- [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
 - Disable embeds, e.g. prevent others from embedding your site and vise-versa
 - Disable comments
 - Remove website field from comment form
@@ -45,7 +43,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Remove shortlink
 - Remove REST API link
 
-#### Assets
+#### Media
 
 - **Asynchronous load CSS**
 - Remove query string for JavaScript and CSS files
@@ -68,6 +66,13 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Remove admin email confirmation
 - Remove application passwords
 
+#### Security
+
+- Disable REST API for unauthenticated requests
+- [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
+- Restrict upload file types
+- Disable detailed login errors
+
 ### You might also like
 
 If you like this plugin, you might also like our other WordPress products:
@@ -88,6 +93,11 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.7.0 - 2023-12-07 =
+- Update hook for disable core update email notification
+- Fix removing update nag not working
+- Add a new security tab with options to disable login errors and restrict upload file types
 
 = 2.6.0 - 2023-12-03 =
 - Update the plugin style

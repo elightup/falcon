@@ -9,9 +9,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 ### General
 
 - [Disable Gutenberg](https://metabox.io/disable-gutenberg-without-using-plugins/) (the block editor)
-- Disable REST API for unauthenticated requests
 - Disable heartbeat
-- [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
 - Disable embeds, e.g. prevent others from embedding your site and vise-versa
 - Disable comments
 - Remove website field from comment form
@@ -34,7 +32,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Remove shortlink
 - Remove REST API link
 
-### Assets
+### Media
 
 - **Asynchronous load CSS**
 - Remove query string for JavaScript and CSS files
@@ -56,6 +54,13 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Remove WordPress logo in the admin bar
 - Remove admin email confirmation
 - Remove application passwords
+
+### Security
+
+- Disable REST API for unauthenticated requests
+- [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
+- Restrict upload file types
+- Disable detailed login errors
 
 ## You might also like
 
