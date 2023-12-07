@@ -164,7 +164,7 @@ class Settings {
 			'no_thumbnails',
 		];
 
-		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'], true );
+		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'] ?? [], true );
 	}
 
 	private function checkbox( string $name, string $label, string $description = '' ): void {
