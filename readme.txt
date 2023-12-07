@@ -3,7 +3,7 @@ Contributors: elightup, rilwis, truongwp
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 5.9
 Tested up to: 6.4.2
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -56,6 +56,13 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Disable automatic image rotation based on EXIF data
 - Disable thumbnail generation
 
+#### Email
+
+- Remove admin email confirmation
+- Disable auto update email notification
+- Disable admin email notification when a new user is registered
+- Disable admin email notification when users reset passwords
+
 #### Admin
 
 - Show site icon on login page
@@ -63,7 +70,6 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Remove footer text
 - Remove default dashboard widgets
 - Remove WordPress logo in the admin bar
-- Remove admin email confirmation
 - Remove application passwords
 
 #### Security
@@ -93,6 +99,10 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.7.1 - 2023-12-07 =
+- Add options for no emails when a new user is registered and users reset their passwords
+- Fix error when disabling all features. Closes #17.
 
 = 2.7.0 - 2023-12-07 =
 - Update hook for disable core update email notification

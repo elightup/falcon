@@ -6,6 +6,7 @@ class General extends Base {
 		'no_admin_email_confirm',
 		'no_update_emails',
 		'no_new_user_emails',
+		'no_password_reset_emails',
 	];
 
 	public function no_admin_email_confirm() {

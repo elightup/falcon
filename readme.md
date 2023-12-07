@@ -45,6 +45,13 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Disable automatic image rotation based on EXIF data
 - Disable thumbnail generation
 
+### Email
+
+- Remove admin email confirmation
+- Disable auto update email notification
+- Disable admin email notification when a new user is registered
+- Disable admin email notification when users reset passwords
+
 ### Admin
 
 - Show site icon on login page
@@ -52,7 +59,6 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Remove footer text
 - Remove default dashboard widgets
 - Remove WordPress logo in the admin bar
-- Remove admin email confirmation
 - Remove application passwords
 
 ### Security
