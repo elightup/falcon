@@ -2,15 +2,12 @@
 namespace Falcon;
 
 use Falcon\Components\DisableComments;
-use WP_Error;
 use WP_Query;
 
 class General extends Base {
 	protected $features = [
 		'no_gutenberg',
-		'no_rest_api',
 		'no_heartbeat',
-		'no_xmlrpc',
 		'no_embeds',
 		'no_revisions',
 		'no_self_pings',
@@ -48,31 +45,12 @@ class General extends Base {
 		wp_dequeue_style( 'classic-theme-styles' );
 	}
 
-	public function no_rest_api() {
-		remove_action( 'wp_head', 'rest_output_link_wp_head' );
-		remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' );
-		remove_action( 'template_redirect', 'rest_output_link_header', 11 );
-
-		add_filter( 'rest_authentication_errors', [ $this, 'no_public_rest_api' ] );
-	}
-
-	public function no_public_rest_api( $access ) {
-		return is_user_logged_in()
-			? $access
-			: new WP_Error( 'rest_login_required', __( 'REST API restricted to authenticated users.', 'falcon' ), [ 'status' => rest_authorization_required_code() ] );
-	}
-
 	public function no_heartbeat() {
 		add_action( 'init', [ $this, 'remove_heartbeat_script' ], 1 );
 	}
 
 	public function remove_heartbeat_script() {
 		wp_deregister_script( 'heartbeat' );
-	}
-
-	public function no_xmlrpc() {
-		add_filter( 'xmlrpc_enabled', '__return_false' );
-		add_filter( 'pings_open', '__return_false' );
 	}
 
 	public function no_embeds() {

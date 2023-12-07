@@ -17,6 +17,10 @@ class Admin extends Base {
 	}
 
 	public function no_update_nags() {
+		add_action( 'admin_init', [ $this, 'remove_update_nag' ] );
+	}
+
+	public function remove_update_nag() {
 		remove_action( 'admin_notices', 'update_nag', 3 );
 		remove_action( 'network_admin_notices', 'update_nag', 3 );
 	}

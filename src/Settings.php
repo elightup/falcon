@@ -31,9 +31,10 @@ class Settings {
 				<div class="e-tabs">
 					<span data-tab="general" class="e-tab e-tab-active"><?php esc_html_e( 'General', 'falcon' ) ?></span>
 					<span data-tab="header" class="e-tab"><?php esc_html_e( 'Header', 'falcon' ) ?></span>
-					<span data-tab="assets" class="e-tab"><?php esc_html_e( 'Assets', 'falcon' ) ?></span>
-					<span data-tab="admin" class="e-tab"><?php esc_html_e( 'Admin', 'falcon' ) ?></span>
+					<span data-tab="media" class="e-tab"><?php esc_html_e( 'Media', 'falcon' ) ?></span>
 					<span data-tab="email" class="e-tab"><?php esc_html_e( 'Email', 'falcon' ) ?></span>
+					<span data-tab="admin" class="e-tab"><?php esc_html_e( 'Admin', 'falcon' ) ?></span>
+					<span data-tab="security" class="e-tab"><?php esc_html_e( 'Security', 'falcon' ) ?></span>
 				</div>
 
 				<?php submit_button( esc_html__( 'Save Changes', 'falcon' ) ); ?>
@@ -48,9 +49,7 @@ class Settings {
 						<div class="e-tabPane" data-tab="general">
 							<?php
 							$this->checkbox( 'no_gutenberg', __( 'Disable Gutenberg (the block editor)', 'falcon' ), sprintf( __( 'Disable the block editor for all post types and use classic editor only. <a href="%s">Learn more</a>.', 'falcon' ), 'https://metabox.io/disable-gutenberg-without-using-plugins/' ) );
-							$this->checkbox( 'no_rest_api', __( 'Disable REST API for unauthenticated requests', 'falcon' ), __( 'Improve your website security by disabling REST API access for non-authenticated users.', 'falcon' ) );
 							$this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ), __( 'Reduce the CPU load on the server by disabling the WordPress heartbeat API.', 'falcon' ) );
-							$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ), sprintf( __( 'Protect your site from brute force, DOS and DDOS attacks via XML-RPC. Also disables trackbacks, pingbacks, and brakes the mobile apps. <a href="%s">Learn more</a>.', 'falcon' ), 'https://deluxeblogtips.com/disable-xml-rpc-wordpress/' ) );
 							$this->checkbox( 'no_embeds', __( 'Disable embeds', 'falcon' ), __( 'Prevent other websites from embedding your site and vise-versa.', 'falcon' ) );
 							$this->checkbox( 'no_comments', __( 'Disable comments', 'falcon' ), __( 'Disable comments for all post types. Existing comments will also be hidden on the frontend. And there will be no UI in the admin.', 'falcon' ) );
 							$this->checkbox( 'no_comment_url', __( 'Remove website field from comment form', 'falcon' ), __( 'Prevent people from spamming your website with their website URL.', 'falcon' ) );
@@ -75,7 +74,7 @@ class Settings {
 							$this->checkbox( 'no_rest_link', __( 'Remove REST API link', 'falcon' ), __( 'Remove the REST API URL from the website\'s head.', 'falcon' ) );
 							?>
 						</div>
-						<div class="e-tabPane hidden" data-tab="assets">
+						<div class="e-tabPane hidden" data-tab="media">
 							<?php
 							$this->checkbox( 'no_query_string', __( 'Remove query string for JavaScript and CSS files', 'falcon' ), __( 'Remove "?ver=xxx" and other query string from JavaScript and CSS files. This will make browsers cache these files better.', 'falcon' ) );
 							$this->checkbox( 'no_jquery_migrate', __( 'Remove jQuery Migrate', 'falcon' ), __( 'Remove the old jQuery Migrate from both admin and frontend.', 'falcon' ) );
@@ -110,6 +109,14 @@ class Settings {
 							$this->checkbox( 'no_update_emails', __( 'Disable auto update email notification', 'falcon' ), __( 'Do not send emails when there are any updates on your website.', 'falcon' ) );
 							?>
 						</div>
+						<div class="e-tabPane hidden" data-tab="security">
+							<?php
+							$this->checkbox( 'no_rest_api', __( 'Disable REST API for unauthenticated requests', 'falcon' ), __( 'Improve your website security by disabling REST API access for non-authenticated users.', 'falcon' ) );
+							$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ), sprintf( __( 'Protect your site from brute force, DOS and DDOS attacks via XML-RPC. Also disables trackbacks, pingbacks, and brakes the mobile apps. <a href="%s">Learn more</a>.', 'falcon' ), 'https://deluxeblogtips.com/disable-xml-rpc-wordpress/' ) );
+							$this->checkbox( 'restrict_upload', __( 'Restrict upload file types', 'falcon' ), __( 'Allow users to upload only common file types, including: images (jpg, jpeg, png, gif), office files (docx, xlsx, pptx), PDF, and videos (mp4).', 'falcon' ) );
+							$this->checkbox( 'no_login_errors', __( 'Disable detailed login errors', 'falcon' ), __( 'Show a general error message when the login is incorrect, not specifically whether the username or password is incorrect.', 'falcon' ) );
+							?>
+						</div>
 					</div>
 
 					<div class="e-sidebar">
@@ -132,8 +139,8 @@ class Settings {
 	}
 
 	public function enqueue() {
-		wp_enqueue_style( 'falcon-settings', FALCON_URL . 'assets/settings.css', [], filemtime( FALCON_DIR . '/assets/settings.css' ) );
-		wp_enqueue_script( 'falcon-settings', FALCON_URL . 'assets/settings.js', [], filemtime( FALCON_DIR . '/assets/settings.js' ), true );
+		wp_enqueue_style( 'falcon', FALCON_URL . 'assets/settings.css', [], filemtime( FALCON_DIR . '/assets/settings.css' ) );
+		wp_enqueue_script( 'falcon', FALCON_URL . 'assets/settings.js', [], filemtime( FALCON_DIR . '/assets/settings.js' ), true );
 	}
 
 	public function save() {

@@ -22,6 +22,8 @@ new Settings;
 
 new General;
 new Admin;
+new Security;
+
 if ( ! is_admin() ) {
 	new Header;
 	new Assets;
