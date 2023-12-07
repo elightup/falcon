@@ -8,7 +8,6 @@ class Admin extends Base {
 		'no_footer_text',
 		'no_dashboard_widgets',
 		'no_wp_logo',
-		'no_admin_email_confirm',
 		'no_application_passwords',
 	];
 
@@ -63,10 +62,6 @@ class Admin extends Base {
 
 	public function remove_wp_logo( $wp_admin_bar ) {
 		$wp_admin_bar->remove_node( 'wp-logo' );
-	}
-
-	public function no_admin_email_confirm() {
-		add_filter( 'admin_email_check_interval', '__return_false' );
 	}
 
 	public function no_application_passwords() {
