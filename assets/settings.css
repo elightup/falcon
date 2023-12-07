@@ -9,6 +9,7 @@
 	border-radius: 6px;
 }
 
+.auto-fold #wpcontent,
 #wpcontent {
 	padding-left: 0;
 }
@@ -19,6 +20,8 @@
 	z-index: 9;
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 24px;
 	border-bottom: 1px solid #e0e0e0;
 	padding: 12px 24px;
 	background: #fff;
@@ -71,6 +74,7 @@
 	min-height: 40px;
 	line-height: 40px;
 	padding: 0 20px;
+	margin: 0;
 }
 
 .e-body {
@@ -85,12 +89,6 @@
 	grid-template-columns: 1fr 300px;
 	align-items: start;
 	gap: 24px;
-}
-
-@media (max-width: 767px) {
-	.e-wrapper {
-		grid-template-columns: 1fr;
-	}
 }
 
 .e-widget {
@@ -214,4 +212,24 @@ fieldset label {
 
 fieldset p {
 	font-style: italic;
+}
+
+@media (max-width: 767px) {
+	.e-header {
+		position: static;
+		padding-inline: 12px;
+		justify-content: center;
+	}
+
+	.e-branding {
+		display: none;
+	}
+
+	.e-body {
+		padding-inline: 12px;
+	}
+
+	.e-wrapper {
+		grid-template-columns: 1fr;
+	}
 }
