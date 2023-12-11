@@ -3,7 +3,7 @@ Contributors: elightup, rilwis, truongwp
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 5.9
 Tested up to: 6.4.2
-Stable tag: 2.7.1
+Stable tag: 2.7.2
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -99,6 +99,10 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.7.2 - 2023-12-11 =
+- Fix not loading email options
+- Fix remove dashboard widgets not removing welcome panel
 
 = 2.7.1 - 2023-12-07 =
 - Add options for no emails when a new user is registered and users reset their passwords
