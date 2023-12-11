@@ -30,11 +30,11 @@ class Admin extends Base {
 	}
 
 	public function no_dashboard_widgets() {
-		remove_action( 'welcome_panel', 'wp_welcome_panel' );
 		add_action( 'wp_dashboard_setup', [ $this, 'remove_widgets' ] );
 	}
-
 	public function remove_widgets() {
+		remove_action( 'welcome_panel', 'wp_welcome_panel' );
+
 		remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' );
 		remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
 
