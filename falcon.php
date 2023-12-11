@@ -27,6 +27,6 @@ new Email;
 
 if ( ! is_admin() ) {
 	new Header;
-	new Assets;
+	new Media;
 	new LazyLoadCSS;
 }

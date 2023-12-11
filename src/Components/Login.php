@@ -1,5 +1,5 @@
 <?php
-namespace Falcon;
+namespace Falcon\Components;
 
 class Login {
 	public function __construct() {

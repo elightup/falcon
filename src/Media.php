@@ -1,7 +1,7 @@
 <?php
 namespace Falcon;
 
-class Assets extends Base {
+class Media extends Base {
 	protected $features = [
 		'no_query_string',
 		'no_jquery_migrate',

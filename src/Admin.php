@@ -12,7 +12,7 @@ class Admin extends Base {
 	];
 
 	public function login_site_icon() {
-		new Login;
+		new Components\Login;
 	}
 
 	public function no_update_nags() {

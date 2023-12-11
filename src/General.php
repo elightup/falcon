@@ -1,7 +1,6 @@
 <?php
 namespace Falcon;
 
-use Falcon\Components\DisableComments;
 use WP_Query;
 
 class General extends Base {
@@ -115,7 +114,7 @@ class General extends Base {
 	}
 
 	public function no_comments() {
-		new DisableComments;
+		new Components\DisableComments;
 	}
 
 	public function search_posts_only() {
