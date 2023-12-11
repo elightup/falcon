@@ -23,6 +23,7 @@ new Settings;
 new General;
 new Admin;
 new Security;
+new Email;
 
 if ( ! is_admin() ) {
 	new Header;

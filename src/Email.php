@@ -1,7 +1,7 @@
 <?php
 namespace Falcon;
 
-class General extends Base {
+class Email extends Base {
 	protected $features = [
 		'no_admin_email_confirm',
 		'no_update_emails',
