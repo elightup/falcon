@@ -25,5 +25,7 @@ class Email extends Base {
 
 	public function no_password_reset_emails() {
 		remove_action( 'after_password_reset', 'wp_password_change_notification' );
+		add_filter( 'send_password_change_email', '__return_false' );
+		add_filter( 'woocommerce_disable_password_change_notification', '__return_false' );
 	}
 }
