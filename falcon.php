@@ -3,7 +3,7 @@
  * Plugin Name: Falcon
  * Plugin URI:  https://elightup.com
  * Description: WordPress optimizations & tweaks
- * Version:     2.7.2
+ * Version:     2.7.3
  * Author:      eLightUp
  * Author URI:  https://elightup.com
  * License:     GPL2+
