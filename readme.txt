@@ -2,8 +2,8 @@
 Contributors: elightup, rilwis, truongwp
 Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
 Requires at least: 5.9
-Tested up to: 6.4.2
-Stable tag: 2.7.3
+Tested up to: 6.4.3
+Stable tag: 2.8.0
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -55,6 +55,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Disable scaling down big images
 - Disable automatic image rotation based on EXIF data
 - Disable thumbnail generation
+- Enable maintenance mode
 
 #### Email
 
@@ -62,6 +63,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Disable auto update email notification
 - Disable admin email notification when a new user is registered
 - Disable admin email notification when users reset passwords
+- SMTP configuration
 
 #### Admin
 
@@ -78,6 +80,8 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
 - Restrict upload file types
 - Disable detailed login errors
+- Block AI bots from crawling/stealing your content, which also affect the performance
+- Force login to view the website
 
 ### You might also like
 
@@ -99,6 +103,12 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.8.0 - 2024-02-20 =
+- Add SMTP configuration
+- Add maintenance mode
+- Add block AI bots option
+- Add force login option
 
 = 2.7.2 - 2023-12-11 =
 - Fix not loading email options
