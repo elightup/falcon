@@ -59,8 +59,9 @@ class Settings {
 							$this->checkbox( 'no_auto_updates', __( 'Disable auto updates', 'falcon' ), __( 'Do not let WordPress auto update. You have to update manually.', 'falcon' ) );
 							$this->checkbox( 'no_cron', __( 'Disable cron', 'falcon' ), __( 'Disable scheduled tasks. If you need to run cron jobs, You need to run from the server via a command line, or with an external service.', 'falcon' ) );
 							$this->checkbox( 'no_external_requests', __( 'Block external requests', 'falcon' ), __( 'Do not allow to connect to other websites. This will increase the performance, but also prevent the auto updates, license checking, or similar tasks that require remote connections.', 'falcon' ) );
-							$this->checkbox( 'search_posts_only', __( 'Search only posts', 'falcon' ), __( 'Do not search other post types when user perform a search.', 'falcon' ) );
+							$this->checkbox( 'search_posts_only', __( 'Search only posts', 'falcon' ), __( 'Do not search other post types when users perform a search.', 'falcon' ) );
 							$this->checkbox( 'no_texturize', __( 'Disable texturize', 'falcon' ), __( 'Do not allow WordPress to auto replace some characters with their formatted forms like quotes, dashes, ellipses, etc.', 'falcon' ) );
+							$this->checkbox( 'maintenance_mode', __( 'Enable maintenance mode', 'falcon' ), __( 'Put your website under the maintenance mode. This option will display a maintenance message to non-admin users when viewing the website on the front end.', 'falcon' ) );
 							?>
 						</div>
 						<div class="e-tabPane hidden" data-tab="header">
@@ -166,6 +167,7 @@ class Settings {
 			'no_comments',
 			'no_thumbnails',
 			'block_ai_bots',
+			'maintenance_mode',
 		];
 
 		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'] ?? [], true );
