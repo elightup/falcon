@@ -10,6 +10,7 @@ class Security extends Base {
 		'no_login_errors',
 		'restrict_upload',
 		'block_ai_bots',
+		'force_login',
 	];
 
 	public function no_rest_api(): void {
@@ -58,5 +59,21 @@ class Security extends Base {
 
 	public function block_ai_bots_in_robots_txt(): void {
 		echo "\nUser-agent: GPTBot\nDisallow: /\n";
+	}
+
+	public function force_login(): void {
+		add_action( 'template_redirect', [ $this, 'redirect_non_logged_in_users' ] );
+	}
+
+	public function redirect_non_logged_in_users(): void {
+		if ( is_user_logged_in() ) {
+			return;
+		}
+
+		// Set the headers to prevent caching.
+		nocache_headers();
+
+		wp_safe_redirect( wp_login_url(), 302 );
+		die;
 	}
 }

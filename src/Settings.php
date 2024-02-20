@@ -119,6 +119,7 @@ class Settings {
 							$this->checkbox( 'restrict_upload', __( 'Restrict upload file types', 'falcon' ), __( 'Allow users to upload only common file types, including: images (jpg, jpeg, png, gif), office files (docx, xlsx, pptx), PDF, and videos (mp4).', 'falcon' ) );
 							$this->checkbox( 'no_login_errors', __( 'Disable detailed login errors', 'falcon' ), __( 'Show a general error message when the login is incorrect, not specifically whether the username or password is incorrect.', 'falcon' ) );
 							$this->checkbox( 'block_ai_bots', __( 'Block AI bots', 'falcon' ), __( 'Stop AI bots from crawling/stealing your website content, which also affects the website performance.', 'falcon' ) );
+							$this->checkbox( 'force_login', __( 'Force login', 'falcon' ), __( 'Force users to login to view the website.', 'falcon' ) );
 							?>
 						</div>
 					</div>
@@ -168,6 +169,7 @@ class Settings {
 			'no_thumbnails',
 			'block_ai_bots',
 			'maintenance_mode',
+			'force_login',
 		];
 
 		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'] ?? [], true );
