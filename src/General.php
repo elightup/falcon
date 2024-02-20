@@ -89,11 +89,12 @@ class General extends Base {
 	}
 
 	/**
+	 * Remove pings to the website itself.
 	 * @link http://wordpress.stackexchange.com/a/1852
 	 */
 	public function remove_self_pings( &$links ) {
 		$home_url = home_url();
-		$links    = array_filter( $links, function ($link) use ($home_url) {
+		$links    = array_filter( $links, function ( $link ) use ( $home_url ) {
 			return false === strpos( $link, $home_url );
 		} );
 	}
@@ -119,7 +120,7 @@ class General extends Base {
 	}
 
 	public function search_posts_only() {
-		add_filter( 'pre_get_posts', function (WP_Query $query) {
+		add_filter( 'pre_get_posts', function ( WP_Query $query ) {
 			if ( ! is_admin() && $query->is_search ) {
 				$query->set( 'post_type', 'post' );
 			}
@@ -128,8 +129,8 @@ class General extends Base {
 	}
 
 	public function no_comment_url() {
-		add_filter( 'comment_form_default_fields', function (array $fields): array {
-			unset( $fields[ 'url' ] );
+		add_filter( 'comment_form_default_fields', function ( array $fields ): array {
+			unset( $fields['url'] );
 			return $fields;
 		} );
 	}
@@ -141,7 +142,13 @@ class General extends Base {
 	public function maintenance_mode(): void {
 		add_action( 'template_redirect', function () {
 			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_die( sprintf( '<h1>%1$s</h1><br>%2$s', __( 'Maintenance mode', 'falcon' ), __( 'The website is under maintenance, please come back later. Sorry for the inconvenience.', 'falcon' ) ), __( 'Maintenance mode', 'falcon' ), 503 );
+				// Translators: %1$s - Header, %2$s - Message.
+				$html = sprintf(
+					'<h1>%1$s</h1><br>%2$s',
+					__( 'Maintenance mode', 'falcon' ),
+					__( 'The website is under maintenance, please come back later. Sorry for the inconvenience.', 'falcon' )
+				);
+				wp_die( wp_kses_post( $html ), esc_html__( 'Maintenance mode', 'falcon' ), 503 );
 			}
 		} );
 	}

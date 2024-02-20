@@ -20,7 +20,7 @@ class Settings {
 
 	public function render() {
 		$option = get_option( 'falcon', [] );
-		$smtp   = $option[ 'smtp' ] ?? [];
+		$smtp   = $option['smtp'] ?? [];
 		?>
 		<form method="POST" action="" class="e-page">
 			<div class="e-header">
@@ -49,6 +49,7 @@ class Settings {
 
 						<div class="e-tabPane" data-tab="general">
 							<?php
+							// Translators: %s - Link to the help docs.
 							$this->checkbox( 'no_gutenberg', __( 'Disable Gutenberg (the block editor)', 'falcon' ), sprintf( __( 'Disable the block editor for all post types and use classic editor only. <a href="%s" target="_blank">Learn more</a>.', 'falcon' ), 'https://metabox.io/disable-gutenberg-without-using-plugins/' ) );
 							$this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ), __( 'Reduce the CPU load on the server by disabling the WordPress heartbeat API.', 'falcon' ) );
 							$this->checkbox( 'no_embeds', __( 'Disable embeds', 'falcon' ), __( 'Prevent other websites from embedding your site and vise-versa.', 'falcon' ) );
@@ -123,13 +124,13 @@ class Settings {
 									<div class="featureBox_more">
 										<div class="formControls">
 											<label for="falcon[smtp][host]"><?php esc_html_e( 'Host', 'falcon' ) ?></label>
-											<input type="text" class="regular-text" name="falcon[smtp][host]" id="falcon[smtp][host]" value="<?php esc_attr_e( $smtp['host'] ?? '' ) ?>">
+											<input type="text" class="regular-text" name="falcon[smtp][host]" id="falcon[smtp][host]" value="<?= esc_attr( $smtp['host'] ?? '' ) ?>">
 											<label for="falcon[smtp][port]"><?php esc_html_e( 'Port', 'falcon' ) ?></label>
-											<input type="text" class="regular-text" name="falcon[smtp][port]" id="falcon[smtp][port]" value="<?php esc_attr_e( $smtp['port'] ?? '' ) ?>">
+											<input type="text" class="regular-text" name="falcon[smtp][port]" id="falcon[smtp][port]" value="<?= esc_attr( $smtp['port'] ?? '' ) ?>">
 											<label for="falcon[smtp][username]"><?php esc_html_e( 'Username', 'falcon' ) ?></label>
-											<input type="text" class="regular-text" name="falcon[smtp][username]" id="falcon[smtp][username]" value="<?php esc_attr_e( $smtp['username'] ?? '' ) ?>">
+											<input type="text" class="regular-text" name="falcon[smtp][username]" id="falcon[smtp][username]" value="<?= esc_attr( $smtp['username'] ?? '' ) ?>">
 											<label for="falcon[smtp][password]"><?php esc_html_e( 'Password', 'falcon' ) ?></label>
-											<input type="password" name="falcon[smtp][password]" id="falcon[smtp][password]" value="<?php esc_attr_e( $smtp['password'] ?? '' ) ?>">
+											<input type="password" name="falcon[smtp][password]" id="falcon[smtp][password]" value="<?= esc_attr( $smtp['password'] ?? '' ) ?>">
 											<label><?php esc_html_e( 'Encryption', 'falcon' ) ?></label>
 											<div>
 												<label><input type="radio" name="falcon[smtp][encryption]" value=""<?php checked( $smtp['encryption'] ?? '', '' ) ?>> <?php esc_html_e( 'None', 'falcon' ) ?></label>
@@ -147,6 +148,7 @@ class Settings {
 						<div class="e-tabPane hidden" data-tab="security">
 							<?php
 							$this->checkbox( 'no_rest_api', __( 'Disable REST API for unauthenticated requests', 'falcon' ), __( 'Improve your website security by disabling REST API access for non-authenticated users.', 'falcon' ) );
+							// Translators: %s - Link to the help docs.
 							$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ), sprintf( __( 'Protect your site from brute force, DOS and DDOS attacks via XML-RPC. Also disables trackbacks, pingbacks, and brakes the mobile apps. <a href="%s" target="_blank">Learn more</a>.', 'falcon' ), 'https://deluxeblogtips.com/disable-xml-rpc-wordpress/' ) );
 							$this->checkbox( 'restrict_upload', __( 'Restrict upload file types', 'falcon' ), __( 'Allow users to upload only common file types, including: images (jpg, jpeg, png, gif), office files (docx, xlsx, pptx), PDF, and videos (mp4).', 'falcon' ) );
 							$this->checkbox( 'no_login_errors', __( 'Disable detailed login errors', 'falcon' ), __( 'Show a general error message when the login is incorrect, not specifically whether the username or password is incorrect.', 'falcon' ) );
@@ -185,7 +187,14 @@ class Settings {
 			return;
 		}
 
-		$data = $_POST['falcon'] ?? [];
+		// phpcs:ignore
+		$data = ! empty( $_POST['falcon'] ) ? wp_unslash( $_POST['falcon'] ) : [];
+
+		$data['features']      = isset( $data['features'] ) && is_array( $data['features'] ) ? array_map( 'sanitize_text_field', $data['features'] ) : [];
+		$data['lazy_load_css'] = isset( $data['lazy_load_css'] ) ? sanitize_textarea_field( $data['lazy_load_css'] ) : '';
+		$data['smtp']          = isset( $data['smtp'] ) && is_array( $data['smtp'] ) ? array_map( 'sanitize_text_field', $data['smtp'] ) : [];
+		$data                  = array_filter( $data );
+
 		update_option( 'falcon', $data );
 
 		add_settings_error( null, 'falcon', __( 'Settings updated.', 'falcon' ), 'success' );

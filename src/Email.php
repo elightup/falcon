@@ -43,27 +43,27 @@ class Email extends Base {
 
 	public function setup_smtp( $phpmailer ) {
 		$option = get_option( 'falcon', [] );
-		$smtp   = $option[ 'smtp' ] ?? [];
+		$smtp   = $option['smtp'] ?? [];
 
-		if ( empty( $smtp[ 'host' ] ) ) {
+		if ( empty( $smtp['host'] ) ) {
 			return;
 		}
 
 		$phpmailer->isSMTP();
-		$phpmailer->Host = $smtp[ 'host' ];
+		$phpmailer->Host = $smtp['host']; // phpcs:ignore
 
-		if ( ! empty( $smtp[ 'port' ] ) ) {
-			$phpmailer->Port = (int) $smtp[ 'port' ];
+		if ( ! empty( $smtp['port'] ) ) {
+			$phpmailer->Port = (int) $smtp['port']; // phpcs:ignore
 		}
 
-		if ( ! empty( $smtp[ 'username' ] ) && ! empty( $smtp[ 'password' ] ) ) {
-			$phpmailer->SMTPAuth = true;
-			$phpmailer->Username = $smtp[ 'username' ];
-			$phpmailer->Password = $smtp[ 'password' ];
+		if ( ! empty( $smtp['username'] ) && ! empty( $smtp['password'] ) ) {
+			$phpmailer->SMTPAuth = true; // phpcs:ignore
+			$phpmailer->Username = $smtp['username']; // phpcs:ignore
+			$phpmailer->Password = $smtp['password']; // phpcs:ignore
 		}
 
-		if ( ! empty( $smtp[ 'encryption' ] ) ) {
-			$phpmailer->SMTPSecure = $smtp[ 'encryption' ] === 'ssl' ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
+		if ( ! empty( $smtp['encryption'] ) ) {
+			$phpmailer->SMTPSecure = $smtp['encryption'] === 'ssl' ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS; // phpcs:ignore
 		}
 	}
 

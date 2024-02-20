@@ -28,6 +28,7 @@ class LazyLoadCSS {
 		wp_dequeue_style( $css->handle );
 
 		$url = add_query_arg( 'ver', $css->ver, $css->src );
+		// phpcs:ignore
 		echo "\n", '<link rel="stylesheet" href="', esc_url( $url ) . '" media="print" onload="this.media=\'all\'">';
 	}
 
