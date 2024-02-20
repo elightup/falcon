@@ -136,12 +136,10 @@ class Settings {
 												<label><input type="radio" name="falcon[smtp][encryption]" value="ssl"<?php checked( $smtp['encryption'] ?? '', 'ssl' ) ?>> <?php esc_html_e( 'SSL', 'falcon' ) ?></label>
 												<label><input type="radio" name="falcon[smtp][encryption]" value="tls"<?php checked( $smtp['encryption'] ?? '', 'tls' ) ?>> <?php esc_html_e( 'TLS', 'falcon' ) ?></label>
 											</div>
-											<label><?php esc_html_e( 'Test', 'falcon' ) ?></label>
-											<div>
-												<button class="button"><?php esc_html_e( 'Send test email', 'falcon' ) ?></button>
-												<p class="description"><?php esc_html_e( 'This action will send a test email to your account email.', 'falcon' ) ?>
-											</div>
 										</div>
+										<br>
+										<button class="button" type="button" id="smtp-test"><?php esc_html_e( 'Send test email', 'falcon' ) ?></button>
+										<p class="description"><?php esc_html_e( 'This action will send a test email to your account email.', 'falcon' ) ?>
 									</div>
 								</div>
 							</div>

@@ -16,5 +16,17 @@
 		document.querySelector( `.e-tabPane[data-tab="${ e.target.dataset.tab }"]` ).classList.remove( 'hidden' );
 	};
 
+	const sendTestEmail = e => {
+		e.target.disabled = true;
+
+		fetch( `${ ajaxurl }?action=falcon_test_smtp` )
+			.then( response => response.json() )
+			.then( response => {
+				alert( response.data );
+				e.target.disabled = false;
+			} );
+	}
+
 	document.querySelector( '.e-tabs' ).addEventListener( 'click', clickHandle );
+	document.querySelector( '#smtp-test' ).addEventListener( 'click', sendTestEmail );
 }
