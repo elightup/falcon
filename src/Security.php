@@ -9,9 +9,10 @@ class Security extends Base {
 		'no_xmlrpc',
 		'no_login_errors',
 		'restrict_upload',
+		'block_ai_bots',
 	];
 
-	public function no_rest_api() {
+	public function no_rest_api(): void {
 		remove_action( 'wp_head', 'rest_output_link_wp_head' );
 		remove_action( 'xmlrpc_rsd_apis', 'rest_output_rsd' );
 		remove_action( 'template_redirect', 'rest_output_link_header', 11 );
@@ -25,7 +26,7 @@ class Security extends Base {
 			: new WP_Error( 'rest_login_required', __( 'REST API restricted to authenticated users.', 'falcon' ), [ 'status' => rest_authorization_required_code() ] );
 	}
 
-	public function no_xmlrpc() {
+	public function no_xmlrpc(): void {
 		add_filter( 'xmlrpc_enabled', '__return_false' );
 		add_filter( 'pings_open', '__return_false' );
 	}
@@ -34,7 +35,7 @@ class Security extends Base {
 		return __( 'There is something wrong. Please try again.', 'falcon' );
 	}
 
-	public function restrict_upload() {
+	public function restrict_upload(): void {
 		add_filter( 'upload_mimes', [ $this, 'restrict_upload_mimes' ] );
 	}
 
@@ -49,5 +50,13 @@ class Security extends Base {
 			'xlsx'     => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 			'pptx'     => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
 		];
+	}
+
+	public function block_ai_bots(): void {
+		add_action( 'do_robotstxt', [ $this, 'block_ai_bots_in_robots_txt' ] );
+	}
+
+	public function block_ai_bots_in_robots_txt(): void {
+		echo "\nUser-agent: GPTBot\nDisallow: /\n";
 	}
 }
