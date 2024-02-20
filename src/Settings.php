@@ -20,6 +20,7 @@ class Settings {
 
 	public function render() {
 		$option = get_option( 'falcon', [] );
+		$smtp   = $option[ 'smtp' ] ?? [];
 		?>
 		<form method="POST" action="" class="e-page">
 			<div class="e-header">
@@ -111,6 +112,39 @@ class Settings {
 							$this->checkbox( 'no_new_user_emails', __( 'Disable admin email notification when a new user is registered', 'falcon' ), __( 'Do not send emails to admins when there are new users registered on your website.', 'falcon' ) );
 							$this->checkbox( 'no_password_reset_emails', __( 'Disable email notification when users reset passwords', 'falcon' ), __( 'Do not send emails when users reset their passwords on your website.', 'falcon' ) );
 							?>
+							<div class="featureBox">
+								<label class="featureBox_switch">
+									<input class="featureBox_input" type="checkbox" name="falcon[features][]" value="smtp"<?php checked( self::is_feature_active( 'smtp' ) ) ?>>
+									<span class="featureBox_icon"></span>
+								</label>
+								<div class="featureBox_body">
+									<div class="featureBox_title"><?php esc_html_e( 'SMTP', 'falcon' ) ?></div>
+									<div class="featureBox_description"><?php esc_html_e( 'Send emails via a SMTP service.', 'falcon' ) ?></div>
+									<div class="featureBox_more">
+										<div class="formControls">
+											<label for="falcon[smtp][host]"><?php esc_html_e( 'Host', 'falcon' ) ?></label>
+											<input type="text" class="regular-text" name="falcon[smtp][host]" id="falcon[smtp][host]" value="<?php esc_attr_e( $smtp['host'] ?? '' ) ?>">
+											<label for="falcon[smtp][port]"><?php esc_html_e( 'Port', 'falcon' ) ?></label>
+											<input type="text" class="regular-text" name="falcon[smtp][port]" id="falcon[smtp][port]" value="<?php esc_attr_e( $smtp['port'] ?? '' ) ?>">
+											<label for="falcon[smtp][username]"><?php esc_html_e( 'Username', 'falcon' ) ?></label>
+											<input type="text" class="regular-text" name="falcon[smtp][username]" id="falcon[smtp][username]" value="<?php esc_attr_e( $smtp['username'] ?? '' ) ?>">
+											<label for="falcon[smtp][password]"><?php esc_html_e( 'Password', 'falcon' ) ?></label>
+											<input type="password" name="falcon[smtp][password]" id="falcon[smtp][password]" value="<?php esc_attr_e( $smtp['password'] ?? '' ) ?>">
+											<label><?php esc_html_e( 'Encryption', 'falcon' ) ?></label>
+											<div>
+												<label><input type="radio" name="falcon[smtp][encryption]" value=""<?php checked( $smtp['encryption'] ?? '', '' ) ?>> <?php esc_html_e( 'None', 'falcon' ) ?></label>
+												<label><input type="radio" name="falcon[smtp][encryption]" value="ssl"<?php checked( $smtp['encryption'] ?? '', 'ssl' ) ?>> <?php esc_html_e( 'SSL', 'falcon' ) ?></label>
+												<label><input type="radio" name="falcon[smtp][encryption]" value="tls"<?php checked( $smtp['encryption'] ?? '', 'tls' ) ?>> <?php esc_html_e( 'TLS', 'falcon' ) ?></label>
+											</div>
+											<label><?php esc_html_e( 'Test', 'falcon' ) ?></label>
+											<div>
+												<button class="button"><?php esc_html_e( 'Send test email', 'falcon' ) ?></button>
+												<p class="description"><?php esc_html_e( 'This action will send a test email to your account email.', 'falcon' ) ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 						<div class="e-tabPane hidden" data-tab="security">
 							<?php

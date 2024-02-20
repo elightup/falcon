@@ -169,6 +169,22 @@
 	margin-bottom: 4px;
 }
 
+.featureBox_more {
+	margin-top: 12px;
+	display: none;
+}
+
+.featureBox:has(.featureBox_input:checked) .featureBox_more {
+	display: block;
+}
+
+/* Form controls */
+.formControls {
+	display: grid;
+	grid-template-columns: min-content 1fr;
+	gap: 16px;
+}
+
 /* Admin color schemes */
 .admin-color-blue .e-page {
 	--color: var(--wp-admin-theme-color, #e1a948);
@@ -210,7 +226,7 @@ fieldset label {
 	margin-bottom: 4px;
 }
 
-fieldset p {
+p.description {
 	font-style: italic;
 }
 
