@@ -57,8 +57,31 @@ class Security extends Base {
 		add_action( 'do_robotstxt', [ $this, 'block_ai_bots_in_robots_txt' ] );
 	}
 
+	/**
+	 * Block AI bots via robots.txt
+	 *
+	 * @link https://neil-clarke.com/block-the-bots-that-feed-ai-models-by-scraping-your-website/
+	 */
 	public function block_ai_bots_in_robots_txt(): void {
-		echo "\nUser-agent: GPTBot\nDisallow: /\n";
+		$user_agents = [
+			'CCBot',
+			'ChatGPT-User',
+			'GPTBot',
+			'Google-Extended',
+			'anthropic-ai',
+			'Omgilibot',
+			'Omgili',
+			'FacebookBot',
+			'Bytespider',
+		];
+		$content = [];
+		foreach ( $user_agents as $user_agent ) {
+			$content[] = "User-agent: $user_agent";
+			$content[] = 'Disallow: /';
+			$content[] = '';
+		}
+
+		echo "\n", implode( "\n", $content ), "\n"; // phpcs:ignore
 	}
 
 	public function force_login(): void {
