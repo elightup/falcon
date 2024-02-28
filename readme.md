@@ -4,7 +4,7 @@
 
 ## Features
 
-Falcon offers a comprehensive list of options for you to tweak and optimize your WordPress websites. These options are divided into the following categories:
+Falcon offers a comprehensive list of 49 FREE modules (and growing) for you to tweak and optimize your WordPress websites. These options are divided into the following categories:
 
 ### General
 
@@ -22,7 +22,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Search only posts
 - Disable replacing text with formatted entities like smart quotes, dashes, ellipses, etc.
 
-### Header
+### Header cleanup
 
 - Remove feed links
 - Remove RSD link
@@ -34,7 +34,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 
 ### Media
 
-- **Asynchronous load CSS**
+- **Asynchronous load CSS** to avoid blocking load of CSS files
 - Remove query string for JavaScript and CSS files
 - Remove jQuery Migrate
 - Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
@@ -44,6 +44,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Disable scaling down big images
 - Disable automatic image rotation based on EXIF data
 - Disable thumbnail generation
+- Enable maintenance mode
 
 ### Email
 
@@ -51,6 +52,8 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Disable auto update email notification
 - Disable admin email notification when a new user is registered
 - Disable admin email notification when users reset passwords
+- [Change default WordPress from name and email](https://deluxeblogtips.com/change-wordpress-default-email/)
+- SMTP configuration
 
 ### Admin
 
@@ -67,6 +70,8 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
 - Restrict upload file types
 - Disable detailed login errors
+- Block AI bots from crawling/stealing your content, which also affect the performance
+- Force login to view the website
 
 ## You might also like
 

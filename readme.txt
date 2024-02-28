@@ -1,6 +1,6 @@
 === Falcon - WordPress Optimizations & Tweaks ===
 Contributors: elightup, rilwis, truongwp
-Tags: optimization, optimize, optimizer, loading speed, performance, speed, clean, clean up, cleaner, ping, pingback, heartbeat, emoji, emojis
+Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 5.9
 Tested up to: 6.4.3
 Stable tag: 2.8.0
@@ -13,11 +13,11 @@ A lightweight WordPress optimization and tweak plugin for a better performance
 
 **Falcon** is lightweight WordPress plugin that provide a list of optimizations and tweaks that help you improve the performance and user experience for your WordPress sites.
 
-### Features
+### FEATURES & MODULES
 
-Falcon offers a comprehensive list of options for you to tweak and optimize your WordPress websites. These options are divided into the following categories:
+Falcon offers a comprehensive list of 49 FREE modules (and growing) for you to tweak and optimize your WordPress websites. These options are divided into the following categories:
 
-#### General
+### General
 
 - [Disable Gutenberg](https://metabox.io/disable-gutenberg-without-using-plugins/) (the block editor)
 - Disable heartbeat
@@ -33,7 +33,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Search only posts
 - Disable replacing text with formatted entities like smart quotes, dashes, ellipses, etc.
 
-#### Header
+### Header cleanup
 
 - Remove feed links
 - Remove RSD link
@@ -43,7 +43,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Remove shortlink
 - Remove REST API link
 
-#### Media
+### Media
 
 - **Asynchronous load CSS** to avoid blocking load of CSS files
 - Remove query string for JavaScript and CSS files
@@ -57,7 +57,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Disable thumbnail generation
 - Enable maintenance mode
 
-#### Email
+### Email
 
 - Remove admin email confirmation
 - Disable auto update email notification
@@ -66,7 +66,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - [Change default WordPress from name and email](https://deluxeblogtips.com/change-wordpress-default-email/)
 - SMTP configuration
 
-#### Admin
+### Admin
 
 - Show site icon on login page
 - Remove update nags
@@ -75,7 +75,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Remove WordPress logo in the admin bar
 - Remove application passwords
 
-#### Security
+### Security
 
 - Disable REST API for unauthenticated requests
 - [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
