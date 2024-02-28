@@ -45,7 +45,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 
 #### Media
 
-- **Asynchronous load CSS**
+- **Asynchronous load CSS** to avoid blocking load of CSS files
 - Remove query string for JavaScript and CSS files
 - Remove jQuery Migrate
 - Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
@@ -63,6 +63,7 @@ Falcon offers a comprehensive list of options for you to tweak and optimize your
 - Disable auto update email notification
 - Disable admin email notification when a new user is registered
 - Disable admin email notification when users reset passwords
+- [Change default WordPress from name and email](https://deluxeblogtips.com/change-wordpress-default-email/)
 - SMTP configuration
 
 #### Admin
