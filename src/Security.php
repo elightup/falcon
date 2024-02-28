@@ -74,7 +74,7 @@ class Security extends Base {
 			'FacebookBot',
 			'Bytespider',
 		];
-		$content = [];
+		$content     = [];
 		foreach ( $user_agents as $user_agent ) {
 			$content[] = "User-agent: $user_agent";
 			$content[] = 'Disallow: /';

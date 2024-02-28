@@ -1,7 +1,10 @@
 <?php
 namespace Falcon;
 
+defined( 'ABSPATH' ) || die;
+
 use PHPMailer\PHPMailer\PHPMailer;
+
 class Email extends Base {
 	public function __construct() {
 		parent::__construct();
@@ -14,6 +17,7 @@ class Email extends Base {
 		'no_update_emails',
 		'no_new_user_emails',
 		'no_password_reset_emails',
+		'change_default_email',
 		'smtp',
 	];
 
@@ -41,7 +45,7 @@ class Email extends Base {
 		add_action( 'phpmailer_init', [ $this, 'setup_smtp' ] );
 	}
 
-	public function setup_smtp( $phpmailer ) {
+	public function setup_smtp( PHPMailer $phpmailer ): void {
 		$option = get_option( 'falcon', [] );
 		$smtp   = $option['smtp'] ?? [];
 
@@ -73,5 +77,19 @@ class Email extends Base {
 			wp_send_json_success( __( 'The email is sent successfully!', 'falcon' ) );
 		}
 		wp_send_json_error( __( 'There is something wrong. Please check your configuration again.', 'falcon' ) );
+	}
+
+	public function change_default_email(): void {
+		$option        = get_option( 'falcon', [] );
+		$default_email = $option['default_email'] ?? [];
+		$from_name     = $default_email['from_name'] ?? get_bloginfo( 'name' );
+		$from_email    = $default_email['from_email'] ?? get_option( 'admin_email' );
+
+		add_filter( 'wp_mail_from', function () use ( $from_email ) {
+			return $from_email;
+		} );
+		add_filter( 'wp_mail_from_name', function () use ( $from_name ) {
+			return $from_name;
+		} );
 	}
 }

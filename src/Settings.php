@@ -19,8 +19,9 @@ class Settings {
 	}
 
 	public function render() {
-		$option = get_option( 'falcon', [] );
-		$smtp   = $option['smtp'] ?? [];
+		$option        = get_option( 'falcon', [] );
+		$smtp          = $option['smtp'] ?? [];
+		$default_email = $option['default_email'] ?? [];
 		?>
 		<form method="POST" action="" class="e-page">
 			<div class="e-header">
@@ -115,6 +116,25 @@ class Settings {
 							?>
 							<div class="featureBox">
 								<label class="featureBox_switch">
+									<input class="featureBox_input" type="checkbox" name="falcon[features][]" value="change_default_email"<?php checked( self::is_feature_active( 'change_default_email' ) ) ?>>
+									<span class="featureBox_icon"></span>
+								</label>
+								<div class="featureBox_body">
+									<div class="featureBox_title"><?php esc_html_e( 'Change default email', 'falcon' ) ?></div>
+									<?php // Translators: %s - Link to the help docs ?>
+									<div class="featureBox_description"><?= wp_kses_post( sprintf( __( 'Change WordPress default email from name and address. <a href="%s">Learn more</a>.', 'falcon' ), 'https://deluxeblogtips.com/change-wordpress-default-email/' ) ) ?></div>
+									<div class="featureBox_more">
+										<div class="formControls">
+											<label for="falcon[default_email][from_name]"><?php esc_html_e( 'From name', 'falcon' ) ?></label>
+											<input type="text" class="regular-text" name="falcon[default_email][from_name]" id="falcon[default_email][from_name]" value="<?= esc_attr( $default_email['from_name'] ?? get_bloginfo( 'name' ) ) ?>">
+											<label for="falcon[default_email][from_email]"><?php esc_html_e( 'From email', 'falcon' ) ?></label>
+											<input type="text" class="regular-text" name="falcon[default_email][from_email]" id="falcon[default_email][from_email]" value="<?= esc_attr( $default_email['from_email'] ?? get_option( 'admin_email' ) ) ?>">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="featureBox">
+								<label class="featureBox_switch">
 									<input class="featureBox_input" type="checkbox" name="falcon[features][]" value="smtp"<?php checked( self::is_feature_active( 'smtp' ) ) ?>>
 									<span class="featureBox_icon"></span>
 								</label>
@@ -193,6 +213,7 @@ class Settings {
 		$data['features']      = isset( $data['features'] ) && is_array( $data['features'] ) ? array_map( 'sanitize_text_field', $data['features'] ) : [];
 		$data['lazy_load_css'] = isset( $data['lazy_load_css'] ) ? sanitize_textarea_field( $data['lazy_load_css'] ) : '';
 		$data['smtp']          = isset( $data['smtp'] ) && is_array( $data['smtp'] ) ? array_map( 'sanitize_text_field', $data['smtp'] ) : [];
+		$data['default_email'] = isset( $data['default_email'] ) && is_array( $data['default_email'] ) ? array_map( 'sanitize_text_field', $data['default_email'] ) : [];
 		$data                  = array_filter( $data );
 
 		update_option( 'falcon', $data );
