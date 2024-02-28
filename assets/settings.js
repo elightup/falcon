@@ -25,8 +25,36 @@
 				alert( response.data );
 				e.target.disabled = false;
 			} );
-	}
+	};
+
+	const submit = e => {
+		e.preventDefault();
+
+		const submitButton = document.querySelector( '#submit' );
+		const message = submitButton.previousElementSibling;
+
+		submitButton.disabled = true;
+		submitButton.value = Falcon.saving;
+
+		let formData = new FormData( e.target );
+		formData.append( 'action', 'falcon_save_settings' );
+		formData.append( '_ajax_nonce', Falcon.nonce );
+		fetch( ajaxurl, { method: 'POST', body: formData } )
+			.then( response => response.json() )
+			.then( response => {
+				submitButton.disabled = false;
+				submitButton.value = Falcon.save;
+
+				message.textContent = response.data;
+				message.classList.remove( 'hidden' );
+
+				setTimeout( () => {
+					message.classList.add( 'hidden' );
+				}, 3000 );
+			} );
+	};
 
 	document.querySelector( '.e-tabs' ).addEventListener( 'click', clickHandle );
 	document.querySelector( '#smtp-test' ).addEventListener( 'click', sendTestEmail );
+	document.querySelector( '#settings-form' ).addEventListener( 'submit', submit );
 }

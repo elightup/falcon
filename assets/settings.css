@@ -63,8 +63,26 @@
 }
 
 .e-header .submit {
-	margin: 0;
+	margin: 0 0 0 auto;
 	padding: 0;
+	display: flex;
+	gap: 24px;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.e-header .message {
+	animation: fadein .5s;
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
 }
 
 .e-header .button {

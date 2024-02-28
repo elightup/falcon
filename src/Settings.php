@@ -4,6 +4,7 @@ namespace Falcon;
 class Settings {
 	public function __construct() {
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
+		add_action( 'wp_ajax_falcon_save_settings', [ $this, 'save' ] );
 	}
 
 	public function add_menu() {
@@ -14,7 +15,6 @@ class Settings {
 			'falcon',
 			[ $this, 'render' ]
 		);
-		add_action( "load-$page", [ $this, 'save' ] );
 		add_action( "admin_print_styles-$page", [ $this, 'enqueue' ] );
 	}
 
@@ -23,7 +23,7 @@ class Settings {
 		$smtp          = $option['smtp'] ?? [];
 		$default_email = $option['default_email'] ?? [];
 		?>
-		<form method="POST" action="" class="e-page">
+		<form method="POST" id="settings-form" class="e-page">
 			<div class="e-header">
 				<div class="e-branding">
 					<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" fill="#4f5d73" r="32"/><g fill="#e0e0d1"><path d="M47.7 40.6c.2-.4.6-.6 1-.7s.9-.1 1.4.1l2.5 1.2c.5.2.8.6.9 1.1.2.5.1 1.1-.2 1.6s-.8.9-1.2 1c-.5.1-1 0-1.4-.3L48.4 43c-.4-.3-.7-.7-.8-1.1-.1-.5-.1-.9.1-1.3zM16.4 40.8c.5.7.1 1.8-.7 2.4l-2.3 1.6c-.9.6-2 .3-2.7-.7-.6-1-.2-2.3.7-2.7l2.5-1.2c1.1-.4 2.1-.1 2.5.6zM14 31.8c0 .9-.7 1.6-1.8 1.7l-2.8.3c-1 .1-2-.8-2-2s.9-2.1 1.9-2l2.8.2c1.1.2 1.9.9 1.9 1.8zM16.3 22.7c-.2.4-.6.6-1 .7s-.9.1-1.4-.1l-2.5-1.2c-.5-.2-.8-.6-.9-1.1-.2-.5-.1-1.1.2-1.6s.8-.9 1.2-1c.5-.1 1 0 1.4.3l2.3 1.6c.4.3.7.7.8 1.1.2.5.2 1-.1 1.3zM22.9 16.1c-.7.5-1.8.1-2.4-.7l-1.6-2.3c-.6-.9-.3-2 .7-2.7 1-.6 2.3-.2 2.7.7l1.2 2.5c.4 1 .1 2-.6 2.5zM31.9 13.6c-.9 0-1.6-.7-1.7-1.8L29.9 9c-.1-1 .8-2 2-2s2.1.9 2 1.9l-.2 2.8c-.2 1.1-.9 1.9-1.8 1.9zM41 16c-.4-.2-.6-.6-.7-1s-.1-.9.1-1.4l1.2-2.5c.2-.5.6-.8 1.1-.9.5-.2 1.1-.1 1.6.2s.9.8 1 1.2c.1.5 0 1-.3 1.4l-1.6 2.3c-.3.4-.7.7-1.1.8-.5.1-1 .1-1.3-.1zM47.6 22.5c-.5-.7-.1-1.8.7-2.4l2.3-1.6c.9-.6 2-.3 2.7.7.6 1 .2 2.3-.7 2.7L50 23.1c-.9.5-2 .2-2.4-.6zM50.1 31.5c0-.9.7-1.6 1.8-1.7l2.8-.3c1-.1 2 .8 2 2s-.9 2.1-1.9 2l-2.8-.2c-1.1-.1-1.9-.9-1.9-1.8z"/></g><path d="M41.6 24.4c-.4-.4-1.1-.5-1.5-.2l-4.7 2.9-3.1 1.9H32c-2.8 0-5 2.2-5 5v.3c.2 2.5 2.1 4.5 4.6 4.6h.3c2.8 0 5-2.2 5-5v-.3l1.9-3.1 2.9-4.7c.4-.4.3-1-.1-1.4z" fill="#231f20" opacity=".2"/><path d="M41.6 22.4c-.4-.4-1.1-.5-1.5-.2l-4.7 2.9-3.1 1.9H32c-2.8 0-5 2.2-5 5v.3c.2 2.5 2.1 4.5 4.6 4.6h.3c2.8 0 5-2.2 5-5v-.3l1.9-3.1 2.9-4.7c.4-.4.3-1-.1-1.4z" fill="#c75c5c"/><circle cx="32" cy="32" fill="#fff" r="5"/><path d="M40 49c0 1.7-1.3 3-3 3H27c-1.7 0-3-1.3-3-3v-2c0-1.7 1.3-3 3-3h10c1.7 0 3 1.3 3 3z" fill="#f5cf87"/></svg>
@@ -39,15 +39,16 @@ class Settings {
 					<span data-tab="security" class="e-tab"><?php esc_html_e( 'Security', 'falcon' ) ?></span>
 				</div>
 
-				<?php submit_button( esc_html__( 'Save Changes', 'falcon' ) ); ?>
+				<div class="submit">
+					<div class="message hidden"></div>
+					<input type="submit" id="submit" class="button button-primary" value="<?php esc_attr_e( 'Save Changes', 'falcon' ) ?>">
+				</div>
 			</div>
 			<div class="e-body wrap">
 				<div class="wp-header-end"></div>
 
 				<div class="e-wrapper">
 					<div class="e-content e-box">
-						<?php wp_nonce_field( 'save' ) ?>
-
 						<div class="e-tabPane" data-tab="general">
 							<?php
 							// Translators: %s - Link to the help docs.
@@ -199,12 +200,15 @@ class Settings {
 	public function enqueue() {
 		wp_enqueue_style( 'falcon', FALCON_URL . 'assets/settings.css', [], filemtime( FALCON_DIR . '/assets/settings.css' ) );
 		wp_enqueue_script( 'falcon', FALCON_URL . 'assets/settings.js', [], filemtime( FALCON_DIR . '/assets/settings.js' ), true );
+		wp_localize_script( 'falcon', 'Falcon', [
+			'nonce'  => wp_create_nonce( 'save' ),
+			'saving' => __( 'Saving...', 'falcon' ),
+			'save'   => __( 'Save Changes', 'falcon' ),
+		] );
 	}
 
 	public function save() {
-		if ( empty( $_POST['submit'] ) || ! check_ajax_referer( 'save', false, false ) ) {
-			return;
-		}
+		check_ajax_referer( 'save' );
 
 		// phpcs:ignore
 		$data = ! empty( $_POST['falcon'] ) ? wp_unslash( $_POST['falcon'] ) : [];
@@ -217,7 +221,7 @@ class Settings {
 
 		update_option( 'falcon', $data );
 
-		add_settings_error( null, 'falcon', __( 'Settings updated.', 'falcon' ), 'success' );
+		wp_send_json_success( __( 'Settings updated.', 'falcon' ) );
 	}
 
 	public static function is_feature_active( string $name ): bool {
