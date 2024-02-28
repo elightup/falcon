@@ -180,9 +180,8 @@ class Settings {
 
 					<div class="e-sidebar">
 						<div class="e-widget e-box">
-							<h2 class="e-widget_title"><?php esc_html_e( 'Write a review for Falcon', 'falcon' ) ?></h2>
-							<p><?php esc_html_e( 'If you like Falcon, please write a review on WordPress.org to help us spread the word. We really appreciate that!', 'falcon' ) ?></p>
-							<p><a href="https://wordpress.org/support/plugin/falcon/reviews/?filter=5" class="button" target="_blank" rel="noopenner noreferrer"><?php esc_html_e( 'Write a review', 'falcon' ) ?></a></p>
+							<h2 class="e-widget_title"><?php esc_html_e( 'Share & feedback', 'falcon' ) ?></h2>
+							<p><?= wp_kses_post( sprintf( __( 'If you like Falcon, please share it with your friends or <a href="%s" target="_blank">write a review</a> to help us spread the word. We also want to hear <a href="%s" target="_blank">your feedback</a> to improve the plugin.', 'falcon' ), 'https://wordpress.org/support/plugin/falcon/reviews/?filter=5', 'https://elu.to/fse' ) ) ?></p>
 						</div>
 						<div class="e-widget e-box">
 							<h2 class="e-widget_title"><?php esc_html_e( 'Our WordPress Plugins', 'falcon' ) ?></h2>
