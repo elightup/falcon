@@ -63,16 +63,20 @@
 }
 
 .e-header .submit {
-	margin: 0 0 0 auto;
+	margin: 0;
 	padding: 0;
-	display: flex;
-	gap: 24px;
-	justify-content: flex-end;
-	align-items: center;
+	min-width: 160px;
+	text-align: right;
 }
 
 .e-header .message {
+	position: absolute;
+	top: 80px;
+	left: 50%;
+	transform: translateX(-50%);
 	animation: fadein .5s;
+	font-weight: 600;
+	color: #00a32a;
 }
 
 @keyframes fadein {
