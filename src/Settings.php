@@ -235,6 +235,7 @@ class Settings {
 			'block_ai_bots',
 			'maintenance_mode',
 			'force_login',
+			'smtp',
 		];
 
 		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'] ?? [], true );
