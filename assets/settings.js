@@ -9,11 +9,20 @@
 
 		e.preventDefault();
 
+		history.pushState( null, null, e.target.getAttribute( 'href' ) );
+
 		tabs.forEach( tab => tab.classList.remove( 'e-tab-active' ) );
 		e.target.classList.add( 'e-tab-active' );
 
-		panes.forEach( pane => pane.classList.add( 'hidden' ) );
-		document.querySelector( `.e-tabPane[data-tab="${ e.target.dataset.tab }"]` ).classList.remove( 'hidden' );
+		panes.forEach( pane => pane.classList.remove( 'e-tabPane-active' ) );
+		document.querySelector( `.e-tabPane[data-tab="${ e.target.dataset.tab }"]` ).classList.add( 'e-tabPane-active' );
+	};
+
+	const activateFirstTab = () => {
+		const tab = location.hash ? location.hash.substring( 1 ) : tabs[ 0 ].dataset.tab;
+
+		document.querySelector( `.e-tab[data-tab="${ tab }"]` ).classList.add( 'e-tab-active' );
+		document.querySelector( `.e-tabPane[data-tab="${ tab }"]` ).classList.add( 'e-tabPane-active' );
 	};
 
 	const sendTestEmail = e => {
@@ -55,6 +64,8 @@
 	};
 
 	document.querySelector( '.e-tabs' ).addEventListener( 'click', clickHandle );
+	activateFirstTab();
+
 	document.querySelector( '#smtp-test' ).addEventListener( 'click', sendTestEmail );
 	document.querySelector( '#settings-form' ).addEventListener( 'submit', submit );
 }
