@@ -109,6 +109,7 @@ class Settings {
 		ob_start();
 		printf( '<div class="e-tabPane" data-tab="%s">', esc_attr( $name ) );
 		include FALCON_DIR . "/views/settings/tabs/$name.php";
+		do_action( "falcon/settings/tabs/$name", $this );
 		echo '</div>';
 		return ob_get_clean();
 	}
@@ -147,7 +148,7 @@ class Settings {
 		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'] ?? [], true );
 	}
 
-	private function checkbox( string $name, string $label, string $description = '' ): void {
+	public function checkbox( string $name, string $label, string $description = '' ): void {
 		?>
 		<div class="featureBox">
 			<label class="featureBox_switch">
