@@ -25,7 +25,9 @@ new Admin;
 new Security;
 new Email;
 
-if ( ! is_admin() ) {
+if ( is_admin() ) {
+	new Core;
+} else {
 	new Header;
 	new Media;
 	new LazyLoadCSS;
