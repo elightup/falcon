@@ -3,7 +3,7 @@ Contributors: elightup, rilwis, truongwp
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 5.9
 Tested up to: 6.4.3
-Stable tag: 2.8.1
+Stable tag: 2.8.2
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -104,6 +104,10 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.8.2 - 2024-03-17 =
+- Add a link to the settings page in the plugin meta row
+- Auto redirect to the settings page after activation
 
 = 2.8.1 - 2024-02-28 =
 - Add options to change default email from name and address
