@@ -10,18 +10,28 @@
 	"phpExtensionBundles": [
 		"kitchen-sink"
 	],
-	"landingPage": "/wp-admin/admin.php?page=falcon",
+	"landingPage": "\/wp-admin\/admin.php?page=falcon",
 	"steps": [
+		{
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "wordpress.org\/plugins",
+                "slug": "falcon"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+			"step": "setSiteOptions",
+			"options": {
+				"blogname": "Falcon Demo"
+			}
+		}
 		{
 			"step": "login",
 			"username": "admin",
 			"password": "password"
-		},
-		{
-			"step": "setSiteOptions",
-			"options": {
-				"blogname": "Falcon Demo",
-			}
 		}
 	]
 }
