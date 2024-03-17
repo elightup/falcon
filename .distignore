@@ -1,11 +1,13 @@
 .DS_Store
 Thumbs.db
 
-.git
-.github
-.gitignore
+/.wordpress-org
 
-.distignore
-composer.*
+/.git
+/.github
+/.gitignore
+
+/.distignore
+/composer.*
 *.md
 phpcs.xml
