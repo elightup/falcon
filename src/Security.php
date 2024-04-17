@@ -29,6 +29,7 @@ class Security extends Base {
 
 	public function no_xmlrpc(): void {
 		add_filter( 'xmlrpc_enabled', '__return_false' );
+		add_filter( 'xmlrpc_methods', '__return_empty_array' );
 		add_filter( 'pings_open', '__return_false' );
 	}
 
