@@ -4,7 +4,7 @@ namespace Falcon;
 use WP_Error;
 
 class Security extends Base {
-	protected $features = [ 
+	protected $features = [
 		'no_rest_api',
 		'no_xmlrpc',
 		'no_login_errors',
@@ -46,7 +46,7 @@ class Security extends Base {
 	}
 
 	public function restrict_upload_mimes(): array {
-		return [ 
+		return [
 			'jpg|jpeg' => 'image/jpeg',
 			'gif'      => 'image/gif',
 			'png'      => 'image/png',
@@ -68,7 +68,7 @@ class Security extends Base {
 	 * @link https://neil-clarke.com/block-the-bots-that-feed-ai-models-by-scraping-your-website/
 	 */
 	public function block_ai_bots_in_robots_txt(): void {
-		$user_agents = [ 
+		$user_agents = [
 			'CCBot',
 			'ChatGPT-User',
 			'GPTBot',
