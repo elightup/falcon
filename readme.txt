@@ -2,8 +2,8 @@
 Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 5.9
-Tested up to: 6.5.3
-Stable tag: 2.8.3
+Tested up to: 6.7.1
+Stable tag: 2.8.4
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -104,6 +104,10 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.8.4 - 2024-11-22 =
+- Fix not showing site icon in the login page
+- Fix security for sending test email
 
 = 2.8.3 - 2024-05-17 =
 - Disable XML-RPC methods
