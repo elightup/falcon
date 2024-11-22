@@ -20,7 +20,7 @@ class Login {
 		$icon = get_site_icon_url();
 		if ( ! $icon ) : ?>
 			<style>
-			.login h1 a {
+			.login .wp-login-logo a {
 				background: none;
 				width: auto;
 				height: auto;
@@ -31,7 +31,7 @@ class Login {
 			</style>
 		<?php else : ?>
 			<style>
-			.login h1 a {
+			.login .wp-login-logo a {
 				background-image: url(<?= esc_url( $icon ) ?>);
 			}
 			</style>
