@@ -20,7 +20,7 @@ class Core {
 		if ( ! $is_plugin || $network_wide || $is_cli || $is_bulk_activate || $this->is_bundled() || $is_doing_ajax ) {
 			return;
 		}
-		
+
 		wp_safe_redirect( admin_url( 'options-general.php?page=falcon' ) );
 		die;
 	}

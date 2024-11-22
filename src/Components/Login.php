@@ -32,7 +32,7 @@ class Login {
 		<?php else : ?>
 			<style>
 			.login .wp-login-logo a {
-				background-image: url(<?= esc_url( $icon ) ?>);
+				background-image: url(<?= esc_url( $icon ); ?>);
 			}
 			</style>
 			<?php

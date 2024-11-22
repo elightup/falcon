@@ -1,4 +1,5 @@
 <?php
+// phpcs:ignore Squiz.Commenting.FileComment.WrongStyle
 // Translators: %s - Link to the help docs.
 $this->checkbox( 'no_gutenberg', __( 'Disable Gutenberg (the block editor)', 'falcon' ), sprintf( __( 'Disable the block editor for all post types and use classic editor only. <a href="%s" target="_blank">Learn more</a>.', 'falcon' ), 'https://metabox.io/disable-gutenberg-without-using-plugins/' ) );
 $this->checkbox( 'no_heartbeat', __( 'Disable heartbeat', 'falcon' ), __( 'Reduce the CPU load on the server by disabling the WordPress heartbeat API.', 'falcon' ) );
