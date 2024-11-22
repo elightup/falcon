@@ -72,6 +72,7 @@ class Email extends Base {
 	}
 
 	public function send_test_email(): void {
+		check_ajax_referer( 'send-email' );
 		$result = wp_mail( wp_get_current_user()->user_email, __( 'Test email', 'falcon' ), __( 'This is a test email from Falcon.', 'falcon' ) );
 		if ( $result ) {
 			wp_send_json_success( __( 'The email is sent successfully!', 'falcon' ) );

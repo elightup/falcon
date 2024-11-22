@@ -28,7 +28,7 @@
 	const sendTestEmail = e => {
 		e.target.disabled = true;
 
-		fetch( `${ ajaxurl }?action=falcon_test_smtp` )
+		fetch( `${ ajaxurl }?action=falcon_test_smtp&_ajax_nonce=${ Falcon.nonce_email }` )
 			.then( response => response.json() )
 			.then( response => {
 				alert( response.data );
