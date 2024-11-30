@@ -29,10 +29,15 @@ class Security extends Base {
 
 	public function no_xmlrpc(): void {
 		add_filter( 'xmlrpc_enabled', '__return_false' );
+		add_filter( 'xmlrpc_methods', '__return_empty_array' );
 		add_filter( 'pings_open', '__return_false' );
 	}
 
-	public function no_login_errors(): string {
+	public function no_login_errors(): void {
+		add_filter( 'login_errors', [ $this, 'custom_login_errors' ] );
+	}
+
+	public function custom_login_errors( $error ): string {
 		return __( 'There is something wrong. Please try again.', 'falcon' );
 	}
 

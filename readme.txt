@@ -1,9 +1,9 @@
 === Falcon - WordPress Optimizations & Tweaks ===
-Contributors: elightup, rilwis, truongwp
+Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 5.9
-Tested up to: 6.4.3
-Stable tag: 2.8.2
+Tested up to: 6.7.1
+Stable tag: 2.8.4
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -104,6 +104,15 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.8.4 - 2024-11-22 =
+- Fix not showing site icon in the login page
+- Fix security for sending test email
+
+= 2.8.3 - 2024-05-17 =
+- Disable XML-RPC methods
+- Fix: activation error on ajax request
+- Update fix word disable detailed login errors
 
 = 2.8.2 - 2024-03-17 =
 - Add a link to the settings page in the plugin meta row
