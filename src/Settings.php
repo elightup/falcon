@@ -140,10 +140,12 @@ class Settings {
 		$data = get_option( 'falcon', null );
 
 		$default_disabled = [
+			'no_gutenberg',
 			'no_cron',
 			'no_external_requests',
 			'no_comments',
 			'no_thumbnails',
+			'search_posts_only',
 			'block_ai_bots',
 			'maintenance_mode',
 			'force_login',
