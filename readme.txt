@@ -3,7 +3,7 @@ Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 5.9
 Tested up to: 6.7.1
-Stable tag: 2.8.4
+Stable tag: 2.8.5
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -104,6 +104,11 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.8.5 - 2025-02-06 =
+- Search posts only: exclude admin and rest API requests
+- Do not enable "No Gutenberg" and "Search Posts Only" by default
+- No Gutenberg: remove support for post types
 
 = 2.8.4 - 2024-11-22 =
 - Fix not showing site icon in the login page
