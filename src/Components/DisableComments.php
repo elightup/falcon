@@ -29,6 +29,7 @@ class DisableComments {
 
 		// No admin bar.
 		add_action( 'admin_init', [ $this, 'remove_admin_bar_items' ] );
+		add_action( 'template_redirect', [ $this, 'remove_admin_bar_items' ] );
 
 		// Hide admin elements.
 		add_action( 'admin_print_styles-index.php', [ $this, 'hide_elements_with_css' ] );
