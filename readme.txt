@@ -2,8 +2,8 @@
 Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 5.9
-Tested up to: 6.7.1
-Stable tag: 2.8.5
+Tested up to: 6.8.3
+Stable tag: 2.8.6
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -90,8 +90,6 @@ If you like this plugin, you might also like our other WordPress products:
 
 - [Meta Box](https://metabox.io) - A powerful WordPress plugin for creating custom post types and custom fields.
 - [Slim SEO](https://wpslimseo.com) - A fast, lightweight and full-featured SEO plugin for WordPress with minimal configuration.
-- [Slim SEO Schema](https://wpslimseo.com/products/slim-seo-schema/) - An advanced, powerful and flexible plugin to add schemas to WordPress.
-- [Slim SEO Link Manager](https://wpslimseo.com/products/slim-seo-link-manager/) - Build internal link easier in WordPress with real-time reports.
 - [GretaThemes](https://gretathemes.com) - Free and premium WordPress themes that clean, simple and just work.
 - [Auto Listings](https://wpautolistings.com) - A car sale and dealership plugin for WordPress.
 
@@ -104,6 +102,9 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.8.6 - 2025-10-20 =
+- Remove admin bar item when disable comments
 
 = 2.8.5 - 2025-02-06 =
 - Search posts only: exclude admin and rest API requests
