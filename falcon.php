@@ -39,6 +39,7 @@ new General;
 new Admin;
 new Security;
 new Email;
+new Components\Cache\Manager;
 
 if ( is_admin() ) {
 	new Core;

@@ -1,0 +1,108 @@
+<?php
+namespace Falcon\Components\Cache;
+
+use Falcon\Settings;
+
+class Manager {
+	private string $cache_dir           = '';
+	private string $advanced_cache_file = '';
+
+	public function __construct() {
+		add_action( 'init', [ $this, 'setup' ], 0 );
+		$this->hook_to_clear_cache();
+	}
+
+	public function setup(): void {
+		$uploads_dir               = wp_upload_dir();
+		$this->cache_dir           = $uploads_dir['basedir'] . '/cache';
+		$this->advanced_cache_file = WP_CONTENT_DIR . '/advanced-cache.php';
+
+		if ( Settings::is_feature_active( 'cache' ) ) {
+			$this->install();
+		} else {
+			$this->uninstall();
+		}
+	}
+
+	public function install(): void {
+		if ( file_exists( $this->advanced_cache_file ) ) {
+			return;
+		}
+
+		file_put_contents( $this->advanced_cache_file, '
+		<?php
+		require_once __DIR__ . \'/plugins/falcon/src/Components/Cache/Serve.php\';
+		new Falcon\Components\Cache\Serve();
+		?>
+		' );
+
+		wp_mkdir_p( $this->cache_dir );
+		$this->update_constant( true );
+	}
+
+	public function uninstall(): void {
+		if ( ! file_exists( $this->advanced_cache_file ) ) {
+			return;
+		}
+
+		unlink( $this->advanced_cache_file );
+		$this->update_constant( false );
+		$this->clear_cache();
+	}
+
+	private function update_constant( bool $enable = true ): void {
+		$config_file = ABSPATH . 'wp-config.php';
+		if ( ! file_exists( $config_file ) || ! is_writable( $config_file ) ) {
+			return;
+		}
+
+		$config = file_get_contents( $config_file );
+		$config = preg_replace( "/define\s*\(\s*['\"]WP_CACHE['\"].*;\s*\n?/i", '', $config );
+		if ( $enable ) {
+			$config = preg_replace( '/^<\?php/', "<?php\ndefine( 'WP_CACHE', true );", $config, 1 );
+		}
+
+		file_put_contents( $config_file, $config );
+	}
+
+	private function hook_to_clear_cache(): void {
+		$actions = [
+			'save_post',
+			'delete_post',
+			'trashed_post',
+			'edit_term',
+			'delete_term',
+			'wp_insert_comment',
+			'edit_comment',
+			'delete_comment',
+			'transition_comment_status',
+			'switch_theme',
+			'activated_plugin',
+			'deactivated_plugin',
+			'update_option_sidebars_widgets',
+			'wp_update_nav_menu',
+			'_core_updated_successfully',
+			'customize_save_after',
+		];
+
+		foreach ( $actions as $action ) {
+			add_action( $action, [ $this, 'clear_cache' ] );
+		}
+	}
+
+	public function clear_cache(): void {
+		$this->remove_dir( $this->cache_dir );
+	}
+
+	private function remove_dir( string $dir ): bool {
+		$files = glob( $dir . '/*' );
+		foreach ( $files as $file ) {
+			if ( is_dir( $file ) ) {
+				$this->remove_dir( $file );
+			} else {
+				unlink( $file );
+			}
+		}
+		return rmdir( $dir );
+	}
+}

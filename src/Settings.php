@@ -88,6 +88,7 @@ class Settings {
 		wp_localize_script( 'falcon', 'Falcon', [
 			'nonce'       => wp_create_nonce( 'save' ),
 			'nonce_email' => wp_create_nonce( 'send-email' ),
+			'nonce_cache' => wp_create_nonce( 'clear-cache' ),
 			'saving'      => __( 'Saving...', 'falcon' ),
 			'save'        => __( 'Save Changes', 'falcon' ),
 		] );
@@ -150,6 +151,7 @@ class Settings {
 			'maintenance_mode',
 			'force_login',
 			'smtp',
+			'cache',
 		];
 
 		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'] ?? [], true );
