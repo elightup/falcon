@@ -32,7 +32,6 @@ class Settings {
 					// phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
 					$tabs = apply_filters( 'falcon/settings/tabs', [
 						'general'  => __( 'General', 'falcon' ),
-						'cache'    => __( 'Cache', 'falcon' ),
 						'header'   => __( 'Header', 'falcon' ),
 						'media'    => __( 'Media', 'falcon' ),
 						'email'    => __( 'Email', 'falcon' ),
