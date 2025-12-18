@@ -1,13 +1,50 @@
+# Ignore files when exporting
+
+## OS
 .DS_Store
 Thumbs.db
 
-/.wordpress-org
+## Editor
+.vscode
+.cursor
 
-/.git
-/.github
-/.gitignore
+## Git
+.git
+.github
+.gitattributes
+.gitignore
 
-/.distignore
-/composer.*
-*.md
+## PHP
+composer.json
+composer.lock
 phpcs.xml
+phpcs.xml.dist
+phpunit.xml
+phpstan.neon
+phpstan.neon.dist
+
+## JS
+package.json
+package-lock.json
+pnpm-lock.yaml
+webpack.config.js
+esbuild.js
+
+## Markdown
+TODO.md
+README.md
+CHANGELOG.md
+
+## Special files and folders
+.distignore
+tests
+bin
+docs
+
+## WordPress
+*.po
+
+## Other files
+## @developers: add your own files here
+.wordpress-org
+readme.md
