@@ -19,7 +19,6 @@ class General extends Base {
 		'no_comment_url',
 		'no_texturize',
 		'maintenance_mode',
-		'cache',
 	];
 
 	public function no_gutenberg() {
@@ -156,9 +155,5 @@ class General extends Base {
 				wp_die( wp_kses_post( $html ), esc_html__( 'Maintenance mode', 'falcon' ), 503 );
 			}
 		} );
-	}
-
-	public function cache(): void {
-		new Components\Cache;
 	}
 }
