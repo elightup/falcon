@@ -73,6 +73,13 @@ class Serve {
 			return false;
 		}
 
+		// Don't cache requests to PHP files like wp-login.php
+		// These files are still use advanced-cache.php
+		$path = $this->get_path();
+		if ( str_contains( $path, '.php' ) ) {
+			return false;
+		}
+
 		return true;
 	}
 
@@ -106,11 +113,14 @@ class Serve {
 	}
 
 	private function get_cache_file(): string {
-		$uri  = parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
-		$uri  = trim( $uri, '/' );
-		$uri  = $uri === '' ? '/' : $uri;
-		$hash = md5( $uri );
-
+		$hash = md5( $this->get_path() );
 		return WP_CONTENT_DIR . '/uploads/cache/' . $hash . '.html';
+	}
+
+	private function get_path(): string {
+		$path = parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH );
+		$path = trim( $path, '/' );
+
+		return $path === '' ? '/' : $path;
 	}
 }

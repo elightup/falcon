@@ -29,28 +29,19 @@ class Manager {
 
 	public function activate(): void {
 		// Extra check when activating the plugin.
-		$active = Settings::is_feature_active( 'cache' );
-
-		if ( ! $active || file_exists( $this->advanced_cache_file ) ) {
+		if ( ! Settings::is_feature_active( 'cache' ) ) {
 			return;
 		}
 
-		file_put_contents( $this->advanced_cache_file, '
-		<?php
-		require_once __DIR__ . \'/plugins/falcon/src/Components/Cache/Serve.php\';
-		new Falcon\Components\Cache\Serve();
-		?>
-		' );
+		file_put_contents( $this->advanced_cache_file, "<?php
+require_once __DIR__ . '/plugins/falcon/src/Components/Cache/Serve.php';
+new Falcon\Components\Cache\Serve();" );
 
 		wp_mkdir_p( $this->cache_dir );
 		$this->update_constant( true );
 	}
 
 	public function deactivate(): void {
-		if ( ! file_exists( $this->advanced_cache_file ) ) {
-			return;
-		}
-
 		unlink( $this->advanced_cache_file );
 		$this->update_constant( false );
 		$this->clear_cache();
