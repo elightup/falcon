@@ -1,9 +1,9 @@
 === Falcon - WordPress Optimizations & Tweaks ===
 Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
-Requires at least: 5.9
-Tested up to: 6.8.3
-Stable tag: 2.8.6
+Requires at least: 6.5
+Tested up to: 6.9
+Stable tag: 2.9.0
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -19,18 +19,23 @@ Falcon offers a comprehensive list of 49 FREE modules (and growing) for you to t
 
 ### General
 
+- Cache: very simple way to cache pages to improve page loading and avoid server load
+- Enable maintenance mode
+- Block external requests
+- Remove website field from comment form
+- Search only posts
+
+Disable components:
+
 - [Disable Gutenberg](https://metabox.io/disable-gutenberg-without-using-plugins/) (the block editor)
 - Disable heartbeat
 - Disable embeds, e.g. prevent others from embedding your site and vise-versa
 - Disable comments
-- Remove website field from comment form
 - Disable revisions
 - Disable self pings
 - Disable privacy tools
 - Disable cron
 - Disable auto updates
-- Block external requests
-- Search only posts
 - Disable replacing text with formatted entities like smart quotes, dashes, ellipses, etc.
 
 ### Header cleanup
@@ -55,7 +60,6 @@ Falcon offers a comprehensive list of 49 FREE modules (and growing) for you to t
 - Disable scaling down big images
 - Disable automatic image rotation based on EXIF data
 - Disable thumbnail generation
-- Enable maintenance mode
 
 ### Email
 
@@ -102,6 +106,13 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.9.0 - 2025-12-19 =
+
+- **Cache module (HTML page cache):** A lightweight yet powerful caching module to improve page load times and reduce server load by caching full HTML pages. Just enable it in the **General** tab and you're good to go.
+  - Recommended for standard blogs and brochure-style websites.
+  - Not recommended for highly dynamic or eCommerce sites.
+- **Settings export & import:** Export your plugin settings to a file and import them on other sites to quickly reuse the same configuration.
 
 = 2.8.6 - 2025-10-20 =
 - Remove admin bar item when disable comments
