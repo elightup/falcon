@@ -2,30 +2,36 @@
 namespace Falcon\Components\Cache;
 
 use Falcon\Settings;
-
 class Manager {
 	private string $cache_dir           = '';
 	private string $advanced_cache_file = '';
 
 	public function __construct() {
-		add_action( 'init', [ $this, 'setup' ], 0 );
-		$this->hook_to_clear_cache();
-	}
-
-	public function setup(): void {
 		$uploads_dir               = wp_upload_dir();
 		$this->cache_dir           = $uploads_dir['basedir'] . '/cache';
 		$this->advanced_cache_file = WP_CONTENT_DIR . '/advanced-cache.php';
 
-		if ( Settings::is_feature_active( 'cache' ) ) {
-			$this->install();
+		add_action( 'falcon_settings_save', [ $this, 'setup' ] );
+		add_action( 'activate_falcon/falcon.php', [ $this, 'activate' ] );
+		add_action( 'deactivate_falcon/falcon.php', [ $this, 'deactivate' ] );
+		$this->hook_to_clear_cache();
+	}
+
+	public function setup(): void {
+		$active = Settings::is_feature_active( 'cache' );
+
+		if ( $active ) {
+			$this->activate();
 		} else {
-			$this->uninstall();
+			$this->deactivate();
 		}
 	}
 
-	public function install(): void {
-		if ( file_exists( $this->advanced_cache_file ) ) {
+	public function activate(): void {
+		// Extra check when activating the plugin.
+		$active = Settings::is_feature_active( 'cache' );
+
+		if ( ! $active || file_exists( $this->advanced_cache_file ) ) {
 			return;
 		}
 
@@ -40,7 +46,7 @@ class Manager {
 		$this->update_constant( true );
 	}
 
-	public function uninstall(): void {
+	public function deactivate(): void {
 		if ( ! file_exists( $this->advanced_cache_file ) ) {
 			return;
 		}

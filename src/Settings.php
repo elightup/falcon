@@ -31,8 +31,7 @@ class Settings {
 
 				<nav class="e-tabs">
 					<?php
-					// phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
-					$tabs = apply_filters( 'falcon/settings/tabs', [
+					$tabs = apply_filters( 'falcon_settings_tabs', [
 						'general'  => __( 'General', 'falcon' ),
 						'header'   => __( 'Header', 'falcon' ),
 						'media'    => __( 'Media', 'falcon' ),
@@ -59,8 +58,7 @@ class Settings {
 				<div class="e-wrapper">
 					<div class="e-content e-box">
 						<?php
-						// phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
-						$tab_panes = apply_filters( 'falcon/settings/tab_panes', $this->get_tab_panes() );
+						$tab_panes = apply_filters( 'falcon_settings_tab_panes', $this->get_tab_panes() );
 						echo implode( '', $tab_panes ); // phpcs:ignore
 						?>
 					</div>
@@ -129,13 +127,12 @@ class Settings {
 		ob_start();
 		printf( '<div class="e-tabPane" data-tab="%s">', esc_attr( $name ) );
 		include FALCON_DIR . "/views/settings/tabs/$name.php";
-		// phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
-		do_action( "falcon/settings/tabs/$name", $this );
+		do_action( "falcon_settings_tab_$name", $this );
 		echo '</div>';
 		return ob_get_clean();
 	}
 
-	public function save() {
+	public function save(): void {
 		check_ajax_referer( 'save' );
 
 		// phpcs:ignore
@@ -143,6 +140,8 @@ class Settings {
 		$data = $this->sanitize_data( $data );
 
 		update_option( 'falcon', $data );
+
+		do_action( 'falcon_settings_save', $data );
 
 		wp_send_json_success( __( 'Settings updated.', 'falcon' ) );
 	}
