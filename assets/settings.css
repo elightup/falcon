@@ -9,6 +9,17 @@
 	border-radius: 6px;
 }
 
+.e-widget_actions {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+	text-align: center;
+}
+
+.e-widget_actions input {
+	display: none;
+}
+
 .auto-fold #wpcontent,
 #wpcontent {
 	padding-left: 0;

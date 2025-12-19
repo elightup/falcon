@@ -63,9 +63,37 @@
 			} );
 	};
 
+	const importSettings = e => {
+		const file = e.target.files[0];
+		if ( ! file ) {
+			return;
+		}
+
+		const formData = new FormData();
+		formData.append( 'action', 'falcon_import_settings' );
+		formData.append( '_ajax_nonce', Falcon.nonce_import );
+		formData.append( 'file', file );
+
+		fetch( ajaxurl, { method: 'POST', body: formData } )
+			.then( response => response.json() )
+			.then( response => {
+				if ( response.success ) {
+					alert( response.data );
+					location.reload();
+				} else {
+					alert( response.data );
+				}
+			} )
+			.catch( error => {
+				alert( error.message );
+			} );
+	};
+
 	document.querySelector( '.e-tabs' ).addEventListener( 'click', clickHandle );
 	activateFirstTab();
 
 	document.querySelector( '#smtp-test' ).addEventListener( 'click', sendTestEmail );
 	document.querySelector( '#settings-form' ).addEventListener( 'submit', submit );
+
+	document.querySelector( '#import' ).addEventListener( 'change', importSettings );
 }
