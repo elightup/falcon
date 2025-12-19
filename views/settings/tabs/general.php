@@ -15,4 +15,4 @@ $this->checkbox( 'no_external_requests', __( 'Block external requests', 'falcon'
 $this->checkbox( 'search_posts_only', __( 'Search only posts', 'falcon' ), __( 'Do not search other post types when users perform a search.', 'falcon' ) );
 $this->checkbox( 'no_texturize', __( 'Disable texturize', 'falcon' ), __( 'Do not allow WordPress to auto replace some characters with their formatted forms like quotes, dashes, ellipses, etc.', 'falcon' ) );
 $this->checkbox( 'maintenance_mode', __( 'Enable maintenance mode', 'falcon' ), __( 'Put your website under the maintenance mode. This option will display a maintenance message to non-admin users when viewing the website on the front end.', 'falcon' ) );
-$this->checkbox( 'cache', __( 'Cache', 'falcon' ), __( 'Cache HTML pages for faster loading. Cache is automatically cleared when content changes.', 'falcon' ) );
+$this->checkbox( 'cache', __( 'Cache', 'falcon' ), __( 'Cache pages for faster loading. Cache is automatically cleared when content changes.', 'falcon' ) );
