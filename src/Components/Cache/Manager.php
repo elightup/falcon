@@ -14,6 +14,7 @@ class Manager {
 		add_action( 'falcon_settings_save', [ $this, 'setup' ] );
 		add_action( 'activate_falcon/falcon.php', [ $this, 'activate' ] );
 		add_action( 'deactivate_falcon/falcon.php', [ $this, 'deactivate' ] );
+		add_action( 'delete_plugin', [ $this, 'delete' ] );
 		$this->hook_to_clear_cache();
 	}
 
@@ -23,6 +24,12 @@ class Manager {
 		if ( $active ) {
 			$this->activate();
 		} else {
+			$this->deactivate();
+		}
+	}
+
+	public function delete( string $plugin ): void {
+		if ( 'falcon/falcon.php' === $plugin ) {
 			$this->deactivate();
 		}
 	}
