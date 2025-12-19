@@ -225,6 +225,8 @@ class Settings {
 		$data = $this->sanitize_data( $data );
 		update_option( 'falcon', $data );
 
+		do_action( 'falcon_settings_save', $data );
+
 		wp_send_json_success( __( 'Settings imported successfully.', 'falcon' ) );
 	}
 
