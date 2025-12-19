@@ -68,6 +68,11 @@ class Serve {
 			}
 		}
 
+		// Don't cache if session is active.
+		if ( session_status() === PHP_SESSION_ACTIVE ) {
+			return false;
+		}
+
 		return true;
 	}
 
@@ -97,7 +102,7 @@ class Serve {
 			return false;
 		}
 
-		return true;
+		return apply_filters( 'falcon_cache', true );
 	}
 
 	private function get_cache_file(): string {
