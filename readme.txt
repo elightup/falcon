@@ -3,7 +3,7 @@ Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 2.9.0
+Stable tag: 2.9.1
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -107,6 +107,10 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.9.1 - 2025-12-19 =
+
+- Fix not creating cache dir after cleaning
 
 = 2.9.0 - 2025-12-19 =
 
