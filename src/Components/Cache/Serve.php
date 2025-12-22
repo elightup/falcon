@@ -36,6 +36,7 @@ class Serve {
 		}
 
 		$file = $this->get_cache_file();
+		wp_mkdir_p( dirname( $file ) );
 		file_put_contents( $file, $html );
 		header( 'X-Cache: MISS' );
 		return $html;
