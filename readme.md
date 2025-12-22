@@ -4,25 +4,33 @@
 
 ## Features
 
-Falcon offers a comprehensive list of 49 FREE modules (and growing) for you to tweak and optimize your WordPress websites. These options are divided into the following categories:
+Falcon offers a comprehensive list modules for you to tweak and optimize your WordPress websites. These options are divided into the following categories:
 
-### General
+### [Disable components](https://wpfalcon.pro/features/disable-components/)
+
+#### General components
 
 - [Disable Gutenberg](https://metabox.io/disable-gutenberg-without-using-plugins/) (the block editor)
 - Disable heartbeat
 - Disable embeds, e.g. prevent others from embedding your site and vise-versa
-- Disable comments
-- Remove website field from comment form
+- Disable comments & remove website field from comment form
 - Disable revisions
 - Disable self pings
 - Disable privacy tools
 - Disable cron
 - Disable auto updates
 - Block external requests
-- Search only posts
 - Disable replacing text with formatted entities like smart quotes, dashes, ellipses, etc.
 
-### Header cleanup
+#### Media components
+
+- Remove jQuery Migrate
+- Disable emojis
+- Disable scaling down big images
+- Disable automatic image rotation based on EXIF data
+- Disable thumbnail generation
+
+### [Header cleanup](https://wpfalcon.pro/features/header-cleanup/)
 
 - Remove feed links
 - Remove RSD link
@@ -34,19 +42,7 @@ Falcon offers a comprehensive list of 49 FREE modules (and growing) for you to t
 
 ### Media
 
-- **Asynchronous load CSS** to avoid blocking load of CSS files
-- Remove query string for JavaScript and CSS files
-- Remove jQuery Migrate
-- Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
-- Remove styles for recent comments widget
-- Cleanup nav menu item ID & classes
-- Disable emojis
-- Disable scaling down big images
-- Disable automatic image rotation based on EXIF data
-- Disable thumbnail generation
-- Enable maintenance mode
-
-### Email
+### [Email](https://wpfalcon.pro/features/email/)
 
 - Remove admin email confirmation
 - Disable auto update email notification
@@ -55,7 +51,7 @@ Falcon offers a comprehensive list of 49 FREE modules (and growing) for you to t
 - [Change default WordPress from name and email](https://deluxeblogtips.com/change-wordpress-default-email/)
 - SMTP configuration
 
-### Admin
+### [Admin cleanup](https://wpfalcon.pro/features/admin-cleanup/)
 
 - Show site icon on login page
 - Remove update nags
@@ -64,7 +60,7 @@ Falcon offers a comprehensive list of 49 FREE modules (and growing) for you to t
 - Remove WordPress logo in the admin bar
 - Remove application passwords
 
-### Security
+### [Security](https://wpfalcon.pro/features/security/)
 
 - Disable REST API for unauthenticated requests
 - [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
@@ -72,6 +68,15 @@ Falcon offers a comprehensive list of 49 FREE modules (and growing) for you to t
 - Disable detailed login errors
 - Block AI bots from crawling/stealing your content, which also affect the performance
 - Force login to view the website
+
+### [Tweaks](https://wpfalcon.pro/features/tweaks/)
+- Search only posts
+- Enable maintenance mode
+- Remove query string for JavaScript and CSS files
+- Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
+- Remove styles for recent comments widget
+- Cleanup nav menu item ID & classes
+- **Asynchronous load CSS** to avoid blocking load of CSS files
 
 ## You might also like
 
