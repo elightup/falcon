@@ -50,6 +50,7 @@ class Security extends Base {
 			'jpg|jpeg' => 'image/jpeg',
 			'gif'      => 'image/gif',
 			'png'      => 'image/png',
+			'webp'     => 'image/webp',
 			'mp4'      => 'video/mp4',
 			'pdf'      => 'application/pdf',
 			'docx'     => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',

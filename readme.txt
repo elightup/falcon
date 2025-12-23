@@ -51,8 +51,6 @@ Falcon offers a comprehensive list modules for you to tweak and optimize your Wo
 - Remove shortlink
 - Remove REST API link
 
-#### Media
-
 #### [Email](https://wpfalcon.pro/features/email/)
 
 - Remove admin email confirmation
