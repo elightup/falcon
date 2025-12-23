@@ -49,9 +49,10 @@ new Falcon\Components\Cache\Serve();" );
 	}
 
 	public function deactivate(): void {
-		unlink( $this->advanced_cache_file );
+		wp_delete_file( $this->advanced_cache_file );
 		$this->update_constant( false );
 		$this->clear_cache();
+		$this->remove_cache_dir();
 	}
 
 	private function update_constant( bool $enable = true ): void {
@@ -95,18 +96,12 @@ new Falcon\Components\Cache\Serve();" );
 	}
 
 	public function clear_cache(): void {
-		$this->remove_dir( $this->cache_dir );
+		array_map( 'wp_delete_file', glob( $this->cache_dir . '/*.html' ) );
 	}
 
-	private function remove_dir( string $dir ): bool {
-		$files = glob( $dir . '/*' );
-		foreach ( $files as $file ) {
-			if ( is_dir( $file ) ) {
-				$this->remove_dir( $file );
-			} else {
-				unlink( $file );
-			}
+	private function remove_cache_dir(): void {
+		if ( is_dir( $this->cache_dir ) ) {
+			rmdir( $this->cache_dir );
 		}
-		return rmdir( $dir );
 	}
 }

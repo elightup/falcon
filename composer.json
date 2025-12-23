@@ -8,20 +8,14 @@
     "optimization"
   ],
   "description": "Falcon is a WordPress plugin which cleans up your website and optimizes it for a better performance.",
-  "homepage": "https://elightup.com",
-  "license": "GPL-2.0",
+  "homepage": "https://wpfalcon.pro",
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Tran Ngoc Tuan Anh",
       "email": "anhtnt@elightup.com",
-      "homepage": "https://elightup.com",
+      "homepage": "https://deluxeblogtips.com",
       "role": "Developer"
-    }
-  ],
-  "repositories": [
-    {
-      "type":"composer",
-      "url":"https://wpackagist.org"
     }
   ],
   "autoload": {
@@ -29,19 +23,8 @@
       "Falcon\\": "src/"
     }
   },
-  "extra": {
-    "installer-paths": {
-      "vendor/{$name}": ["vendor:wpackagist-plugin"]
-    },
-    "light-ignore-plugin": {
-      "composer": [
-        "LICENSE"
-      ]
-    }
-  },
-  "config": {
-    "allow-plugins": {
-      "composer/installers": true
-    }
+  "scripts": {
+    "phpcs": "phpcs --standard=phpcs.xml src",
+    "phpcbf": "phpcbf --standard=phpcs.xml src"
   }
 }
