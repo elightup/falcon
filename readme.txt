@@ -3,7 +3,7 @@ Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 2.9.1
+Stable tag: 2.9.2
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -105,6 +105,11 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.9.2 - 2025-12-23 =
+
+- Allow to upload WEBP images if enable restrict upload file types module
+- Fix PHP warning when deleting cache dir
 
 = 2.9.1 - 2025-12-19 =
 
