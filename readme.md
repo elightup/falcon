@@ -69,6 +69,10 @@ Falcon offers a comprehensive list modules for you to tweak and optimize your Wo
 - Block AI bots from crawling/stealing your content, which also affect the performance
 - Force login to view the website
 
+### [Cache](https://wpfalcon.pro/features/cache/)
+
+Falcon's cache feature creates static HTML files of your pages, serving them instantly to visitors without processing database queries, or loading WordPress, themes and all plugins on every request.
+
 ### [Tweaks](https://wpfalcon.pro/features/tweaks/)
 - Search only posts
 - Enable maintenance mode

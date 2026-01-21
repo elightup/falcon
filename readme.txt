@@ -3,7 +3,7 @@ Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 6.5
 Tested up to: 6.9
-Stable tag: 2.9.2
+Stable tag: 2.9.3
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -78,6 +78,10 @@ Falcon offers a comprehensive list modules for you to tweak and optimize your Wo
 - Block AI bots from crawling/stealing your content, which also affect the performance
 - Force login to view the website
 
+#### [Cache](https://wpfalcon.pro/features/cache/)
+
+Falcon's cache feature creates static HTML files of your pages, serving them instantly to visitors without processing database queries, or loading WordPress, themes and all plugins on every request.
+
 #### [Tweaks](https://wpfalcon.pro/features/tweaks/)
 - Search only posts
 - Enable maintenance mode
@@ -106,6 +110,10 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 
 == Changelog ==
 
+= 2.9.3 - 2026-01-21 =
+
+- Improve check for not caching search result pages
+
 = 2.9.2 - 2025-12-23 =
 
 - Allow to upload WEBP images if enable restrict upload file types module
@@ -117,7 +125,7 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 
 = 2.9.0 - 2025-12-19 =
 
-- **Cache module (HTML page cache):** A lightweight yet powerful caching module to improve page load times and reduce server load by caching full HTML pages. Just enable it in the **General** tab and you're good to go.
+- **[Cache module](https://wpfalcon.pro/features/cache/) (HTML page cache):** A lightweight yet powerful caching module to improve page load times and reduce server load by caching full HTML pages. Just enable it in the **General** tab and you're good to go.
   - Recommended for standard blogs and brochure-style websites.
   - Not recommended for highly dynamic or eCommerce sites.
 - **Settings export & import:** Export your plugin settings to a file and import them on other sites to quickly reuse the same configuration.
