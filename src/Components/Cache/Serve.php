@@ -54,6 +54,11 @@ class Serve {
 			return false;
 		}
 
+		// Do not cache search result pages.
+		if ( isset( $_GET['s'] ) ) {
+			return false;
+		}
+
 		// Don't cache AJAX, REST API, XMLRPC requests.
 		if ( defined( 'DOING_AJAX' ) || defined( 'REST_REQUEST' ) || defined( 'XMLRPC_REQUEST' ) ) {
 			return false;
