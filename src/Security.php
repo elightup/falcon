@@ -11,6 +11,7 @@ class Security extends Base {
 		'restrict_upload',
 		'block_ai_bots',
 		'force_login',
+		'comment_spam_protection',
 	];
 
 	public function no_rest_api(): void {
@@ -94,12 +95,47 @@ class Security extends Base {
 		add_action( 'template_redirect', [ $this, 'redirect_non_logged_in_users' ] );
 	}
 
+	/**
+	 * Simple technique to prevent spam comments. Credit to Maarten Belmans.
+	 * @link https://x.com/PoeHaH/status/2043964375959048388
+	 */
+	public function comment_spam_protection(): void {
+		add_filter( 'pre_comment_approved', [ $this, 'check_comment_spam' ], 10, 2 );
+		add_action( 'comment_form_after', [ $this, 'add_comment_spam_protection_script' ] );
+	}
+
+	public function check_comment_spam( $approved ) {
+		if ( ! is_admin() && ( empty( $_POST['comment-check'] ) || $_POST['comment-check'] !== 'ok' ) ) {
+			return new WP_Error( 'comment_lang', __( 'Your comment is detected as spam.', 'falcon' ), 429 );
+		}
+
+		return $approved;
+	}
+
+	public function add_comment_spam_protection_script(): void {
+		?>
+		<script>
+		{
+			let form = document.querySelector( '#commentform' );
+			if ( form ) {
+				setTimeout( function() {
+					let input = document.createElement( 'input' );
+					input.type = 'hidden';
+					input.name = 'comment-check';
+					input.value = 'ok';
+					form.appendChild( input );
+				}, 2000 );
+			}
+		}
+		</script>
+		<?php
+	}
+
 	public function redirect_non_logged_in_users(): void {
 		if ( is_user_logged_in() ) {
 			return;
 		}
 
-		// Set the headers to prevent caching.
 		nocache_headers();
 
 		wp_safe_redirect( wp_login_url(), 302 );

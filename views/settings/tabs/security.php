@@ -6,3 +6,4 @@ $this->checkbox( 'restrict_upload', __( 'Restrict upload file types', 'falcon' )
 $this->checkbox( 'no_login_errors', __( 'Disable detailed login errors', 'falcon' ), __( 'Show a general error message when the login is incorrect, not specifically whether the username or password is incorrect.', 'falcon' ) );
 $this->checkbox( 'block_ai_bots', __( 'Block AI bots', 'falcon' ), __( 'Stop AI bots from crawling/stealing your website content, which also affects the website performance.', 'falcon' ) );
 $this->checkbox( 'force_login', __( 'Force login', 'falcon' ), __( 'Force users to login to view the website.', 'falcon' ) );
+$this->checkbox( 'comment_spam_protection', __( 'Comment spam protection', 'falcon' ), __( 'Protect your site from spam comments with a simple honeypot.', 'falcon' ) );
