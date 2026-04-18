@@ -62,6 +62,7 @@ Falcon offers a comprehensive list modules for you to tweak and optimize your Wo
 
 ### [Security](https://wpfalcon.pro/features/security/)
 
+- Comment spam protection
 - Disable REST API for unauthenticated requests
 - [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
 - Restrict upload file types

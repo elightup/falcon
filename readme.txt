@@ -2,8 +2,8 @@
 Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 6.5
-Tested up to: 6.9
-Stable tag: 2.9.3
+Tested up to: 6.9.4
+Stable tag: 2.10.0
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -71,6 +71,7 @@ Falcon offers a comprehensive list modules for you to tweak and optimize your Wo
 
 #### [Security](https://wpfalcon.pro/features/security/)
 
+- Comment spam protection
 - Disable REST API for unauthenticated requests
 - [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
 - Restrict upload file types
@@ -109,6 +110,10 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 == Screenshots ==
 
 == Changelog ==
+
+= 2.10.0 - 2026-04-18 =
+
+- Add new security module: Comment spam protection. Enable it under Security tab.
 
 = 2.9.3 - 2026-01-21 =
 
