@@ -107,6 +107,10 @@ Go to *Dashboard | Plugins | Add New* and search for **Falcon**. Then install an
 
 == Frequently Asked Questions ==
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the Falcon – WordPress Optimizations & Tweaks plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/9e5fc06c-9bf1-4893-92b9-2cac4d0f24f0). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Screenshots ==
 
 == Changelog ==
