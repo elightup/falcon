@@ -77,7 +77,6 @@ new Falcon\Components\Cache\Serve();" );
 			'trashed_post',
 			'edit_term',
 			'delete_term',
-			'wp_insert_comment',
 			'edit_comment',
 			'delete_comment',
 			'transition_comment_status',
@@ -92,6 +91,12 @@ new Falcon\Components\Cache\Serve();" );
 
 		foreach ( $actions as $action ) {
 			add_action( $action, [ $this, 'clear_cache' ] );
+		}
+	}
+
+	public function clear_cache_on_insert_comment( $comment_id, $comment ): void {
+		if ( $comment->comment_approved === '1' ) {
+			$this->clear_cache();
 		}
 	}
 
