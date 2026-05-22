@@ -145,15 +145,24 @@ class General extends Base {
 
 	public function maintenance_mode(): void {
 		add_action( 'template_redirect', function () {
-			if ( ! current_user_can( 'manage_options' ) ) {
-				// Translators: %1$s - Header, %2$s - Message.
-				$html = sprintf(
-					'<h1>%1$s</h1><br>%2$s',
-					__( 'Maintenance mode', 'falcon' ),
-					__( 'The website is under maintenance, please come back later. Sorry for the inconvenience.', 'falcon' )
-				);
-				wp_die( wp_kses_post( $html ), esc_html__( 'Maintenance mode', 'falcon' ), 503 );
+			if ( current_user_can( 'manage_options' ) ) {
+				return;
 			}
+
+			// Customize the maintenance message with maintenance.php in the active theme.
+			status_header( 503 );
+			$template = locate_template( 'maintenance.php', true );
+			if ( $template ) {
+				die;
+			}
+
+			// Translators: %1$s - Header, %2$s - Message.
+			$html = sprintf(
+				'<h1>%1$s</h1><br>%2$s',
+				__( 'Maintenance mode', 'falcon' ),
+				__( 'The website is under maintenance, please come back later. Sorry for the inconvenience.', 'falcon' )
+			);
+			wp_die( wp_kses_post( $html ), esc_html__( 'Maintenance mode', 'falcon' ), 503 );
 		} );
 	}
 }
