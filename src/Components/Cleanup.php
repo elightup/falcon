@@ -96,7 +96,7 @@ class Cleanup {
 			'orphaned_user_meta'    => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->usermeta um LEFT JOIN $wpdb->users u ON u.ID = um.user_id WHERE u.ID IS NULL" ),
 			'orphaned_term_meta'    => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->termmeta tm LEFT JOIN $wpdb->terms t ON t.term_id = tm.term_id WHERE t.term_id IS NULL" ),
 			'orphaned_post_terms'   => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->term_relationships tr LEFT JOIN $wpdb->posts p ON p.ID = tr.object_id WHERE p.ID IS NULL" ),
-			'unused_terms'          => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->terms t WHERE t.term_id NOT IN (SELECT term_id FROM $wpdb->term_taxonomy WHERE count > 0)" ),
+			'unused_terms'          => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->terms t LEFT JOIN $wpdb->term_taxonomy tt ON tt.term_id = t.term_id WHERE tt.term_id IS NULL OR tt.count = 0" ),
 			'optimize_tables'       => 0,
 		];
 	}
@@ -168,9 +168,11 @@ class Cleanup {
 				$wpdb->prepare(
 					"DELETE a, b FROM $wpdb->options a, $wpdb->options b
 					WHERE a.option_name LIKE %s
+					AND a.option_name NOT LIKE %s
 					AND b.option_name = CONCAT( '_transient_timeout_', SUBSTRING( a.option_name, 12 ) )
 					AND b.option_value < %d",
 					'_transient_%',
+					'_transient_timeout_%',
 					$time
 				)
 			);
@@ -178,9 +180,11 @@ class Cleanup {
 				$wpdb->prepare(
 					"DELETE a, b FROM $wpdb->options a, $wpdb->options b
 					WHERE a.option_name LIKE %s
-					AND b.option_name = CONCAT( '_site_transient_timeout_', SUBSTRING( a.option_name, 18 ) )
+					AND a.option_name NOT LIKE %s
+					AND b.option_name = CONCAT( '_site_transient_timeout_', SUBSTRING( a.option_name, 17 ) )
 					AND b.option_value < %d",
 					'_site_transient_%',
+					'_site_transient_timeout_%',
 					$time
 				)
 			);
@@ -235,16 +239,14 @@ class Cleanup {
 
 	private static function unused_terms(): int {
 		global $wpdb;
-		$count    = self::count( 'unused_terms' );
+		$count = self::count( 'unused_terms' );
 		if ( $count > 0 ) {
 			$term_ids = $wpdb->get_col( "SELECT t.term_id FROM $wpdb->terms t WHERE t.term_id NOT IN (SELECT term_id FROM $wpdb->term_taxonomy WHERE count > 0)" );
 			if ( ! empty( $term_ids ) ) {
-				$taxonomies = $wpdb->get_results(
-					"SELECT tt.term_id, tt.taxonomy FROM $wpdb->term_taxonomy tt WHERE tt.term_id IN (" . implode( ',', array_map( 'intval', $term_ids ) ) . ')'
-				);
-				foreach ( $taxonomies as $row ) {
-					wp_delete_term( (int) $row->term_id, $row->taxonomy );
-				}
+				$ids = implode( ',', array_map( 'intval', $term_ids ) );
+				$wpdb->query( "DELETE FROM $wpdb->term_relationships WHERE term_taxonomy_id IN (SELECT term_taxonomy_id FROM $wpdb->term_taxonomy WHERE term_id IN ($ids))" );
+				$wpdb->query( "DELETE FROM $wpdb->term_taxonomy WHERE term_id IN ($ids)" );
+				$wpdb->query( "DELETE FROM $wpdb->terms WHERE term_id IN ($ids)" );
 			}
 		}
 		return $count;
