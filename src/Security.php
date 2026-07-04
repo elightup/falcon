@@ -12,6 +12,7 @@ class Security extends Base {
 		'block_ai_bots',
 		'force_login',
 		'comment_spam_protection',
+		'limit_logins',
 	];
 
 	public function no_rest_api(): void {
@@ -38,7 +39,11 @@ class Security extends Base {
 		add_filter( 'login_errors', [ $this, 'custom_login_errors' ] );
 	}
 
-	public function custom_login_errors( $error ): string {
+	public function custom_login_errors( string $error ): string {
+		if ( Components\LimitLogins::was_blocked() ) {
+			return $error;
+		}
+
 		return __( 'There is something wrong. Please try again.', 'falcon' );
 	}
 
@@ -130,6 +135,10 @@ class Security extends Base {
 		}
 		</script>
 		<?php
+	}
+
+	public function limit_logins(): void {
+		new Components\LimitLogins;
 	}
 
 	public function redirect_non_logged_in_users(): void {

@@ -157,6 +157,7 @@ class Settings {
 			'no_thumbnails',
 			'search_posts_only',
 			'block_ai_bots',
+			'limit_logins',
 			'maintenance_mode',
 			'force_login',
 			'smtp',
