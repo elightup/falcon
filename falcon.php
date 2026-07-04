@@ -43,6 +43,7 @@ new Components\Cache\Manager;
 
 if ( is_admin() ) {
 	new Core;
+	new Components\Cleanup;
 } else {
 	new Header;
 	new Media;
