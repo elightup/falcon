@@ -26,9 +26,9 @@ $items  = array_keys( $labels );
 	<button type="button" id="run-cleanup" class="button button-primary">
 		<?php esc_html_e( 'Run Cleanup', 'falcon' ); ?>
 	</button>
-	<span id="cleanup-message" class="message hidden"></span>
 	<span class="spinner" style="float: none; margin: 0;"></span>
 </div>
+<span id="cleanup-message" class="message hidden" style="margin-top: 10px; display: block;"></span>
 
 <script>
 {
@@ -48,9 +48,8 @@ $items  = array_keys( $labels );
 		button.disabled = true;
 		button.classList.add( 'disabled' );
 		spinner.classList.add( 'is-active' );
-		message.classList.remove( 'hidden' );
-		message.textContent = '<?php echo esc_js( __( 'Cleaning...', 'falcon' ) ); ?>';
 		message.className = 'message';
+		message.classList.add( 'hidden' );
 
 		const formData = new FormData();
 		formData.append( 'action', 'falcon_run_cleanup' );
@@ -66,23 +65,14 @@ $items  = array_keys( $labels );
 
 				message.className = 'message';
 				message.classList.add( 'notice', response.success ? 'notice-success' : 'notice-error' );
-				message.innerHTML = response.data;
+				message.innerHTML = response.data.message ?? response.data;
 
-				if ( response.success ) {
-					const fd = new FormData();
-					fd.append( 'action', 'falcon_cleanup_counts' );
-					fd.append( '_ajax_nonce', Falcon.nonce_cleanup );
-					fetch( ajaxurl, { method: 'POST', body: fd } )
-						.then( r => r.json() )
-						.then( data => {
-							if ( data.success ) {
-								document.querySelectorAll( '.cleanup-count' ).forEach( el => {
-									const checkbox = el.closest( '.featureBox' ).querySelector( '.cleanup-checkbox' );
-									const newCount = data.data[ checkbox.value ] ?? 0;
-									el.textContent = `(${ newCount })`;
-								} );
-							}
-						} );
+				if ( response.success && response.data.counts ) {
+					document.querySelectorAll( '.cleanup-count' ).forEach( el => {
+						const checkbox = el.closest( '.featureBox' ).querySelector( '.cleanup-checkbox' );
+						const newCount = response.data.counts[ checkbox.value ] ?? 0;
+						el.textContent = `(${ newCount })`;
+					} );
 				}
 			} );
 	} );
