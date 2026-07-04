@@ -51,6 +51,7 @@ class Security extends Base {
 			'jpg|jpeg' => 'image/jpeg',
 			'gif'      => 'image/gif',
 			'png'      => 'image/png',
+			'avif'     => 'image/avif',
 			'webp'     => 'image/webp',
 			'mp4'      => 'video/mp4',
 			'pdf'      => 'application/pdf',
