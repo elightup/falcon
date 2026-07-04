@@ -12,12 +12,12 @@ class LimitLogins {
 	}
 
 	public function __construct() {
-		add_filter( 'authenticate', [ $this, 'check_login_attempts' ], 25, 3 );
+		add_filter( 'authenticate', [ $this, 'check_login_attempts' ], 25, 2 );
 		add_action( 'wp_login_failed', [ $this, 'track_failed_login' ] );
 		add_action( 'wp_login', [ $this, 'clear_login_attempts' ] );
 	}
 
-	public function check_login_attempts( $user, string $username, string $password ) {
+	public function check_login_attempts( $user, string $username ) {
 		if ( ! $username ) {
 			return $user;
 		}
@@ -30,7 +30,7 @@ class LimitLogins {
 		return $user;
 	}
 
-	public function track_failed_login( string $username ): void {
+	public function track_failed_login(): void {
 		$key      = $this->get_key();
 		$attempts = (int) get_transient( $key );
 
