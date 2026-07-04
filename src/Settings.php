@@ -98,12 +98,13 @@ class Settings {
 		wp_enqueue_style( 'falcon', FALCON_URL . 'assets/settings.css', [], filemtime( FALCON_DIR . '/assets/settings.css' ) );
 		wp_enqueue_script( 'falcon', FALCON_URL . 'assets/settings.js', [], filemtime( FALCON_DIR . '/assets/settings.js' ), true );
 		wp_localize_script( 'falcon', 'Falcon', [
-			'nonce'        => wp_create_nonce( 'save' ),
-			'nonce_email'  => wp_create_nonce( 'send-email' ),
-			'nonce_cache'  => wp_create_nonce( 'clear-cache' ),
-			'nonce_import' => wp_create_nonce( 'import' ),
-			'saving'       => __( 'Saving...', 'falcon' ),
-			'save'         => __( 'Save Changes', 'falcon' ),
+			'nonce'          => wp_create_nonce( 'save' ),
+			'nonce_email'    => wp_create_nonce( 'send-email' ),
+			'nonce_cache'    => wp_create_nonce( 'clear-cache' ),
+			'nonce_import'   => wp_create_nonce( 'import' ),
+			'nonce_cleanup'  => wp_create_nonce( 'cleanup' ),
+			'saving'         => __( 'Saving...', 'falcon' ),
+			'save'           => __( 'Save Changes', 'falcon' ),
 		] );
 	}
 
