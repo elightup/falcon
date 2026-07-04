@@ -33,6 +33,10 @@ class Cleanup {
 	public function run(): void {
 		check_ajax_referer( 'cleanup' );
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'You do not have permission to perform this action.', 'falcon' ) );
+		}
+
 		$items = ! empty( $_POST['items'] ) ? (array) wp_unslash( $_POST['items'] ) : [];
 		$items = array_map( 'sanitize_text_field', $items );
 
@@ -83,6 +87,11 @@ class Cleanup {
 
 	public function get_counts_ajax(): void {
 		check_ajax_referer( 'cleanup' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'You do not have permission to perform this action.', 'falcon' ) );
+		}
+
 		self::$counts = null;
 		wp_send_json_success( self::get_counts() );
 	}
