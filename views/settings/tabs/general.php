@@ -15,4 +15,31 @@ $this->checkbox( 'no_external_requests', __( 'Block external requests', 'falcon'
 $this->checkbox( 'search_posts_only', __( 'Search only posts', 'falcon' ), __( 'Do not search other post types when users perform a search.', 'falcon' ) );
 $this->checkbox( 'no_texturize', __( 'Disable texturize', 'falcon' ), __( 'Do not allow WordPress to auto replace some characters with their formatted forms like quotes, dashes, ellipses, etc.', 'falcon' ) );
 $this->checkbox( 'maintenance_mode', __( 'Enable maintenance mode', 'falcon' ), __( 'Put your website under the maintenance mode. This option will display a maintenance message to non-admin users when viewing the website on the front end.', 'falcon' ) );
-$this->checkbox( 'cache', __( 'Cache', 'falcon' ), __( 'Cache pages for faster loading. Cache is automatically cleared when content changes.', 'falcon' ) );
+
+$option     = get_option( 'falcon', [] );
+$cloudflare = $option['cloudflare'] ?? [];
+?>
+<div class="featureBox">
+	<label class="featureBox_switch">
+		<input class="featureBox_input" type="checkbox" name="falcon[features][]" value="cache"<?php checked( self::is_feature_active( 'cache' ) ) ?>>
+		<span class="featureBox_icon"></span>
+	</label>
+	<div class="featureBox_body">
+		<div class="featureBox_title"><?php esc_html_e( 'Cache', 'falcon' ) ?></div>
+		<div class="featureBox_description"><?php esc_html_e( 'Cache pages for faster loading. Cache is automatically cleared when content changes.', 'falcon' ) ?></div>
+		<div class="featureBox_more">
+			<div class="formControls">
+				<label for="falcon[cloudflare][api_token]"><?php esc_html_e( 'Cloudflare API token', 'falcon' ) ?></label>
+				<input type="password" class="regular-text" name="falcon[cloudflare][api_token]" id="falcon[cloudflare][api_token]" value="" autocomplete="off" placeholder="<?= ! empty( $cloudflare['api_token'] ) ? esc_attr__( 'Saved (leave blank to keep)', 'falcon' ) : ''; ?>">
+				<label for="falcon[cloudflare][zone_id]"><?php esc_html_e( 'Cloudflare zone ID', 'falcon' ) ?></label>
+				<input type="text" class="regular-text" name="falcon[cloudflare][zone_id]" id="falcon[cloudflare][zone_id]" value="<?= esc_attr( $cloudflare['zone_id'] ?? '' ); ?>">
+			</div>
+			<p class="description">
+				<?php
+				// Translators: %1$s - Link to Cloudflare API tokens page, %2$s - Link to the cache documentation.
+				echo wp_kses_post( sprintf( __( 'If your site uses Cloudflare, enter your <a href="%1$s" target="_blank">API token</a> and zone ID to cache pages at the edge. The token must have <strong>Zone.Cache Purge</strong> permission. <a href="%2$s" target="_blank">Learn more</a>.', 'falcon' ), 'https://dash.cloudflare.com/profile/api-tokens', 'https://wpfalcon.pro/features/cache/' ) );
+				?>
+			</p>
+		</div>
+	</div>
+</div>
