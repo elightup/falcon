@@ -9,9 +9,9 @@ $default_email = $option['default_email'] ?? [];
 		<span class="featureBox_icon"></span>
 	</label>
 	<div class="featureBox_body">
-		<div class="featureBox_title"><?php esc_html_e( 'Change default email', 'falcon' ) ?></div>
+		<div class="featureBox_title"><?php esc_html_e( 'Change email sender', 'falcon' ) ?></div>
 		<?php // Translators: %s - Link to the help docs ?>
-		<div class="featureBox_description"><?= wp_kses_post( sprintf( __( 'Change WordPress default email from name and address. <a href="%s">Learn more</a>.', 'falcon' ), 'https://deluxeblogtips.com/change-wordpress-default-email/' ) ); ?></div>
+		<div class="featureBox_description"><?= wp_kses_post( sprintf( __( 'Change the default from name and email address. <a href="%s">Learn more</a>.', 'falcon' ), 'https://deluxeblogtips.com/change-wordpress-default-email/' ) ); ?></div>
 		<div class="featureBox_more">
 			<div class="formControls">
 				<label for="falcon[default_email][from_name]"><?php esc_html_e( 'From name', 'falcon' ) ?></label>
@@ -29,7 +29,7 @@ $default_email = $option['default_email'] ?? [];
 	</label>
 	<div class="featureBox_body">
 		<div class="featureBox_title"><?php esc_html_e( 'SMTP', 'falcon' ) ?></div>
-		<div class="featureBox_description"><?php esc_html_e( 'Send emails via a SMTP service.', 'falcon' ) ?></div>
+		<div class="featureBox_description"><?php esc_html_e( 'Send WordPress emails via an SMTP server.', 'falcon' ) ?></div>
 		<div class="featureBox_more">
 			<div class="formControls">
 				<label for="falcon[smtp][host]"><?php esc_html_e( 'Host', 'falcon' ) ?></label>
@@ -49,7 +49,7 @@ $default_email = $option['default_email'] ?? [];
 			</div>
 			<br>
 			<button class="button" type="button" id="smtp-test"><?php esc_html_e( 'Send test email', 'falcon' ) ?></button>
-			<p class="description"><?php esc_html_e( 'This action will send a test email to your account email.', 'falcon' ) ?>
+			<p class="description"><?php esc_html_e( 'Send a test email to your account email address.', 'falcon' ) ?>
 		</div>
 	</div>
 </div>

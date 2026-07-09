@@ -1,10 +1,13 @@
 <?php
+$this->checkbox( 'limit_logins', __( 'Limit login attempts', 'falcon' ), __( 'Block an IP after 3 failed attempts for 1 hour.', 'falcon' ) );
+$this->checkbox( 'no_login_errors', __( 'Hide login error details', 'falcon' ), __( 'Show a generic error message on failed logins.', 'falcon' ) );
+$this->checkbox( 'force_login', __( 'Force login', 'falcon' ), __( 'Force users to login to view the website.', 'falcon' ) );
+
 $this->checkbox( 'no_rest_api', __( 'Disable REST API for unauthenticated requests', 'falcon' ), __( 'Improve your website security by disabling REST API access for non-authenticated users.', 'falcon' ) );
 // Translators: %s - Link to the help docs.
-$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ), sprintf( __( 'Protect your site from brute force, DOS and DDOS attacks via XML-RPC. Also disables trackbacks, pingbacks, and brakes the mobile apps. <a href="%s" target="_blank">Learn more</a>.', 'falcon' ), 'https://deluxeblogtips.com/disable-xml-rpc-wordpress/' ) );
-$this->checkbox( 'restrict_upload', __( 'Restrict upload file types', 'falcon' ), __( 'Allow users to upload only common file types, including: images (jpg, jpeg, png, gif), office files (docx, xlsx, pptx), PDF, and videos (mp4).', 'falcon' ) );
-$this->checkbox( 'no_login_errors', __( 'Disable detailed login errors', 'falcon' ), __( 'Show a general error message when the login is incorrect, not specifically whether the username or password is incorrect.', 'falcon' ) );
-$this->checkbox( 'limit_logins', __( 'Limit logins', 'falcon' ), __( 'Block login attempts from the same IP after 3 failed tries. The user will have to wait 1 hour before trying again.', 'falcon' ) );
-$this->checkbox( 'block_ai_bots', __( 'Block AI bots', 'falcon' ), __( 'Stop AI bots from crawling/stealing your website content, which also affects the website performance.', 'falcon' ) );
-$this->checkbox( 'force_login', __( 'Force login', 'falcon' ), __( 'Force users to login to view the website.', 'falcon' ) );
+$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ), sprintf( __( 'Disable XML-RPC to reduce brute-force and pingback abuse. <a href="%s" target="_blank">Learn more</a>.', 'falcon' ), 'https://deluxeblogtips.com/disable-xml-rpc-wordpress/' ) );
+$this->checkbox( 'restrict_upload', __( 'Restrict upload file types', 'falcon' ), __( 'Allow only common file types for uploads.', 'falcon' ) );
 $this->checkbox( 'comment_spam_protection', __( 'Comment spam protection', 'falcon' ), __( 'Protect your site from spam comments with a simple honeypot.', 'falcon' ) );
+
+$this->checkbox( 'block_ai_bots', __( 'Block AI bots', 'falcon' ), __( 'Block common AI crawlers via <code>robots.txt</code>.', 'falcon' ) );
+$this->checkbox( 'schema_less_urls', __( 'Use scheme-less asset URLs', 'falcon' ), __( 'Avoid mixed content warnings by using the current scheme (HTTP/HTTPS).', 'falcon' ) );
