@@ -21,6 +21,7 @@ class Settings {
 	}
 
 	public function render() {
+		$groups = $this->get_tab_groups();
 		?>
 		<form method="POST" id="settings-form" class="e-page">
 			<div class="e-header">
@@ -29,38 +30,42 @@ class Settings {
 					<h1><?= esc_html( get_admin_page_title() ); ?></h1>
 				</div>
 
-				<nav class="e-tabs">
-					<?php
-					$tabs = apply_filters( 'falcon_settings_tabs', [
-						'general'  => __( 'General', 'falcon' ),
-						'header'   => __( 'Header', 'falcon' ),
-						'media'    => __( 'Media', 'falcon' ),
-						'email'    => __( 'Email', 'falcon' ),
-						'admin'    => __( 'Admin', 'falcon' ),
-						'security' => __( 'Security', 'falcon' ),
-					] );
-
-					foreach ( $tabs as $key => $label ) {
-						// Translators: %1$s - tab name, %2$s - tab label.
-						printf( '<a href="#%1$s" data-tab="%1$s" class="e-tab">%2$s</a>', esc_attr( $key ), esc_html( $label ) );
-					}
-					?>
-				</nav>
-
 				<div class="submit">
 					<div class="message hidden"></div>
 					<input type="submit" id="submit" class="button button-primary" value="<?php esc_attr_e( 'Save Changes', 'falcon' ) ?>">
 				</div>
 			</div>
+
 			<div class="e-body wrap">
 				<div class="wp-header-end"></div>
 
 				<div class="e-wrapper">
 					<div class="e-content e-box">
-						<?php
-						$tab_panes = apply_filters( 'falcon_settings_tab_panes', $this->get_tab_panes() );
-						echo implode( '', $tab_panes ); // phpcs:ignore
-						?>
+						<nav class="e-tabs" aria-label="<?php esc_attr_e( 'Settings sections', 'falcon' ); ?>">
+							<?php foreach ( $groups as $group_key => $group ) : ?>
+								<a href="#<?= esc_attr( $group_key ); ?>" data-group="<?= esc_attr( $group_key ); ?>" class="e-tab"><?= esc_html( $group['label'] ); ?></a>
+							<?php endforeach; ?>
+						</nav>
+
+						<div class="e-tabPanes">
+							<div class="e-subTabsBar" aria-hidden="false">
+								<?php foreach ( $groups as $group_key => $group ) : ?>
+									<?php if ( empty( $group['tabs'] ) ) : ?>
+										<?php continue; ?>
+									<?php endif; ?>
+									<nav class="e-subTabs" data-group="<?= esc_attr( $group_key ); ?>" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: settings section name */ __( '%s sub-sections', 'falcon' ), $group['label'] ) ); ?>">
+										<?php foreach ( $group['tabs'] as $tab_key => $tab_label ) : ?>
+											<a href="#<?= esc_attr( "$group_key/$tab_key" ); ?>" data-group="<?= esc_attr( $group_key ); ?>" data-tab="<?= esc_attr( $tab_key ); ?>" class="e-subTab"><?= esc_html( $tab_label ); ?></a>
+										<?php endforeach; ?>
+									</nav>
+								<?php endforeach; ?>
+							</div>
+
+							<?php
+							$tab_panes = apply_filters( 'falcon_settings_tab_panes', $this->get_tab_panes() );
+							echo implode( '', $tab_panes ); // phpcs:ignore
+							?>
+						</div>
 					</div>
 
 					<div class="e-sidebar">
@@ -108,27 +113,79 @@ class Settings {
 		] );
 	}
 
+	private function get_tab_groups(): array {
+		return apply_filters( 'falcon_settings_tab_groups', [
+			'performance' => [
+				'label' => __( 'Performance', 'falcon' ),
+				'tabs'  => null,
+			],
+			'security'    => [
+				'label' => __( 'Security', 'falcon' ),
+				'tabs'  => null,
+			],
+			'cleanup'     => [
+				'label' => __( 'Cleanup', 'falcon' ),
+				'tabs'  => [
+					'header'    => __( 'Header', 'falcon' ),
+					'admin'     => __( 'Admin', 'falcon' ),
+					'frontend'  => __( 'Frontend', 'falcon' ),
+					'database'  => __( 'Database', 'falcon' ),
+				],
+			],
+			'content'     => [
+				'label' => __( 'Content', 'falcon' ),
+				'tabs'  => [
+					'editor'     => __( 'Editor', 'falcon' ),
+					'comments'   => __( 'Comments', 'falcon' ),
+					'media'      => __( 'Media', 'falcon' ),
+					'publishing' => __( 'Publishing', 'falcon' ),
+				],
+			],
+			'system'      => [
+				'label' => __( 'System', 'falcon' ),
+				'tabs'  => null,
+			],
+			'email'       => [
+				'label' => __( 'Email', 'falcon' ),
+				'tabs'  => [
+					'notifications' => __( 'Notifications', 'falcon' ),
+					'delivery'      => __( 'Delivery', 'falcon' ),
+				],
+			],
+		] );
+	}
+
 	private function get_tab_panes(): array {
 		$tab_panes = [];
-		$names     = [
-			'general',
-			'header',
-			'media',
-			'email',
-			'admin',
-			'security',
-		];
-		foreach ( $names as $name ) {
-			$tab_panes[ $name ] = $this->get_tab_pane( $name );
+		foreach ( $this->get_tab_groups() as $group_key => $group ) {
+			if ( empty( $group['tabs'] ) ) {
+				$tab_panes[ $group_key ] = $this->get_tab_pane( $group_key );
+				continue;
+			}
+			foreach ( array_keys( $group['tabs'] ) as $tab_key ) {
+				$id = "$group_key/$tab_key";
+				$tab_panes[ $id ] = $this->get_tab_pane( $group_key, $tab_key );
+			}
 		}
 		return $tab_panes;
 	}
 
-	public function get_tab_pane( string $name ): string {
+	public function get_tab_pane( string $group, ?string $tab = null ): string {
+		$path = null === $tab
+			? FALCON_DIR . "/views/settings/groups/$group.php"
+			: FALCON_DIR . "/views/settings/groups/$group/$tab.php";
+
 		ob_start();
-		printf( '<div class="e-tabPane" data-tab="%s">', esc_attr( $name ) );
-		include FALCON_DIR . "/views/settings/tabs/$name.php";
-		do_action( "falcon_settings_tab_$name", $this );
+		printf(
+			'<div class="e-tabPane" data-group="%1$s"%2$s>',
+			esc_attr( $group ),
+			null === $tab ? '' : sprintf( ' data-tab="%s"', esc_attr( $tab ) )
+		);
+		if ( file_exists( $path ) ) {
+			include $path;
+		}
+		$hook = null === $tab ? "falcon_settings_tab_$group" : "falcon_settings_tab_{$group}_$tab";
+		do_action( $hook, $this );
 		echo '</div>';
 		return ob_get_clean();
 	}

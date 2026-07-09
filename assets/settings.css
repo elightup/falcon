@@ -1,5 +1,5 @@
 .e-page {
-	--color: var(--wp-admin-theme-color, #2271b1);
+	--color: var(--wp-admin-theme-color, #3858e9);
 }
 
 .e-box {
@@ -55,18 +55,17 @@
 }
 
 .e-tabs {
-	align-self: flex-end;
-	margin-bottom: -12px;
 	display: flex;
 	gap: 24px;
+	padding-inline: 24px;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .e-tab {
-	cursor: pointer;
-	display: inline-block;
-	padding: 12px 0 24px;
-	border-bottom: 3px solid transparent;
-	line-height: 1;
+	display: flex;
+	align-items: center;
+	height: 54px;
+	box-shadow: none;
 	color: inherit;
 	text-decoration: none;
 }
@@ -74,10 +73,70 @@
 .e-tab:focus {
 	outline: none;
 	box-shadow: none;
+	border-radius: 0;
 }
 
-.e-tab-active {
-	border-color: var(--color);
+.e-tab-active,
+.e-tab-active:focus {
+	color: var(--color);
+	box-shadow: inset 0 -4px 0 currentColor;
+}
+
+.e-tab:hover {
+	color: var(--color);
+}
+
+.e-subTabsBar {
+	padding-bottom: 24px;
+	display: none;
+}
+
+.e-subTabsBar-active {
+	display: block;
+}
+
+.e-subTabs {
+	display: none;
+	align-items: center;
+}
+
+.e-subTabs-active {
+	display: flex;
+}
+
+.e-subTab {
+	display: inline-block;
+	color: inherit;
+	text-decoration: none;
+}
+
+.e-subTab:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.e-subTab:hover {
+	color: var(--color);
+	text-decoration: none;
+}
+
+.e-subTab + .e-subTab::before {
+	content: '|';
+	display: inline-block;
+	margin-inline: 8px;
+}
+
+.e-subTab-active {
+	color: var(--color);
+}
+
+/* Make the tabs borders reach box edges */
+.e-content.e-box {
+	padding: 0;
+}
+
+.e-tabPanes {
+	padding: 24px;
 }
 
 .e-header .submit {
@@ -145,12 +204,15 @@
 }
 
 .e-tabPane {
-	padding-block: 8px;
 	display: none;
 }
 
 .e-tabPane-active {
 	display: block;
+}
+
+.e-tabPane > *:first-child {
+	margin-top: 0;
 }
 
 .featureBox+.featureBox {
@@ -159,13 +221,13 @@
 
 .featureBox {
 	display: flex;
+	align-items: start;
 	gap: 8px;
 }
 
 .featureBox_switch {
-	position: relative;
-	top: 2px;
 	cursor: pointer;
+	display: flex;
 }
 
 .featureBox .featureBox_input {
@@ -207,11 +269,19 @@
 	left: calc(var(--size) + var(--border) + var(--gap));
 }
 
+.featureBox_body {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
 .featureBox_title {
 	font-weight: 600;
-	font-size: 14px;
-	color: #1d2327;
-	margin-bottom: 4px;
+}
+
+.featureBox_description {
+	font-size: 12px;
+	color: #757575;
 }
 
 .featureBox_more {
@@ -223,44 +293,15 @@
 	display: block;
 }
 
+.e-tabPane[data-tab="database"] .featureBox_title {
+	font-weight: 400;
+}
+
 /* Form controls */
 .formControls {
 	display: grid;
 	grid-template-columns: max-content 1fr;
 	gap: 16px;
-}
-
-/* Admin color schemes */
-.admin-color-blue .e-page {
-	--color: var(--wp-admin-theme-color, #e1a948);
-}
-
-.admin-color-coffee .e-page {
-	--color: var(--wp-admin-theme-color, #c7a589);
-}
-
-.admin-color-ectoplasm .e-page {
-	--color: var(--wp-admin-theme-color, #a3b745);
-}
-
-.admin-color-light .e-page {
-	--color: var(--wp-admin-theme-color, #04a4cc);
-}
-
-.admin-color-midnight .e-page {
-	--color: var(--wp-admin-theme-color, #e14d43);
-}
-
-.admin-color-modern .e-page {
-	--color: var(--wp-admin-theme-color, #3858e9);
-}
-
-.admin-color-ocean .e-page {
-	--color: var(--wp-admin-theme-color, #9ebaa0);
-}
-
-.admin-color-sunrise .e-page {
-	--color: var(--wp-admin-theme-color, #dd823b);
 }
 
 fieldset label {
@@ -272,7 +313,8 @@ fieldset label {
 }
 
 p.description {
-	font-style: italic;
+	font-size: 12px;
+	color: #757575;
 }
 
 @media (max-width: 767px) {
@@ -292,5 +334,10 @@ p.description {
 
 	.e-wrapper {
 		grid-template-columns: 1fr;
+	}
+
+	.e-tabs {
+		flex-wrap: wrap;
+		gap: 16px;
 	}
 }

@@ -5,29 +5,8 @@ class Cleanup {
 	private static ?array $counts = null;
 
 	public function __construct() {
-		add_filter( 'falcon_settings_tabs', [ $this, 'add_tab' ] );
-		add_filter( 'falcon_settings_tab_panes', [ $this, 'add_tab_pane' ] );
 		add_action( 'wp_ajax_falcon_run_cleanup', [ $this, 'run' ] );
 		add_action( 'wp_ajax_falcon_cleanup_counts', [ $this, 'get_counts_ajax' ] );
-	}
-
-	public function add_tab( array $tabs ): array {
-		$tabs['cleanup'] = __( 'Cleanup', 'falcon' );
-		return $tabs;
-	}
-
-	public function add_tab_pane( array $panes ): array {
-		$panes['cleanup'] = $this->get_tab_pane();
-		return $panes;
-	}
-
-	private function get_tab_pane(): string {
-		ob_start();
-		printf( '<div class="e-tabPane" data-tab="%s">', esc_attr( 'cleanup' ) );
-		include FALCON_DIR . '/views/settings/tabs/cleanup.php';
-		do_action( 'falcon_settings_tab_cleanup' );
-		echo '</div>';
-		return ob_get_clean();
 	}
 
 	public function run(): void {
