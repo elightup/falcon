@@ -9,7 +9,8 @@ $cloudflare = $option['cloudflare'] ?? [];
 	</label>
 	<div class="featureBox_body">
 		<div class="featureBox_title"><?php esc_html_e( 'Cache', 'falcon' ) ?></div>
-		<div class="featureBox_description"><?php esc_html_e( 'Cache pages for faster loading. Cache is automatically cleared when content changes.', 'falcon' ) ?></div>
+		<?php // Translators: %s - Link to the cache documentation. ?>
+		<div class="featureBox_description"><?= wp_kses_post( sprintf( __( 'Cache pages for faster loading. Cache is automatically cleared when content changes. <a href="%s" target="_blank">Learn more</a>.', 'falcon' ), esc_url( add_query_arg( [ 'utm_campaign' => 'falcon', 'utm_source' => 'settings_page', 'utm_medium' => 'documentation_link' ], 'https://wpfalcon.pro/features/performance/cache/' ) ) ) ); ?></div>
 		<div class="featureBox_more">
 			<div class="formControls">
 				<label for="falcon[cloudflare][api_token]"><?php esc_html_e( 'Cloudflare API token', 'falcon' ) ?></label>
@@ -19,8 +20,8 @@ $cloudflare = $option['cloudflare'] ?? [];
 			</div>
 			<p class="description">
 				<?php
-				// Translators: %1$s - Link to Cloudflare API tokens page, %2$s - Link to the cache documentation.
-				echo wp_kses_post( sprintf( __( 'If your site uses Cloudflare, enter your <a href="%1$s" target="_blank">API token</a> and zone ID to cache pages at the edge. The token must have <strong>Zone.Cache Purge</strong> permission. <a href="%2$s" target="_blank">Learn more</a>.', 'falcon' ), 'https://dash.cloudflare.com/profile/api-tokens', 'https://wpfalcon.pro/features/cache/' ) );
+				// Translators: %s - Link to Cloudflare API tokens page.
+				echo wp_kses_post( sprintf( __( 'If your site uses Cloudflare, enter your <a href="%s" target="_blank">API token</a> and zone ID to cache pages at the edge. The token must have <strong>Zone.Cache Purge</strong> permission.', 'falcon' ), 'https://dash.cloudflare.com/profile/api-tokens' ) );
 				?>
 			</p>
 		</div>

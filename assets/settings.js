@@ -3,6 +3,8 @@
 	const subTabs = document.querySelectorAll( '.e-subTab' );
 	const subTabBars = document.querySelectorAll( '.e-subTabs' );
 	const panes = document.querySelectorAll( '.e-tabPane' );
+	const subTabsBar = document.querySelector( '.e-subTabsBar' );
+	const docsLink = document.querySelector( '.e-docsLink' );
 
 	const parseHash = () => {
 		const hash = location.hash.substring( 1 );
@@ -21,10 +23,32 @@
 		return document.querySelector( `.e-tabPane[data-group="${ group }"]:not([data-tab])` );
 	};
 
+	const getDocsUrl = ( group, tab ) => {
+		const docs = Falcon.docs?.[ group ];
+		if ( ! docs ) {
+			return '';
+		}
+		if ( typeof docs === 'string' ) {
+			return docs;
+		}
+		return tab ? ( docs[ tab ] || '' ) : '';
+	};
+
+	const updateDocsLink = ( group, tab ) => {
+		if ( ! docsLink ) {
+			return;
+		}
+
+		const url = getDocsUrl( group, tab );
+		docsLink.hidden = ! url;
+		if ( url ) {
+			docsLink.href = url;
+		}
+	};
+
 	const activate = ( group, tab = null ) => {
 		const subTabBar = document.querySelector( `.e-subTabs[data-group="${ group }"]` );
 		const hasSubTabs = Boolean( subTabBar );
-		const subTabsBar = document.querySelector( '.e-subTabsBar' );
 
 		if ( hasSubTabs && ! tab ) {
 			tab = subTabBar.querySelector( '.e-subTab' )?.dataset.tab;
@@ -39,6 +63,7 @@
 		if ( subTabsBar ) {
 			subTabsBar.classList.toggle( 'e-subTabsBar-active', hasSubTabs );
 		}
+		updateDocsLink( group, tab );
 
 		panes.forEach( pane => pane.classList.remove( 'e-tabPane-active' ) );
 		getPane( group, tab )?.classList.add( 'e-tabPane-active' );

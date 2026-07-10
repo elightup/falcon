@@ -4,8 +4,7 @@ $this->checkbox( 'no_login_errors', __( 'Hide login error details', 'falcon' ), 
 $this->checkbox( 'force_login', __( 'Force login', 'falcon' ), __( 'Force users to login to view the website.', 'falcon' ) );
 
 $this->checkbox( 'no_rest_api', __( 'Disable REST API for unauthenticated requests', 'falcon' ), __( 'Improve your website security by disabling REST API access for non-authenticated users.', 'falcon' ) );
-// Translators: %s - Link to the help docs.
-$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ), sprintf( __( 'Disable XML-RPC to reduce brute-force and pingback abuse. <a href="%s" target="_blank">Learn more</a>.', 'falcon' ), 'https://deluxeblogtips.com/disable-xml-rpc-wordpress/' ) );
+$this->checkbox( 'no_xmlrpc', __( 'Disable XML-RPC', 'falcon' ), __( 'Disable XML-RPC to reduce brute-force and pingback abuse.', 'falcon' ) );
 $this->checkbox( 'restrict_upload', __( 'Restrict upload file types', 'falcon' ), __( 'Allow only common file types for uploads.', 'falcon' ) );
 $this->checkbox( 'comment_spam_protection', __( 'Comment spam protection', 'falcon' ), __( 'Protect your site from spam comments with a simple honeypot.', 'falcon' ) );
 

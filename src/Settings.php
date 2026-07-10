@@ -45,10 +45,14 @@ class Settings {
 							<?php foreach ( $groups as $group_key => $group ) : ?>
 								<a href="#<?= esc_attr( $group_key ); ?>" data-group="<?= esc_attr( $group_key ); ?>" class="e-tab"><?= esc_html( $group['label'] ); ?></a>
 							<?php endforeach; ?>
+							<a class="e-docsLink" href="#" target="_blank" rel="noopener noreferrer">
+								<span class="e-docsLink_text"><?php esc_html_e( 'Documentation', 'falcon' ); ?></span>
+								<span class="dashicons dashicons-external" aria-hidden="true"></span>
+							</a>
 						</nav>
 
 						<div class="e-tabPanes">
-							<div class="e-subTabsBar" aria-hidden="false">
+							<div class="e-subTabsBar">
 								<?php foreach ( $groups as $group_key => $group ) : ?>
 									<?php if ( empty( $group['tabs'] ) ) : ?>
 										<?php continue; ?>
@@ -100,16 +104,17 @@ class Settings {
 	}
 
 	public function enqueue() {
-		wp_enqueue_style( 'falcon', FALCON_URL . 'assets/settings.css', [], filemtime( FALCON_DIR . '/assets/settings.css' ) );
+		wp_enqueue_style( 'falcon', FALCON_URL . 'assets/settings.css', [ 'dashicons' ], filemtime( FALCON_DIR . '/assets/settings.css' ) );
 		wp_enqueue_script( 'falcon', FALCON_URL . 'assets/settings.js', [], filemtime( FALCON_DIR . '/assets/settings.js' ), true );
 		wp_localize_script( 'falcon', 'Falcon', [
-			'nonce'          => wp_create_nonce( 'save' ),
-			'nonce_email'    => wp_create_nonce( 'send-email' ),
-			'nonce_cache'    => wp_create_nonce( 'clear-cache' ),
-			'nonce_import'   => wp_create_nonce( 'import' ),
-			'nonce_cleanup'  => wp_create_nonce( 'cleanup' ),
-			'saving'         => __( 'Saving...', 'falcon' ),
-			'save'           => __( 'Save Changes', 'falcon' ),
+			'nonce'         => wp_create_nonce( 'save' ),
+			'nonce_email'   => wp_create_nonce( 'send-email' ),
+			'nonce_cache'   => wp_create_nonce( 'clear-cache' ),
+			'nonce_import'  => wp_create_nonce( 'import' ),
+			'nonce_cleanup' => wp_create_nonce( 'cleanup' ),
+			'saving'        => __( 'Saving...', 'falcon' ),
+			'save'          => __( 'Save Changes', 'falcon' ),
+			'docs'          => $this->get_docs_urls(),
 		] );
 	}
 
@@ -188,6 +193,55 @@ class Settings {
 		do_action( $hook, $this );
 		echo '</div>';
 		return ob_get_clean();
+	}
+
+	private function get_docs_urls(): array {
+		$urls = [
+			'performance' => 'https://wpfalcon.pro/features/performance/',
+			'security'    => 'https://wpfalcon.pro/features/security/',
+			'system'      => 'https://wpfalcon.pro/features/system/',
+			'cleanup'     => [
+				'header'   => 'https://wpfalcon.pro/features/cleanup/header/',
+				'admin'    => 'https://wpfalcon.pro/features/cleanup/admin/',
+				'frontend' => 'https://wpfalcon.pro/features/cleanup/frontend/',
+				'database' => 'https://wpfalcon.pro/features/cleanup/database/',
+			],
+			'content'     => [
+				'editor'     => 'https://wpfalcon.pro/features/content/editor/',
+				'comments'   => 'https://wpfalcon.pro/features/content/comments/',
+				'media'      => 'https://wpfalcon.pro/features/content/media/',
+				'publishing' => 'https://wpfalcon.pro/features/content/publishing/',
+			],
+			'email'       => [
+				'notifications' => 'https://wpfalcon.pro/features/email/notifications/',
+				'delivery'      => 'https://wpfalcon.pro/features/email/delivery/',
+			],
+		];
+
+		$urls = apply_filters( 'falcon_settings_docs_urls', $urls );
+
+		return $this->add_docs_utm( $urls );
+	}
+
+	private function add_docs_utm( array $urls ): array {
+		foreach ( $urls as $key => $value ) {
+			$urls[ $key ] = is_array( $value )
+				? $this->add_docs_utm( $value )
+				: $this->with_docs_utm( $value );
+		}
+
+		return $urls;
+	}
+
+	private function with_docs_utm( string $url ): string {
+		return add_query_arg(
+			[
+				'utm_campaign' => 'falcon',
+				'utm_source'   => 'settings_page',
+				'utm_medium'   => 'documentation_link',
+			],
+			$url
+		);
 	}
 
 	public function save(): void {

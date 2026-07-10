@@ -10,8 +10,7 @@ $default_email = $option['default_email'] ?? [];
 	</label>
 	<div class="featureBox_body">
 		<div class="featureBox_title"><?php esc_html_e( 'Change email sender', 'falcon' ) ?></div>
-		<?php // Translators: %s - Link to the help docs ?>
-		<div class="featureBox_description"><?= wp_kses_post( sprintf( __( 'Change the default from name and email address. <a href="%s">Learn more</a>.', 'falcon' ), 'https://deluxeblogtips.com/change-wordpress-default-email/' ) ); ?></div>
+		<div class="featureBox_description"><?php esc_html_e( 'Change the default from name and email address.', 'falcon' ); ?></div>
 		<div class="featureBox_more">
 			<div class="formControls">
 				<label for="falcon[default_email][from_name]"><?php esc_html_e( 'From name', 'falcon' ) ?></label>
@@ -29,7 +28,7 @@ $default_email = $option['default_email'] ?? [];
 	</label>
 	<div class="featureBox_body">
 		<div class="featureBox_title"><?php esc_html_e( 'SMTP', 'falcon' ) ?></div>
-		<div class="featureBox_description"><?php esc_html_e( 'Send WordPress emails via an SMTP server.', 'falcon' ) ?></div>
+		<div class="featureBox_description"><?php esc_html_e( 'Send WordPress emails via an SMTP server.', 'falcon' ); ?></div>
 		<div class="featureBox_more">
 			<div class="formControls">
 				<label for="falcon[smtp][host]"><?php esc_html_e( 'Host', 'falcon' ) ?></label>

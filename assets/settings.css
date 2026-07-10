@@ -56,6 +56,7 @@
 
 .e-tabs {
 	display: flex;
+	align-items: center;
 	gap: 24px;
 	padding-inline: 24px;
 	border-bottom: 1px solid #e0e0e0;
@@ -87,8 +88,8 @@
 }
 
 .e-subTabsBar {
-	padding-bottom: 24px;
 	display: none;
+	padding-bottom: 24px;
 }
 
 .e-subTabsBar-active {
@@ -102,6 +103,44 @@
 
 .e-subTabs-active {
 	display: flex;
+}
+
+.e-docsLink {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	margin-left: auto;
+	height: 54px;
+	color: var(--color);
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 1.4;
+	white-space: nowrap;
+}
+
+.e-docsLink_text {
+	text-decoration: none;
+}
+
+.e-docsLink:hover,
+.e-docsLink:focus {
+	color: var(--color);
+	text-decoration: none;
+	box-shadow: none;
+	outline: none;
+}
+
+.e-docsLink:hover .e-docsLink_text,
+.e-docsLink:focus .e-docsLink_text {
+	text-decoration: underline;
+}
+
+.e-docsLink .dashicons {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+	line-height: 1;
+	text-decoration: none;
 }
 
 .e-subTab {
