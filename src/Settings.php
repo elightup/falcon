@@ -344,18 +344,10 @@ class Settings {
 	}
 
 	private function sanitize_data( array $data ): array {
-		$existing              = get_option( 'falcon', [] );
 		$data['features']      = isset( $data['features'] ) && is_array( $data['features'] ) ? array_map( 'sanitize_text_field', $data['features'] ) : [];
 		$data['lazy_load_css'] = isset( $data['lazy_load_css'] ) ? sanitize_textarea_field( $data['lazy_load_css'] ) : '';
 		$data['smtp']          = isset( $data['smtp'] ) && is_array( $data['smtp'] ) ? array_map( 'sanitize_text_field', $data['smtp'] ) : [];
 		$data['default_email'] = isset( $data['default_email'] ) && is_array( $data['default_email'] ) ? array_map( 'sanitize_text_field', $data['default_email'] ) : [];
-
-		if ( isset( $data['cloudflare'] ) && is_array( $data['cloudflare'] ) ) {
-			$data['cloudflare'] = Components\Cache\Cloudflare::prepare_settings(
-				$data['cloudflare'],
-				$existing['cloudflare'] ?? []
-			);
-		}
 
 		return array_filter( $data );
 	}

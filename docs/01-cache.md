@@ -40,18 +40,6 @@ Code được đặt trong folder `src/Components/Cache`, trong đó:
 	- Serve cache khi nhận được yêu cầu. Khi serve cache thì các hàm, plugin, theme của WordPress chưa được load, nên chỉ xử lý điều kiện theo PHP thuần.
 	- Lưu cache vào file `.html` nếu chưa có. Khi lưu cache qua output buffering, chỉ cần khai báo hàm callback cho `ob_start`, vì ở hook `shutdown`, WordPres sẽ flush cache và gọi tới hàm này. Do đó, lúc này toàn bộ các hàm, plugin, theme của WordPress đều đã được load, nên có thể kiểm tra điều kiện thông qua các template tags được.
 
-## Cloudflare edge cache
-
-Khi điền **Cloudflare API token** trong phần cài đặt Cache:
-
-- Plugin tự tìm zone khớp với domain hiện tại (`home_url`) qua Cloudflare API và lưu `zone_id` / `zone_name` vào option (chỉ resolve lại khi token đổi, chưa có zone, hoặc domain không còn khớp zone đã lưu).
-- Các trang được cache sẽ gửi thêm header `CDN-Cache-Control` để Cloudflare lưu cache tại edge.
-- Khi xoá cache (do thay đổi nội dung), plugin sẽ tự động gọi Cloudflare API để purge toàn bộ cache trên edge.
-- File `config.json` trong thư mục cache lưu trạng thái bật Cloudflare để `Serve.php` có thể đọc được trước khi WordPress load (dùng trong `advanced-cache.php`).
-
-API token cần có quyền **Zone.Zone Read** và **Zone.Cache Purge**.
-
 ## Tham khảo
 
 - https://github.com/webatleten/advanced-cache
-- https://developers.cloudflare.com/cache/

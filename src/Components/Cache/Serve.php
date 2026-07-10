@@ -3,9 +3,6 @@ namespace Falcon\Components\Cache;
 
 defined( 'ABSPATH' ) || die;
 
-// advanced-cache.php loads this file before Composer autoload.
-require_once __DIR__ . '/Config.php';
-
 class Serve {
 	public function __construct() {
 		$this->serve();
@@ -128,9 +125,5 @@ class Serve {
 	private function send_cache_headers( string $status ): void {
 		header( 'Cache-Control: public, max-age=31536000, s-maxage=31536000' );
 		header( "X-Cache: $status" );
-
-		if ( Config::is_cloudflare_enabled() ) {
-			header( 'CDN-Cache-Control: max-age=31536000' );
-		}
 	}
 }

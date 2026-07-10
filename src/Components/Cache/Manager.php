@@ -23,7 +23,6 @@ class Manager {
 
 		if ( $active ) {
 			$this->activate();
-			Config::update();
 		} else {
 			$this->deactivate();
 		}
@@ -46,7 +45,6 @@ require_once __DIR__ . '/plugins/falcon/src/Components/Cache/Serve.php';
 new Falcon\Components\Cache\Serve();" );
 
 		wp_mkdir_p( $this->cache_dir );
-		Config::update();
 		$this->update_constant( true );
 	}
 
@@ -54,7 +52,6 @@ new Falcon\Components\Cache\Serve();" );
 		wp_delete_file( $this->advanced_cache_file );
 		$this->update_constant( false );
 		$this->clear_cache();
-		Config::delete();
 		$this->remove_cache_dir();
 	}
 
@@ -105,7 +102,6 @@ new Falcon\Components\Cache\Serve();" );
 
 	public function clear_cache(): void {
 		array_map( 'wp_delete_file', glob( $this->cache_dir . '/*.html' ) );
-		Cloudflare::purge();
 	}
 
 	private function remove_cache_dir(): void {
