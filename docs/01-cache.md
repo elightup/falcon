@@ -42,13 +42,14 @@ Code được đặt trong folder `src/Components/Cache`, trong đó:
 
 ## Cloudflare edge cache
 
-Khi điền **Cloudflare API token** và **Zone ID** trong phần cài đặt Cache:
+Khi điền **Cloudflare API token** trong phần cài đặt Cache:
 
+- Plugin tự tìm zone khớp với domain hiện tại (`home_url`) qua Cloudflare API và lưu `zone_id` / `zone_name` vào option (chỉ resolve lại khi token đổi, chưa có zone, hoặc domain không còn khớp zone đã lưu).
 - Các trang được cache sẽ gửi thêm header `CDN-Cache-Control` để Cloudflare lưu cache tại edge.
 - Khi xoá cache (do thay đổi nội dung), plugin sẽ tự động gọi Cloudflare API để purge toàn bộ cache trên edge.
 - File `config.json` trong thư mục cache lưu trạng thái bật Cloudflare để `Serve.php` có thể đọc được trước khi WordPress load (dùng trong `advanced-cache.php`).
 
-API token cần có quyền **Zone.Cache Purge**. Zone ID có thể tìm thấy trong Cloudflare dashboard, mục Overview của domain.
+API token cần có quyền **Zone.Zone Read** và **Zone.Cache Purge**.
 
 ## Tham khảo
 

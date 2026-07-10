@@ -351,14 +351,10 @@ class Settings {
 		$data['default_email'] = isset( $data['default_email'] ) && is_array( $data['default_email'] ) ? array_map( 'sanitize_text_field', $data['default_email'] ) : [];
 
 		if ( isset( $data['cloudflare'] ) && is_array( $data['cloudflare'] ) ) {
-			$data['cloudflare'] = [
-				'api_token' => sanitize_text_field( $data['cloudflare']['api_token'] ?? '' ),
-				'zone_id'   => sanitize_text_field( $data['cloudflare']['zone_id'] ?? '' ),
-			];
-
-			if ( empty( $data['cloudflare']['api_token'] ) && ! empty( $existing['cloudflare']['api_token'] ) ) {
-				$data['cloudflare']['api_token'] = $existing['cloudflare']['api_token'];
-			}
+			$data['cloudflare'] = Components\Cache\Cloudflare::prepare_settings(
+				$data['cloudflare'],
+				$existing['cloudflare'] ?? []
+			);
 		}
 
 		return array_filter( $data );

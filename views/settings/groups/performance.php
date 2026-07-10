@@ -15,13 +15,21 @@ $cloudflare = $option['cloudflare'] ?? [];
 			<div class="formControls">
 				<label for="falcon[cloudflare][api_token]"><?php esc_html_e( 'Cloudflare API token', 'falcon' ) ?></label>
 				<input type="password" class="regular-text" name="falcon[cloudflare][api_token]" id="falcon[cloudflare][api_token]" value="" autocomplete="off" placeholder="<?= ! empty( $cloudflare['api_token'] ) ? esc_attr__( 'Saved (leave blank to keep)', 'falcon' ) : ''; ?>">
-				<label for="falcon[cloudflare][zone_id]"><?php esc_html_e( 'Cloudflare zone ID', 'falcon' ) ?></label>
-				<input type="text" class="regular-text" name="falcon[cloudflare][zone_id]" id="falcon[cloudflare][zone_id]" value="<?= esc_attr( $cloudflare['zone_id'] ?? '' ); ?>">
 			</div>
+			<?php if ( ! empty( $cloudflare['zone_name'] ) ) : ?>
+				<p class="description">
+					<?php
+					// Translators: %s - Detected Cloudflare zone name.
+					echo esc_html( sprintf( __( 'Detected zone: %s', 'falcon' ), $cloudflare['zone_name'] ) );
+					?>
+				</p>
+			<?php elseif ( ! empty( $cloudflare['api_token'] ) ) : ?>
+				<p class="description"><?php esc_html_e( 'No Cloudflare zone matched this site domain. Check the API token permissions and that the domain is in your Cloudflare account.', 'falcon' ); ?></p>
+			<?php endif; ?>
 			<p class="description">
 				<?php
 				// Translators: %s - Link to Cloudflare API tokens page.
-				echo wp_kses_post( sprintf( __( 'If your site uses Cloudflare, enter your <a href="%s" target="_blank">API token</a> and zone ID to cache pages at the edge. The token must have <strong>Zone.Cache Purge</strong> permission.', 'falcon' ), 'https://dash.cloudflare.com/profile/api-tokens' ) );
+				echo wp_kses_post( sprintf( __( 'If your site uses Cloudflare, enter your <a href="%s" target="_blank">API token</a> to cache pages at the edge. The token needs <strong>Zone.Zone Read</strong> and <strong>Zone.Cache Purge</strong> permissions.', 'falcon' ), 'https://dash.cloudflare.com/profile/api-tokens' ) );
 				?>
 			</p>
 		</div>
