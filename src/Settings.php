@@ -109,7 +109,6 @@ class Settings {
 		wp_localize_script( 'falcon', 'Falcon', [
 			'nonce'         => wp_create_nonce( 'save' ),
 			'nonce_email'   => wp_create_nonce( 'send-email' ),
-			'nonce_cache'   => wp_create_nonce( 'clear-cache' ),
 			'nonce_import'  => wp_create_nonce( 'import' ),
 			'nonce_cleanup' => wp_create_nonce( 'cleanup' ),
 			'saving'        => __( 'Saving...', 'falcon' ),

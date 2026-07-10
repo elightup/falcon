@@ -2,6 +2,7 @@
 namespace Falcon\Components\Cache;
 
 use Falcon\Settings;
+
 class Manager {
 	private string $cache_dir           = '';
 	private string $advanced_cache_file = '';
@@ -92,6 +93,8 @@ new Falcon\Components\Cache\Serve();" );
 		foreach ( $actions as $action ) {
 			add_action( $action, [ $this, 'clear_cache' ] );
 		}
+
+		add_action( 'wp_insert_comment', [ $this, 'clear_cache_on_insert_comment' ], 10, 2 );
 	}
 
 	public function clear_cache_on_insert_comment( $comment_id, $comment ): void {
@@ -101,7 +104,11 @@ new Falcon\Components\Cache\Serve();" );
 	}
 
 	public function clear_cache(): void {
-		array_map( 'wp_delete_file', glob( $this->cache_dir . '/*.html' ) );
+		$files = glob( $this->cache_dir . '/*.html' );
+		if ( false === $files ) {
+			return;
+		}
+		array_map( 'wp_delete_file', $files );
 	}
 
 	private function remove_cache_dir(): void {
