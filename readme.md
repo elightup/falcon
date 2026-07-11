@@ -1,87 +1,114 @@
 # Falcon - WordPress Optimizations & Tweaks
 
-**Falcon** is lightweight WordPress plugin that provide a list of optimizations and tweaks that help you improve the performance and user experience for your WordPress sites.
+**[Falcon](https://wpfalcon.pro)** is a lightweight WordPress plugin that helps you speed up your site, harden security, clean up bloat, and fine-tune how WordPress works — without a heavy stack of separate tools.
+
+Toggle only what you need from a clear settings UI. Export and import settings to reuse the same setup across sites.
 
 ## Features
 
-Falcon offers a comprehensive list modules for you to tweak and optimize your WordPress websites. These options are divided into the following categories:
+### [Performance](https://wpfalcon.pro/features/performance/)
 
-### [Disable components](https://wpfalcon.pro/features/disable-components/)
+Make pages load faster and cut unnecessary front-end work.
 
-#### General components
-
-- [Disable Gutenberg](https://metabox.io/disable-gutenberg-without-using-plugins/) (the block editor)
-- Disable heartbeat
-- Disable embeds, e.g. prevent others from embedding your site and vise-versa
-- Disable comments & remove website field from comment form
-- Disable revisions
-- Disable self pings
-- Disable privacy tools
-- Disable cron
-- Disable auto updates
-- Block external requests
-- Disable replacing text with formatted entities like smart quotes, dashes, ellipses, etc.
-
-#### Media components
-
-- Remove jQuery Migrate
-- Disable emojis
-- Disable scaling down big images
-- Disable automatic image rotation based on EXIF data
-- Disable thumbnail generation
-
-### [Header cleanup](https://wpfalcon.pro/features/header-cleanup/)
-
-- Remove feed links
-- Remove RSD link
-- Remove wlwmanifest link
-- Remove adjacent posts links
-- Remove WordPress version number
-- Remove shortlink
-- Remove REST API link
-
-### Media
-
-### [Email](https://wpfalcon.pro/features/email/)
-
-- Remove admin email confirmation
-- Disable auto update email notification
-- Disable admin email notification when a new user is registered
-- Disable admin email notification when users reset passwords
-- [Change default WordPress from name and email](https://deluxeblogtips.com/change-wordpress-default-email/)
-- SMTP configuration
-
-### [Admin cleanup](https://wpfalcon.pro/features/admin-cleanup/)
-
-- Show site icon on login page
-- Remove update nags
-- Remove footer text
-- Remove default dashboard widgets
-- Remove WordPress logo in the admin bar
-- Remove application passwords
+- [HTML page cache](https://wpfalcon.pro/features/performance/cache/) — serve static HTML and skip WordPress, themes, and plugins on cache hits
+- Disable Heartbeat to reduce server load
+- Remove `?ver=` query strings from CSS/JS for better browser caching
+- Disable emoji scripts and styles
+- Remove jQuery Migrate on the front end
+- Load selected CSS files asynchronously to reduce render-blocking
 
 ### [Security](https://wpfalcon.pro/features/security/)
 
-- Comment spam protection
-- Disable REST API for unauthenticated requests
-- [Disable XML-RPC](https://deluxeblogtips.com/disable-xml-rpc-wordpress/)
-- Restrict upload file types
-- Disable detailed login errors
-- Block AI bots from crawling/stealing your content, which also affect the performance
-- Force login to view the website
+Reduce common attack surfaces and protect your content.
 
-### [Cache](https://wpfalcon.pro/features/cache/)
+- Limit login attempts (block an IP after 3 failed tries for 1 hour)
+- Hide detailed login error messages
+- Force login to view the site
+- Disable the REST API for unauthenticated requests
+- Disable XML-RPC
+- Restrict upload file types (including WebP and AVIF when enabled)
+- Comment spam protection with a simple honeypot
+- Block common AI crawlers via `robots.txt`
+- Use scheme-less asset URLs to avoid mixed content warnings
 
-Falcon's cache feature creates static HTML files of your pages, serving them instantly to visitors without processing database queries, or loading WordPress, themes and all plugins on every request.
+### [Cleanup](https://wpfalcon.pro/features/cleanup/header/)
 
-### [Tweaks](https://wpfalcon.pro/features/tweaks/)
-- Search only posts
-- Enable maintenance mode
-- Remove query string for JavaScript and CSS files
-- Set scheme-less URLs for JavaScript and CSS files, e.g. remove `http:` and `https:` from URLs
-- Remove styles for recent comments widget
-- Cleanup nav menu item ID & classes
-- **Asynchronous load CSS** to avoid blocking load of CSS files
+Strip unused markup and keep the database lean.
+
+#### [Header](https://wpfalcon.pro/features/cleanup/header/)
+
+- Hide WordPress version
+- Remove shortlink, REST API link, adjacent posts links, feed links, RSD link, and WLW manifest link
+
+#### [Admin](https://wpfalcon.pro/features/cleanup/admin/)
+
+- Use the site icon on the login screen
+- Hide update nags
+- Remove default dashboard widgets
+- Remove admin footer text and the WordPress admin bar logo
+
+#### [Frontend](https://wpfalcon.pro/features/cleanup/frontend/)
+
+- Disable embeds
+- Clean up menu item classes and IDs
+- Remove Recent Comments widget CSS
+
+#### [Database](https://wpfalcon.pro/features/cleanup/database/)
+
+- Clean revisions, auto drafts, trashed posts, spam/trashed comments, expired transients, orphaned meta, unused terms, and optimize tables
+
+### [Content](https://wpfalcon.pro/features/content/editor/)
+
+Control the editor, comments, media, and publishing behavior.
+
+#### [Editor](https://wpfalcon.pro/features/content/editor/)
+
+- Disable the block editor (Gutenberg) and use the classic editor
+- Disable post revisions
+- Disable texturize (smart quotes and auto formatting)
+
+#### [Comments](https://wpfalcon.pro/features/content/comments/)
+
+- Disable comments site-wide
+- Remove the website field from the comment form
+
+#### [Media](https://wpfalcon.pro/features/content/media/)
+
+- Disable thumbnail generation
+- Disable big image scaling
+- Disable EXIF-based image rotation
+
+#### [Publishing](https://wpfalcon.pro/features/content/publishing/)
+
+- Limit front-end search to posts only
+- Disable self pingbacks
+
+### [System](https://wpfalcon.pro/features/system/)
+
+Site-wide controls for maintenance and WordPress internals.
+
+- Maintenance mode (customize the message with `maintenance.php` in the active theme)
+- Block external HTTP requests
+- Disable application passwords
+- Disable auto-updates
+- Disable WP-Cron (use a real server cron instead)
+- Remove privacy tools from the admin menu
+
+### [Email](https://wpfalcon.pro/features/email/notifications/)
+
+Cut noisy notifications and send mail reliably.
+
+#### [Notifications](https://wpfalcon.pro/features/email/notifications/)
+
+- Disable admin email verification prompts
+- Disable update notification emails
+- Disable new user emails to admins
+- Disable password change/reset emails
+
+#### [Delivery](https://wpfalcon.pro/features/email/delivery/)
+
+- Change the default from name and email address
+- Send WordPress email via SMTP
 
 ## You might also like
 
