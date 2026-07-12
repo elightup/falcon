@@ -1,6 +1,4 @@
-# Changelog
-
-## Unreleased
+### 2.11.0 - 2026-07-12
 
 **Highlight**
 
