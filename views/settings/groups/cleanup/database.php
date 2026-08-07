@@ -1,9 +1,11 @@
 <?php
 use Falcon\Components\Cleanup;
 
-$labels = Cleanup::get_labels();
-$counts = Cleanup::get_counts();
-$items  = array_keys( $labels );
+$cleanup = Cleanup::instance();
+$labels  = $cleanup->get_labels();
+$counts  = $cleanup->get_counts();
+$items   = array_keys( $labels );
+$keep    = defined( 'WP_POST_REVISIONS' ) && is_numeric( WP_POST_REVISIONS ) ? (int) WP_POST_REVISIONS : '';
 ?>
 <p><?php esc_html_e( 'Select items to clean up from your database. All items are selected by default.', 'falcon' ); ?></p>
 
@@ -18,6 +20,17 @@ $items  = array_keys( $labels );
 				<?= esc_html( $labels[ $item ] ); ?>
 				<span class="cleanup-count">(<?= esc_html( $counts[ $item ] ); ?>)</span>
 			</div>
+			<?php if ( $item === 'revisions' ) : ?>
+				<div class="featureBox_description">
+					<?php
+					printf(
+						/* translators: %s: number input */
+						esc_html__( 'Keep latest %s revisions per post (leave empty to delete all)', 'falcon' ),
+						'<input type="text" class="e-inlineInput" id="revisions-keep" value="' . esc_attr( $keep ) . '" inputmode="numeric" pattern="[0-9]*" size="2">'
+					);
+					?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 <?php endforeach; ?>
@@ -54,6 +67,7 @@ $items  = array_keys( $labels );
 		const formData = new FormData();
 		formData.append( 'action', 'falcon_run_cleanup' );
 		formData.append( '_ajax_nonce', Falcon.nonce_cleanup );
+		formData.append( 'revisions_keep', document.getElementById( 'revisions-keep' )?.value ?? '' );
 		items.forEach( item => formData.append( 'items[]', item ) );
 
 		fetch( ajaxurl, { method: 'POST', body: formData } )

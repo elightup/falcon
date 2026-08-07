@@ -356,6 +356,27 @@ p.description {
 	color: #757575;
 }
 
+.e-page input[type="text"].e-inlineInput {
+	width: 2em;
+	min-height: 0;
+	padding: 0;
+	margin: 0 2px;
+	border: 0;
+	border-bottom: 1px solid #8c8f94;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	text-align: center;
+	line-height: inherit;
+	font-size: inherit;
+}
+
+.e-page input[type="text"].e-inlineInput:focus {
+	border-color: transparent transparent var(--color);
+	box-shadow: none;
+	outline: none;
+}
+
 @media (max-width: 767px) {
 	.e-header {
 		position: static;

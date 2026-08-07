@@ -2,11 +2,19 @@
 namespace Falcon\Components;
 
 class Cleanup {
-	private static ?array $counts = null;
+	private static ?self $instance = null;
+
+	private ?array $counts = null;
 
 	public function __construct() {
+		self::$instance = $this;
+
 		add_action( 'wp_ajax_falcon_run_cleanup', [ $this, 'run' ] );
 		add_action( 'wp_ajax_falcon_cleanup_counts', [ $this, 'get_counts_ajax' ] );
+	}
+
+	public static function instance(): self {
+		return self::$instance ??= new self;
 	}
 
 	public function run(): void {
@@ -32,15 +40,15 @@ class Cleanup {
 		];
 		foreach ( $items as $item ) {
 			$method = str_replace( '-', '_', $item );
-			if ( ! method_exists( __CLASS__, $method ) ) {
+			if ( ! method_exists( $this, $method ) ) {
 				continue;
 			}
-			$cleaned = self::$method();
+			$cleaned = $this->$method();
 			if ( $cleaned <= 0 ) {
 				continue;
 			}
 			$verb = $actions[ $method ] ?? __( 'Cleaned', 'falcon' );
-			$noun = $nouns[ $method ] ?? strtolower( self::get_labels()[ $item ] ?? $item );
+			$noun = $nouns[ $method ] ?? strtolower( $this->get_labels()[ $item ] ?? $item );
 			$results[] = sprintf(
 				/* translators: %1$s - action verb, %2$d - number of items, %3$s - item type */
 				__( '%1$s %2$d %3$s.', 'falcon' ),
@@ -53,14 +61,14 @@ class Cleanup {
 		if ( empty( $results ) ) {
 			wp_send_json_success( [
 				'message' => __( 'Nothing to clean. Your database is already clean!', 'falcon' ),
-				'counts'  => self::get_counts(),
+				'counts'  => $this->get_counts(),
 			] );
 		}
 
-		self::$counts = null;
+		$this->counts = null;
 		wp_send_json_success( [
 			'message' => implode( '<br>', $results ),
-			'counts'  => self::get_counts(),
+			'counts'  => $this->get_counts(),
 		] );
 	}
 
@@ -71,11 +79,11 @@ class Cleanup {
 			wp_send_json_error( __( 'You do not have permission to perform this action.', 'falcon' ) );
 		}
 
-		self::$counts = null;
-		wp_send_json_success( self::get_counts() );
+		$this->counts = null;
+		wp_send_json_success( $this->get_counts() );
 	}
 
-	public static function get_labels(): array {
+	public function get_labels(): array {
 		return [
 			'revisions'             => __( 'Revisions', 'falcon' ),
 			'auto_drafts'           => __( 'Auto drafts', 'falcon' ),
@@ -93,20 +101,20 @@ class Cleanup {
 		];
 	}
 
-	public static function get_counts(): array {
+	public function get_counts(): array {
 		global $wpdb;
 
-		if ( self::$counts !== null ) {
-			return self::$counts;
+		if ( $this->counts !== null ) {
+			return $this->counts;
 		}
 
-		return self::$counts = [
+		return $this->counts = [
 			'revisions'             => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->posts WHERE post_type = 'revision'" ),
 			'auto_drafts'           => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->posts WHERE post_status = 'auto-draft'" ),
 			'trashed_posts'         => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->posts WHERE post_status = 'trash'" ),
 			'spam_comments'         => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->comments WHERE comment_approved = 'spam'" ),
 			'trashed_comments'      => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->comments WHERE comment_approved = 'trash'" ),
-			'expired_transients'    => self::count_expired_transients(),
+			'expired_transients'    => $this->count_expired_transients(),
 			'orphaned_post_meta'    => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->postmeta pm LEFT JOIN $wpdb->posts p ON p.ID = pm.post_id WHERE p.ID IS NULL" ),
 			'orphaned_comment_meta' => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->commentmeta cm LEFT JOIN $wpdb->comments c ON c.comment_ID = cm.comment_id WHERE c.comment_ID IS NULL" ),
 			'orphaned_user_meta'    => (int) $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->usermeta um LEFT JOIN $wpdb->users u ON u.ID = um.user_id WHERE u.ID IS NULL" ),
@@ -117,7 +125,7 @@ class Cleanup {
 		];
 	}
 
-	private static function count_expired_transients(): int {
+	private function count_expired_transients(): int {
 		global $wpdb;
 		$count = (int) $wpdb->get_var(
 			$wpdb->prepare(
@@ -130,19 +138,59 @@ class Cleanup {
 		return $count;
 	}
 
-	private static function revisions(): int {
+	private function revisions(): int {
 		global $wpdb;
-		$count = self::count( 'revisions' );
+
+		$count = $this->count( 'revisions' );
 		if ( $count <= 0 ) {
 			return 0;
 		}
-		$wpdb->delete( $wpdb->posts, [ 'post_type' => 'revision' ] );
-		return $count;
+
+		$keep    = $this->get_revisions_keep();
+		$deleted = 0;
+
+		if ( $keep > 0 ) {
+			// Match core wp_save_post_revision(): keep latest N, skip autosaves.
+			$parents = $wpdb->get_col( "SELECT DISTINCT post_parent FROM $wpdb->posts WHERE post_type = 'revision' AND post_parent > 0" );
+			foreach ( $parents as $parent_id ) {
+				$revisions = wp_get_post_revisions( (int) $parent_id, [ 'order' => 'ASC' ] );
+				$to_delete = count( $revisions ) - $keep;
+				if ( $to_delete < 1 ) {
+					continue;
+				}
+				foreach ( array_slice( $revisions, 0, $to_delete ) as $revision ) {
+					if ( str_contains( $revision->post_name, 'autosave' ) ) {
+						continue;
+					}
+					if ( wp_delete_post_revision( $revision->ID ) ) {
+						++$deleted;
+					}
+				}
+			}
+			return $deleted;
+		}
+
+		// Empty or 0: delete all revisions via the WP API.
+		$ids = $wpdb->get_col( "SELECT ID FROM $wpdb->posts WHERE post_type = 'revision'" );
+		foreach ( $ids as $id ) {
+			if ( wp_delete_post_revision( (int) $id ) ) {
+				++$deleted;
+			}
+		}
+		return $deleted;
 	}
 
-	private static function auto_drafts(): int {
+	/**
+	 * Number of revisions to keep per post. 0 = delete all.
+	 */
+	private function get_revisions_keep(): int {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- verified in run().
+		return absint( wp_unslash( $_POST['revisions_keep'] ?? 0 ) );
+	}
+
+	private function auto_drafts(): int {
 		global $wpdb;
-		$count = self::count( 'auto_drafts' );
+		$count = $this->count( 'auto_drafts' );
 		if ( $count <= 0 ) {
 			return 0;
 		}
@@ -150,7 +198,7 @@ class Cleanup {
 		return $count;
 	}
 
-	private static function trashed_posts(): int {
+	private function trashed_posts(): int {
 		global $wpdb;
 		$ids = $wpdb->get_col( "SELECT ID FROM $wpdb->posts WHERE post_status = 'trash'" );
 		foreach ( $ids as $id ) {
@@ -159,7 +207,7 @@ class Cleanup {
 		return count( $ids );
 	}
 
-	private static function spam_comments(): int {
+	private function spam_comments(): int {
 		global $wpdb;
 		$ids = $wpdb->get_col( "SELECT comment_ID FROM $wpdb->comments WHERE comment_approved = 'spam'" );
 		foreach ( $ids as $id ) {
@@ -168,7 +216,7 @@ class Cleanup {
 		return count( $ids );
 	}
 
-	private static function trashed_comments(): int {
+	private function trashed_comments(): int {
 		global $wpdb;
 		$ids = $wpdb->get_col( "SELECT comment_ID FROM $wpdb->comments WHERE comment_approved = 'trash'" );
 		foreach ( $ids as $id ) {
@@ -177,9 +225,9 @@ class Cleanup {
 		return count( $ids );
 	}
 
-	private static function expired_transients(): int {
+	private function expired_transients(): int {
 		global $wpdb;
-		$count = self::count( 'expired_transients' );
+		$count = $this->count( 'expired_transients' );
 		if ( $count <= 0 ) {
 			return 0;
 		}
@@ -211,9 +259,9 @@ class Cleanup {
 		return $count;
 	}
 
-	private static function orphaned_post_meta(): int {
+	private function orphaned_post_meta(): int {
 		global $wpdb;
-		$count = self::count( 'orphaned_post_meta' );
+		$count = $this->count( 'orphaned_post_meta' );
 		if ( $count <= 0 ) {
 			return 0;
 		}
@@ -221,9 +269,9 @@ class Cleanup {
 		return $count;
 	}
 
-	private static function orphaned_comment_meta(): int {
+	private function orphaned_comment_meta(): int {
 		global $wpdb;
-		$count = self::count( 'orphaned_comment_meta' );
+		$count = $this->count( 'orphaned_comment_meta' );
 		if ( $count <= 0 ) {
 			return 0;
 		}
@@ -231,9 +279,9 @@ class Cleanup {
 		return $count;
 	}
 
-	private static function orphaned_user_meta(): int {
+	private function orphaned_user_meta(): int {
 		global $wpdb;
-		$count = self::count( 'orphaned_user_meta' );
+		$count = $this->count( 'orphaned_user_meta' );
 		if ( $count <= 0 ) {
 			return 0;
 		}
@@ -241,9 +289,9 @@ class Cleanup {
 		return $count;
 	}
 
-	private static function orphaned_term_meta(): int {
+	private function orphaned_term_meta(): int {
 		global $wpdb;
-		$count = self::count( 'orphaned_term_meta' );
+		$count = $this->count( 'orphaned_term_meta' );
 		if ( $count <= 0 ) {
 			return 0;
 		}
@@ -251,9 +299,9 @@ class Cleanup {
 		return $count;
 	}
 
-	private static function orphaned_post_terms(): int {
+	private function orphaned_post_terms(): int {
 		global $wpdb;
-		$count = self::count( 'orphaned_post_terms' );
+		$count = $this->count( 'orphaned_post_terms' );
 		if ( $count <= 0 ) {
 			return 0;
 		}
@@ -261,9 +309,9 @@ class Cleanup {
 		return $count;
 	}
 
-	private static function unused_terms(): int {
+	private function unused_terms(): int {
 		global $wpdb;
-		$count = self::count( 'unused_terms' );
+		$count = $this->count( 'unused_terms' );
 		if ( $count <= 0 ) {
 			return 0;
 		}
@@ -278,7 +326,7 @@ class Cleanup {
 		return $count;
 	}
 
-	private static function optimize_tables(): int {
+	private function optimize_tables(): int {
 		global $wpdb;
 		$tables = $wpdb->get_col( "SHOW TABLES LIKE '{$wpdb->prefix}%'" );
 		foreach ( $tables as $table ) {
@@ -287,8 +335,8 @@ class Cleanup {
 		return count( $tables );
 	}
 
-	private static function count( string $item ): int {
-		$counts = self::get_counts();
+	private function count( string $item ): int {
+		$counts = $this->get_counts();
 		return $counts[ $item ] ?? 0;
 	}
 }
