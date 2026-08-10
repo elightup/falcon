@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || die;
+
 $this->checkbox( 'login_site_icon', __( 'Use site icon on login screen', 'falcon' ), __( 'Use your site icon as the login logo.', 'falcon' ) );
 $this->checkbox( 'no_update_nags', __( 'Hide update nags', 'falcon' ), __( 'Hide WordPress update notices in the admin area.', 'falcon' ) );
 $this->checkbox( 'no_dashboard_widgets', __( 'Remove dashboard widgets', 'falcon' ), __( 'Remove default widgets from the Dashboard screen.', 'falcon' ) );

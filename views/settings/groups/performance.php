@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || die;
+
 $option = get_option( 'falcon', [] );
 ?>
 <div class="featureBox">
@@ -9,7 +11,7 @@ $option = get_option( 'falcon', [] );
 	<div class="featureBox_body">
 		<div class="featureBox_title"><?php esc_html_e( 'Cache', 'falcon' ) ?></div>
 		<?php // Translators: %s - Link to the cache documentation. ?>
-		<div class="featureBox_description"><?= wp_kses_post( sprintf( __( 'Cache pages for faster loading. Cache is automatically cleared when content changes. <a href="%s" target="_blank">Learn more</a>.', 'falcon' ), esc_url( add_query_arg( [ 'utm_campaign' => 'falcon', 'utm_source' => 'settings_page', 'utm_medium' => 'documentation_link' ], 'https://wpfalcon.pro/features/performance/cache/' ) ) ) ); ?></div>
+		<div class="featureBox_description"><?php echo wp_kses_post( sprintf( __( 'Cache pages for faster loading. Cache is automatically cleared when content changes. <a href="%s" target="_blank">Learn more</a>.', 'falcon' ), esc_url( add_query_arg( [ 'utm_campaign' => 'falcon', 'utm_source' => 'settings_page', 'utm_medium' => 'documentation_link' ], 'https://wpfalcon.pro/features/performance/cache/' ) ) ) ); ?></div>
 	</div>
 </div>
 <?php
@@ -21,6 +23,6 @@ $this->checkbox( 'no_jquery_migrate', __( 'Remove jQuery Migrate', 'falcon' ), _
 <fieldset>
 	<label for="lazy-load-css"><?php esc_html_e( 'Asynchronous load CSS', 'falcon' ) ?></label>
 	<p class="description"><?php esc_html_e( 'Load selected CSS files asynchronously to reduce render-blocking.', 'falcon' ) ?></p>
-	<textarea id="lazy-load-css" class="large-text" rows="5" name="falcon[lazy_load_css]"><?= esc_textarea( $option['lazy_load_css'] ?? '' ); ?></textarea>
+	<textarea id="lazy-load-css" class="large-text" rows="5" name="falcon[lazy_load_css]"><?php echo esc_textarea( $option['lazy_load_css'] ?? '' ); ?></textarea>
 	<p class="description"><?php esc_html_e( 'Enter CSS handles or keywords, one per line.', 'falcon' ) ?></p>
 </fieldset>

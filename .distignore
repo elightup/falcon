@@ -15,7 +15,7 @@ Thumbs.db
 .gitignore
 
 ## PHP
-composer.*
+composer.lock
 phpcs.*
 phpunit.xml
 phpstan.*

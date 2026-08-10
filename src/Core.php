@@ -44,7 +44,7 @@ class Core {
 			return $meta;
 		}
 
-		$meta[] = '<a href="https://wordpress.org/support/plugin/falcon/reviews/?filter=5" target="_blank" title="' . esc_html__( 'Rate Falcon on WordPress.org', 'falcon' ) . '" style="color: #ffb900">'
+		$meta[] = '<a href="https://wordpress.org/support/plugin/falcon/reviews/" target="_blank" title="' . esc_html__( 'Rate Falcon on WordPress.org', 'falcon' ) . '" style="color: #ffb900">'
 			. str_repeat( '<span class="dashicons dashicons-star-filled" style="font-size: 16px; width:16px; height: 16px"></span>', 5 )
 			. '</a>';
 

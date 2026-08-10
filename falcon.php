@@ -8,7 +8,6 @@
  * Author URI:  https://elightup.com
  * License:     GPL2+
  * Text Domain: falcon
- * Domain Path: /languages/
  *
  * Copyright (C) 2010-2025 Tran Ngoc Tuan Anh. All rights reserved.
  *
@@ -27,6 +26,8 @@
  */
 
 namespace Falcon;
+
+defined( 'ABSPATH' ) || die;
 
 define( 'FALCON_URL', plugin_dir_url( __FILE__ ) );
 define( 'FALCON_DIR', __DIR__ );

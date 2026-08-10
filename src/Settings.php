@@ -27,7 +27,7 @@ class Settings {
 			<div class="e-header">
 				<div class="e-branding">
 					<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" fill="#4f5d73" r="32"/><g fill="#e0e0d1"><path d="M47.7 40.6c.2-.4.6-.6 1-.7s.9-.1 1.4.1l2.5 1.2c.5.2.8.6.9 1.1.2.5.1 1.1-.2 1.6s-.8.9-1.2 1c-.5.1-1 0-1.4-.3L48.4 43c-.4-.3-.7-.7-.8-1.1-.1-.5-.1-.9.1-1.3zM16.4 40.8c.5.7.1 1.8-.7 2.4l-2.3 1.6c-.9.6-2 .3-2.7-.7-.6-1-.2-2.3.7-2.7l2.5-1.2c1.1-.4 2.1-.1 2.5.6zM14 31.8c0 .9-.7 1.6-1.8 1.7l-2.8.3c-1 .1-2-.8-2-2s.9-2.1 1.9-2l2.8.2c1.1.2 1.9.9 1.9 1.8zM16.3 22.7c-.2.4-.6.6-1 .7s-.9.1-1.4-.1l-2.5-1.2c-.5-.2-.8-.6-.9-1.1-.2-.5-.1-1.1.2-1.6s.8-.9 1.2-1c.5-.1 1 0 1.4.3l2.3 1.6c.4.3.7.7.8 1.1.2.5.2 1-.1 1.3zM22.9 16.1c-.7.5-1.8.1-2.4-.7l-1.6-2.3c-.6-.9-.3-2 .7-2.7 1-.6 2.3-.2 2.7.7l1.2 2.5c.4 1 .1 2-.6 2.5zM31.9 13.6c-.9 0-1.6-.7-1.7-1.8L29.9 9c-.1-1 .8-2 2-2s2.1.9 2 1.9l-.2 2.8c-.2 1.1-.9 1.9-1.8 1.9zM41 16c-.4-.2-.6-.6-.7-1s-.1-.9.1-1.4l1.2-2.5c.2-.5.6-.8 1.1-.9.5-.2 1.1-.1 1.6.2s.9.8 1 1.2c.1.5 0 1-.3 1.4l-1.6 2.3c-.3.4-.7.7-1.1.8-.5.1-1 .1-1.3-.1zM47.6 22.5c-.5-.7-.1-1.8.7-2.4l2.3-1.6c.9-.6 2-.3 2.7.7.6 1 .2 2.3-.7 2.7L50 23.1c-.9.5-2 .2-2.4-.6zM50.1 31.5c0-.9.7-1.6 1.8-1.7l2.8-.3c1-.1 2 .8 2 2s-.9 2.1-1.9 2l-2.8-.2c-1.1-.1-1.9-.9-1.9-1.8z"/></g><path d="M41.6 24.4c-.4-.4-1.1-.5-1.5-.2l-4.7 2.9-3.1 1.9H32c-2.8 0-5 2.2-5 5v.3c.2 2.5 2.1 4.5 4.6 4.6h.3c2.8 0 5-2.2 5-5v-.3l1.9-3.1 2.9-4.7c.4-.4.3-1-.1-1.4z" fill="#231f20" opacity=".2"/><path d="M41.6 22.4c-.4-.4-1.1-.5-1.5-.2l-4.7 2.9-3.1 1.9H32c-2.8 0-5 2.2-5 5v.3c.2 2.5 2.1 4.5 4.6 4.6h.3c2.8 0 5-2.2 5-5v-.3l1.9-3.1 2.9-4.7c.4-.4.3-1-.1-1.4z" fill="#c75c5c"/><circle cx="32" cy="32" fill="#fff" r="5"/><path d="M40 49c0 1.7-1.3 3-3 3H27c-1.7 0-3-1.3-3-3v-2c0-1.7 1.3-3 3-3h10c1.7 0 3 1.3 3 3z" fill="#f5cf87"/></svg>
-					<h1><?= esc_html( get_admin_page_title() ); ?></h1>
+					<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 				</div>
 
 				<div class="submit">
@@ -43,7 +43,7 @@ class Settings {
 					<div class="e-content e-box">
 						<nav class="e-tabs" aria-label="<?php esc_attr_e( 'Settings sections', 'falcon' ); ?>">
 							<?php foreach ( $groups as $group_key => $group ) : ?>
-								<a href="#<?= esc_attr( $group_key ); ?>" data-group="<?= esc_attr( $group_key ); ?>" class="e-tab"><?= esc_html( $group['label'] ); ?></a>
+								<a href="#<?php echo esc_attr( $group_key ); ?>" data-group="<?php echo esc_attr( $group_key ); ?>" class="e-tab"><?php echo esc_html( $group['label'] ); ?></a>
 							<?php endforeach; ?>
 							<a class="e-docsLink" href="#" target="_blank" rel="noopener noreferrer">
 								<span class="e-docsLink_text"><?php esc_html_e( 'Documentation', 'falcon' ); ?></span>
@@ -57,9 +57,9 @@ class Settings {
 									<?php if ( empty( $group['tabs'] ) ) : ?>
 										<?php continue; ?>
 									<?php endif; ?>
-									<nav class="e-subTabs" data-group="<?= esc_attr( $group_key ); ?>" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: settings section name */ __( '%s sub-sections', 'falcon' ), $group['label'] ) ); ?>">
+									<nav class="e-subTabs" data-group="<?php echo esc_attr( $group_key ); ?>" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: settings section name */ __( '%s sub-sections', 'falcon' ), $group['label'] ) ); ?>">
 										<?php foreach ( $group['tabs'] as $tab_key => $tab_label ) : ?>
-											<a href="#<?= esc_attr( "$group_key/$tab_key" ); ?>" data-group="<?= esc_attr( $group_key ); ?>" data-tab="<?= esc_attr( $tab_key ); ?>" class="e-subTab"><?= esc_html( $tab_label ); ?></a>
+											<a href="#<?php echo esc_attr( "$group_key/$tab_key" ); ?>" data-group="<?php echo esc_attr( $group_key ); ?>" data-tab="<?php echo esc_attr( $tab_key ); ?>" class="e-subTab"><?php echo esc_html( $tab_label ); ?></a>
 										<?php endforeach; ?>
 									</nav>
 								<?php endforeach; ?>
@@ -78,7 +78,7 @@ class Settings {
 							<p><?php esc_html_e( 'Export your current plugin settings and import them on another site to quickly apply the same configuration.', 'falcon' ) ?></p>
 							<div class="e-widget_actions">
 								<?php $url = wp_nonce_url( add_query_arg( 'action', 'falcon-export' ), 'export' ); ?>
-								<a href="<?= esc_url( $url ) ?>" class="button"><?php esc_html_e( 'Export', 'falcon' ) ?></a>
+								<a href="<?php echo esc_url( $url ) ?>" class="button"><?php esc_html_e( 'Export', 'falcon' ) ?></a>
 								<label for="import" class="button">
 									<?php esc_html_e( 'Import', 'falcon' ) ?>
 									<input type="file" id="import" accept=".json">
@@ -88,7 +88,7 @@ class Settings {
 						<div class="e-widget e-box">
 							<h2 class="e-widget_title"><?php esc_html_e( 'Share & feedback', 'falcon' ) ?></h2>
 							<?php // Translators: %1$s - URL to the review page, %2$s - URL to the feedback page ?>
-							<p><?= wp_kses_post( sprintf( __( 'If you like Falcon, please share it with your friends or <a href="%1$s" target="_blank">write a review</a> to help us spread the word. We also want to hear <a href="%2$s" target="_blank">your feedback</a> to improve the plugin.', 'falcon' ), 'https://wordpress.org/support/plugin/falcon/reviews/?filter=5', 'https://elu.to/fse' ) ); ?></p>
+							<p><?php echo wp_kses_post( sprintf( __( 'If you like Falcon, please share it with your friends or <a href="%1$s" target="_blank">write a review</a> to help us spread the word. We also want to hear <a href="%2$s" target="_blank">your feedback</a> to improve the plugin.', 'falcon' ), 'https://wordpress.org/support/plugin/falcon/reviews/', 'https://elu.to/fse' ) ); ?></p>
 						</div>
 						<div class="e-widget e-box">
 							<h2 class="e-widget_title"><?php esc_html_e( 'Our WordPress Plugins', 'falcon' ) ?></h2>
@@ -282,12 +282,12 @@ class Settings {
 		?>
 		<div class="featureBox">
 			<label class="featureBox_switch">
-				<input class="featureBox_input" type="checkbox" name="falcon[features][]" value="<?= esc_attr( $name ); ?>"<?php checked( self::is_feature_active( $name ) ) ?>>
+				<input class="featureBox_input" type="checkbox" name="falcon[features][]" value="<?php echo esc_attr( $name ); ?>"<?php checked( self::is_feature_active( $name ) ) ?>>
 				<span class="featureBox_icon"></span>
 			</label>
 			<div class="featureBox_body">
-				<div class="featureBox_title"><?= wp_kses_post( $label ); ?></div>
-				<div class="featureBox_description"><?= wp_kses_post( $description ); ?></div>
+				<div class="featureBox_title"><?php echo wp_kses_post( $label ); ?></div>
+				<div class="featureBox_description"><?php echo wp_kses_post( $description ); ?></div>
 			</div>
 		</div>
 		<?php

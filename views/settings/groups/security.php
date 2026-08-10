@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || die;
+
 $this->checkbox( 'limit_logins', __( 'Limit login attempts', 'falcon' ), __( 'Block an IP after 3 failed attempts for 1 hour.', 'falcon' ) );
 $this->checkbox( 'no_login_errors', __( 'Hide login error details', 'falcon' ), __( 'Show a generic error message on failed logins.', 'falcon' ) );
 $this->checkbox( 'force_login', __( 'Force login', 'falcon' ), __( 'Force users to login to view the website.', 'falcon' ) );

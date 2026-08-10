@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || die;
+
 $option        = get_option( 'falcon', [] );
 $smtp          = $option['smtp'] ?? [];
 $default_email = $option['default_email'] ?? [];
@@ -14,9 +16,9 @@ $default_email = $option['default_email'] ?? [];
 		<div class="featureBox_more">
 			<div class="formControls">
 				<label for="falcon[default_email][from_name]"><?php esc_html_e( 'From name', 'falcon' ) ?></label>
-				<input type="text" class="regular-text" name="falcon[default_email][from_name]" id="falcon[default_email][from_name]" value="<?= esc_attr( $default_email['from_name'] ?? get_bloginfo( 'name' ) ); ?>">
+				<input type="text" class="regular-text" name="falcon[default_email][from_name]" id="falcon[default_email][from_name]" value="<?php echo esc_attr( $default_email['from_name'] ?? get_bloginfo( 'name' ) ); ?>">
 				<label for="falcon[default_email][from_email]"><?php esc_html_e( 'From email', 'falcon' ) ?></label>
-				<input type="text" class="regular-text" name="falcon[default_email][from_email]" id="falcon[default_email][from_email]" value="<?= esc_attr( $default_email['from_email'] ?? get_option( 'admin_email' ) ); ?>">
+				<input type="text" class="regular-text" name="falcon[default_email][from_email]" id="falcon[default_email][from_email]" value="<?php echo esc_attr( $default_email['from_email'] ?? get_option( 'admin_email' ) ); ?>">
 			</div>
 		</div>
 	</div>
@@ -32,13 +34,13 @@ $default_email = $option['default_email'] ?? [];
 		<div class="featureBox_more">
 			<div class="formControls">
 				<label for="falcon[smtp][host]"><?php esc_html_e( 'Host', 'falcon' ) ?></label>
-				<input type="text" class="regular-text" name="falcon[smtp][host]" id="falcon[smtp][host]" value="<?= esc_attr( $smtp['host'] ?? '' ); ?>">
+				<input type="text" class="regular-text" name="falcon[smtp][host]" id="falcon[smtp][host]" value="<?php echo esc_attr( $smtp['host'] ?? '' ); ?>">
 				<label for="falcon[smtp][port]"><?php esc_html_e( 'Port', 'falcon' ) ?></label>
-				<input type="text" class="regular-text" name="falcon[smtp][port]" id="falcon[smtp][port]" value="<?= esc_attr( $smtp['port'] ?? '' ); ?>">
+				<input type="text" class="regular-text" name="falcon[smtp][port]" id="falcon[smtp][port]" value="<?php echo esc_attr( $smtp['port'] ?? '' ); ?>">
 				<label for="falcon[smtp][username]"><?php esc_html_e( 'Username', 'falcon' ) ?></label>
-				<input type="text" class="regular-text" name="falcon[smtp][username]" id="falcon[smtp][username]" value="<?= esc_attr( $smtp['username'] ?? '' ); ?>">
+				<input type="text" class="regular-text" name="falcon[smtp][username]" id="falcon[smtp][username]" value="<?php echo esc_attr( $smtp['username'] ?? '' ); ?>">
 				<label for="falcon[smtp][password]"><?php esc_html_e( 'Password', 'falcon' ) ?></label>
-				<input type="password" name="falcon[smtp][password]" id="falcon[smtp][password]" value="<?= esc_attr( $smtp['password'] ?? '' ); ?>">
+				<input type="password" name="falcon[smtp][password]" id="falcon[smtp][password]" value="<?php echo esc_attr( $smtp['password'] ?? '' ); ?>">
 				<label><?php esc_html_e( 'Encryption', 'falcon' ) ?></label>
 				<div>
 					<label><input type="radio" name="falcon[smtp][encryption]" value=""<?php checked( $smtp['encryption'] ?? '', '' ) ?>> <?php esc_html_e( 'None', 'falcon' ) ?></label>

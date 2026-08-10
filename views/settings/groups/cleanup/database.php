@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || die;
+
 use Falcon\Components\Cleanup;
 
 $cleanup = Cleanup::instance();
@@ -12,13 +14,13 @@ $keep    = defined( 'WP_POST_REVISIONS' ) && is_numeric( WP_POST_REVISIONS ) ? (
 <?php foreach ( $items as $item ) : ?>
 	<div class="featureBox">
 		<label class="featureBox_switch">
-			<input class="featureBox_input cleanup-checkbox" type="checkbox" name="cleanup_items[]" value="<?= esc_attr( $item ); ?>" checked>
+			<input class="featureBox_input cleanup-checkbox" type="checkbox" name="cleanup_items[]" value="<?php echo esc_attr( $item ); ?>" checked>
 			<span class="featureBox_icon"></span>
 		</label>
 		<div class="featureBox_body">
 			<div class="featureBox_title">
-				<?= esc_html( $labels[ $item ] ); ?>
-				<span class="cleanup-count">(<?= esc_html( $counts[ $item ] ); ?>)</span>
+				<?php echo esc_html( $labels[ $item ] ); ?>
+				<span class="cleanup-count">(<?php echo esc_html( $counts[ $item ] ); ?>)</span>
 			</div>
 			<?php if ( $item === 'revisions' ) : ?>
 				<div class="featureBox_description">

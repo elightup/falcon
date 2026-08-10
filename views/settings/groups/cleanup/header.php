@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || die;
+
 $this->checkbox( 'no_wp_generator', __( 'Hide WordPress version', 'falcon' ), __( 'Remove the WordPress version meta tag from the page header.', 'falcon' ) );
 $this->checkbox( 'no_shortlink', __( 'Remove shortlink', 'falcon' ), __( 'Remove the shortlink tag from the page header.', 'falcon' ) );
 $this->checkbox( 'no_rest_link', __( 'Remove REST API link', 'falcon' ), __( 'Remove the REST API link tag from the page header.', 'falcon' ) );

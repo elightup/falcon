@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || die;
+
 $this->checkbox( 'maintenance_mode', __( 'Maintenance mode', 'falcon' ), __( 'Show a maintenance message to non-admin visitors.', 'falcon' ) );
 $this->checkbox( 'no_external_requests', __( 'Block external requests', 'falcon' ), __( 'Block outbound HTTP requests from WordPress (can break updates and some plugins).', 'falcon' ) );
 $this->checkbox( 'no_application_passwords', __( 'Disable application passwords', 'falcon' ), __( 'Disable application passwords if you don\'t use external integrations.', 'falcon' ) );
