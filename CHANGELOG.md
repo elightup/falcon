@@ -1,3 +1,9 @@
+### 2.11.1 - 2026-08-10
+
+- Stop direct access to PHP files.
+- Replace short echo tags with PHP echo.
+- Add option to keep latest N revisions when cleaning database.
+
 ### 2.11.0 - 2026-07-12
 
 **Highlight**
