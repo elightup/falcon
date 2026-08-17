@@ -1,4 +1,4 @@
-### Unreleased
+### 2.11.2 - 2026-08-17
 
 - Skip page cache for Markdown requests (Slim SEO Pro's [Markdown for AI](https://wpslimseo.com/serve-posts-as-markdown/)) so AI bots always get Markdown, not cached HTML.
 

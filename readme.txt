@@ -3,7 +3,7 @@ Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 6.7
 Tested up to: 7.0
-Stable tag: 2.11.1
+Stable tag: 2.11.2
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -143,6 +143,10 @@ Please report security bugs found in the source code of the Falcon – WordPress
 == Screenshots ==
 
 == Changelog ==
+
+### 2.11.2 - 2026-08-17
+
+- Skip page cache for Markdown requests (Slim SEO Pro's [Markdown for AI](https://wpslimseo.com/serve-posts-as-markdown/)) so AI bots always get Markdown, not cached HTML.
 
 ### 2.11.1 - 2026-08-10
 
