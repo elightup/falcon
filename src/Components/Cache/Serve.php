@@ -85,6 +85,12 @@ class Serve {
 			return false;
 		}
 
+		// Don't cache Markdown requests (e.g. Slim SEO Pro's Markdown for AI).
+		// The cache key is based on the URL only, so HTML and Markdown responses for the same URL would collide.
+		if ( $this->is_markdown_requested() ) {
+			return false;
+		}
+
 		return true;
 	}
 
@@ -96,6 +102,11 @@ class Serve {
 	 */
 	private function should_create_cache(): bool {
 		if ( ! $this->should_cache() ) {
+			return false;
+		}
+
+		// Don't cache if a plugin asked to skip page cache, e.g. Slim SEO Pro's Markdown for AI.
+		if ( defined( 'DONOTCACHEPAGE' ) && DONOTCACHEPAGE ) {
 			return false;
 		}
 
@@ -120,6 +131,73 @@ class Serve {
 	private function get_cache_file(): string {
 		$hash = md5( $_SERVER['REQUEST_URI'] ?? '' );
 		return WP_CONTENT_DIR . '/uploads/cache/' . $hash . '.html';
+	}
+
+	/**
+	 * Whether the Accept header prefers Markdown over HTML (RFC 9110).
+	 * Mirrors Slim SEO Pro's Markdown for AI so both plugins make the same decision.
+	 */
+	private function is_markdown_requested(): bool {
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- Accept header is only read for content negotiation, never output.
+		$accept = $_SERVER['HTTP_ACCEPT'] ?? '';
+		if ( $accept === '' ) {
+			return false;
+		}
+
+		[ $markdown_q, $markdown_specificity ] = $this->accept_quality( $accept, 'text', 'markdown' );
+		[ $html_q ]                            = $this->accept_quality( $accept, 'text', 'html' );
+
+		return $markdown_q > 0.0 && ( $markdown_q > $html_q || ( $markdown_q === $html_q && $markdown_specificity === 2 ) );
+	}
+
+	/**
+	 * Get q-value and specificity for a media type from the Accept header.
+	 * Specificity: 2 = exact, 1 = type wildcard, 0 = full wildcard.
+	 *
+	 * @return array{0: float, 1: int}
+	 */
+	private function accept_quality( string $accept, string $type, string $subtype ): array {
+		$best             = 0.0;
+		$best_specificity = -1;
+
+		foreach ( explode( ',', $accept ) as $entry ) {
+			$entry = trim( $entry );
+			if ( $entry === '' ) {
+				continue;
+			}
+
+			$params      = explode( ';', $entry );
+			$media_type  = strtolower( trim( array_shift( $params ) ) );
+			[ $t, $s ]   = array_pad( explode( '/', $media_type, 2 ), 2, '' );
+			$specificity = -1;
+
+			if ( $t === $type && $s === $subtype ) {
+				$specificity = 2;
+			} elseif ( $t === $type && $s === '*' ) {
+				$specificity = 1;
+			} elseif ( $t === '*' && $s === '*' ) {
+				$specificity = 0;
+			}
+
+			if ( $specificity < 0 ) {
+				continue;
+			}
+
+			$q = 1.0;
+			foreach ( $params as $param ) {
+				$param = trim( $param );
+				if ( stripos( $param, 'q=' ) === 0 ) {
+					$q = (float) substr( $param, 2 );
+				}
+			}
+
+			if ( $specificity > $best_specificity || ( $specificity === $best_specificity && $q > $best ) ) {
+				$best             = $q;
+				$best_specificity = $specificity;
+			}
+		}
+
+		return [ $best, $best_specificity ];
 	}
 
 	private function send_cache_headers( string $status ): void {
