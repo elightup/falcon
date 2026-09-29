@@ -1,6 +1,6 @@
-### 2.11.3 - TBD
+### 2.12.0 - 2026-09-29
 
-- Add option to disable WordPress AI features and hide the Connectors settings page. (#28)
+- Add option to disable WordPress AI features and hide the Connectors settings page.
 
 ### 2.11.2 - 2026-08-17
 

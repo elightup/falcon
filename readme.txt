@@ -2,8 +2,8 @@
 Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 6.7
-Tested up to: 7.0
-Stable tag: 2.11.2
+Tested up to: 7.1.2
+Stable tag: 2.12.0
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -145,9 +145,9 @@ Please report security bugs found in the source code of the Falcon – WordPress
 
 == Changelog ==
 
-### 2.11.3 - TBD
+= 2.12.0 - 2026-09-29 =
 
-- Add option to disable WordPress AI features and hide the Connectors settings page. (#28)
+- Add option to disable WordPress AI features and hide the Connectors settings page.
 
 ### 2.11.2 - 2026-08-17
 
