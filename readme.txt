@@ -104,6 +104,7 @@ Site-wide controls for maintenance and WordPress internals.
 - Disable auto-updates
 - Disable WP-Cron (use a real server cron instead)
 - Remove privacy tools from the admin menu
+- Disable AI features and hide the Connectors settings page
 
 #### [Email](https://wpfalcon.pro/features/email/notifications/)
 
@@ -143,6 +144,10 @@ Please report security bugs found in the source code of the Falcon – WordPress
 == Screenshots ==
 
 == Changelog ==
+
+### 2.11.3 - TBD
+
+- Add option to disable WordPress AI features and hide the Connectors settings page. (#28)
 
 ### 2.11.2 - 2026-08-17
 

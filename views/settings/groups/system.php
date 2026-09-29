@@ -7,3 +7,4 @@ $this->checkbox( 'no_application_passwords', __( 'Disable application passwords'
 $this->checkbox( 'no_auto_updates', __( 'Disable auto-updates', 'falcon' ), __( 'Turn off automatic updates for WordPress, themes, and plugins.', 'falcon' ) );
 $this->checkbox( 'no_cron', __( 'Disable WP-Cron', 'falcon' ), __( 'Disable WP-Cron. Use a real server cron job instead.', 'falcon' ) );
 $this->checkbox( 'no_privacy', __( 'Remove privacy tools', 'falcon' ), __( 'Remove privacy tools from the admin menu.', 'falcon' ) );
+$this->checkbox( 'no_ai_features', __( 'Disable AI features', 'falcon' ), __( 'Turn off WordPress AI features and hide the Connectors settings page.', 'falcon' ) );

@@ -19,6 +19,7 @@ class General extends Base {
 		'no_comment_url',
 		'no_texturize',
 		'maintenance_mode',
+		'no_ai_features',
 	];
 
 	public function no_gutenberg() {
@@ -87,6 +88,15 @@ class General extends Base {
 		remove_submenu_page( 'options-general.php', 'options-privacy.php' );
 		remove_submenu_page( 'tools.php', 'export-personal-data.php' );
 		remove_submenu_page( 'tools.php', 'erase-personal-data.php' );
+	}
+
+	public function no_ai_features(): void {
+		add_filter( 'wp_supports_ai', '__return_false' );
+		add_action( 'admin_menu', [ $this, 'hide_ai_connectors_page' ], 999 );
+	}
+
+	public function hide_ai_connectors_page(): void {
+		remove_submenu_page( 'options-general.php', 'options-connectors.php' );
 	}
 
 	/**

@@ -273,6 +273,7 @@ class Settings {
 			'force_login',
 			'smtp',
 			'cache',
+			'no_ai_features',
 		];
 
 		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'] ?? [], true );
