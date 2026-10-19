@@ -17,6 +17,17 @@ class Manager {
 		add_action( 'deactivate_falcon/falcon.php', [ $this, 'deactivate' ] );
 		add_action( 'delete_plugin', [ $this, 'delete' ] );
 		$this->hook_to_clear_cache();
+		$this->maybe_purge_legacy_cache();
+	}
+
+	/** Delete cache files from before the key bump in Serve. */
+	private function maybe_purge_legacy_cache(): void {
+		if ( get_option( 'falcon_cache' ) ) {
+			return;
+		}
+
+		$this->clear_cache();
+		update_option( 'falcon_cache', 1, true );
 	}
 
 	public function setup(): void {

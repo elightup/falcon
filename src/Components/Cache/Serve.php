@@ -63,11 +63,11 @@ class Serve {
 			return false;
 		}
 
-		// Don't cache logged-in users and comment authors.
+		// Don't cache logged-in users, comment authors, or post-password viewers.
 		// https://developer.wordpress.org/advanced-administration/wordpress/cookies/
 		if ( ! empty( $_COOKIE ) ) {
-			foreach ( $_COOKIE as $key => $value ) {
-				if ( str_contains( $key, 'wordpress_logged_in_' ) || str_contains( $key, 'comment_author_' ) ) {
+			foreach ( array_keys( $_COOKIE ) as $key ) {
+				if ( str_contains( $key, 'wordpress_logged_in_' ) || str_contains( $key, 'comment_author_' ) || str_contains( $key, 'wp-postpass_' ) ) {
 					return false;
 				}
 			}
@@ -115,8 +115,9 @@ class Serve {
 			return false;
 		}
 
-		// Don't cache password protected posts.
-		if ( is_singular() && post_password_required() ) {
+		// Don't cache posts that have a password.
+		$post = get_post();
+		if ( is_singular() && $post && $post->post_password ) {
 			return false;
 		}
 
@@ -129,7 +130,8 @@ class Serve {
 	}
 
 	private function get_cache_file(): string {
-		$hash = md5( $_SERVER['REQUEST_URI'] ?? '' );
+		// Bump the key so old cache files are not served.
+		$hash = md5( '2|' . ( $_SERVER['REQUEST_URI'] ?? '' ) );
 		return WP_CONTENT_DIR . '/uploads/cache/' . $hash . '.html';
 	}
 
