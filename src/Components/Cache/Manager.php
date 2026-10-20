@@ -17,6 +17,48 @@ class Manager {
 		add_action( 'deactivate_falcon/falcon.php', [ $this, 'deactivate' ] );
 		add_action( 'delete_plugin', [ $this, 'delete' ] );
 		$this->hook_to_clear_cache();
+		$this->maybe_purge_legacy_cache();
+
+		if ( Settings::is_feature_active( 'cache' ) ) {
+			$this->protect_cache_dir();
+		}
+	}
+
+	/**
+	 * Delete cache files from before the salted key in Serve.
+	 */
+	private function maybe_purge_legacy_cache(): void {
+		if ( get_option( 'falcon_cache' ) ) {
+			return;
+		}
+
+		$this->clear_cache();
+		update_option( 'falcon_cache', 1, true );
+	}
+
+	/**
+	 * Block direct HTTP access to cached HTML.
+	 * Write .htaccess only on Apache/LiteSpeed. Always write index.php.
+	 */
+	private function protect_cache_dir(): void {
+		global $is_apache;
+
+		wp_mkdir_p( $this->cache_dir );
+
+		$files = [
+			'index.php' => "<?php\n// Silence is golden.\n",
+		];
+
+		if ( $is_apache ) {
+			$files['.htaccess'] = "<IfModule mod_authz_core.c>\nRequire all denied\n</IfModule>\n<IfModule !mod_authz_core.c>\nDeny from all\n</IfModule>\n";
+		}
+
+		foreach ( $files as $name => $contents ) {
+			$path = $this->cache_dir . '/' . $name;
+			if ( ! file_exists( $path ) ) {
+				file_put_contents( $path, $contents );
+			}
+		}
 	}
 
 	public function setup(): void {
@@ -45,7 +87,7 @@ class Manager {
 require_once __DIR__ . '/plugins/falcon/src/Components/Cache/Serve.php';
 new Falcon\Components\Cache\Serve();" );
 
-		wp_mkdir_p( $this->cache_dir );
+		$this->protect_cache_dir();
 		$this->update_constant( true );
 	}
 
@@ -112,6 +154,13 @@ new Falcon\Components\Cache\Serve();" );
 	}
 
 	private function remove_cache_dir(): void {
+		foreach ( [ '.htaccess', 'index.php' ] as $file ) {
+			$path = $this->cache_dir . '/' . $file;
+			if ( file_exists( $path ) ) {
+				wp_delete_file( $path );
+			}
+		}
+
 		if ( is_dir( $this->cache_dir ) ) {
 			rmdir( $this->cache_dir );
 		}
