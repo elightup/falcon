@@ -130,8 +130,9 @@ class Serve {
 	}
 
 	private function get_cache_file(): string {
-		// Bump the key so old cache files are not served.
-		$hash = md5( '2|' . ( $_SERVER['REQUEST_URI'] ?? '' ) );
+		// NONCE_SALT (wp-config) loads before advanced-cache.php, so the path is not guessable from the URL.
+		$salt = defined( 'NONCE_SALT' ) ? NONCE_SALT : '';
+		$hash = md5( $salt . '|' . ( $_SERVER['REQUEST_URI'] ?? '' ) );
 		return WP_CONTENT_DIR . '/uploads/cache/' . $hash . '.html';
 	}
 
@@ -203,7 +204,7 @@ class Serve {
 	}
 
 	private function send_cache_headers( string $status ): void {
-		header( 'Cache-Control: public, max-age=31536000, s-maxage=31536000' );
+		header( 'Cache-Control: public, max-age=3600, s-maxage=86400' );
 		header( "X-Cache: $status" );
 	}
 }

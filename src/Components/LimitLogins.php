@@ -52,14 +52,6 @@ class LimitLogins {
 	}
 
 	private function get_ip_hash(): string {
-		$ip = ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] )
-			? sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) )
-			: sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ?? '' ) );
-
-		if ( str_contains( $ip, ',' ) ) {
-			$ip = trim( explode( ',', $ip )[0] );
-		}
-
-		return wp_hash( $ip );
+		return wp_hash( sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ?? '' ) ) );
 	}
 }
