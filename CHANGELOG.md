@@ -1,3 +1,7 @@
+### 2.12.1 - 2026-10-20
+
+- Fix password-protected post cache leak and harden cache/login
+
 ### 2.12.0 - 2026-09-29
 
 - Add option to disable WordPress AI features and hide the Connectors settings page.

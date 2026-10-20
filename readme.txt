@@ -2,8 +2,8 @@
 Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 6.7
-Tested up to: 7.1.2
-Stable tag: 2.12.0
+Tested up to: 7.1
+Stable tag: 2.12.1
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -144,6 +144,10 @@ Please report security bugs found in the source code of the Falcon – WordPress
 == Screenshots ==
 
 == Changelog ==
+
+= 2.12.1 - 2026-10-20 =
+
+- Fix password-protected post cache leak and harden cache/login
 
 = 2.12.0 - 2026-09-29 =
 
