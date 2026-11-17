@@ -1,13 +1,15 @@
 <?php
 /**
- * Plugin Name: Falcon
- * Plugin URI:  https://wpfalcon.pro
- * Description: WordPress optimizations & tweaks
- * Version:     2.12.1
- * Author:      eLightUp
- * Author URI:  https://elightup.com
- * License:     GPL2+
- * Text Domain: falcon
+ * Plugin Name:       Falcon
+ * Plugin URI:        https://wpfalcon.pro
+ * Description:       WordPress optimizations & tweaks
+ * Version:           2.12.2
+ * Requires at least: 6.7
+ * Requires PHP:      7.4
+ * Author:            eLightUp
+ * Author URI:        https://elightup.com
+ * License:           GPL2+
+ * Text Domain:       falcon
  *
  * Copyright (C) 2010-2025 Tran Ngoc Tuan Anh. All rights reserved.
  *

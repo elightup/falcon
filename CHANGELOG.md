@@ -1,3 +1,7 @@
+### 2.12.2 - 2026-11-17
+
+- Fix WooCommerce still sending the "Password Changed" email to the admin when password change emails are disabled
+
 ### 2.12.1 - 2026-10-20
 
 - Fix password-protected post cache leak and harden cache/login
