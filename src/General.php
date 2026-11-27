@@ -20,6 +20,7 @@ class General extends Base {
 		'no_texturize',
 		'maintenance_mode',
 		'no_ai_features',
+		'no_block_patterns',
 	];
 
 	public function no_gutenberg() {
@@ -97,6 +98,15 @@ class General extends Base {
 
 	public function hide_ai_connectors_page(): void {
 		remove_submenu_page( 'options-general.php', 'options-connectors.php' );
+	}
+
+	public function no_block_patterns(): void {
+		add_filter( 'should_load_remote_block_patterns', '__return_false' );
+		add_action( 'init', [ $this, 'remove_core_block_patterns' ], 9 );
+	}
+
+	public function remove_core_block_patterns(): void {
+		remove_theme_support( 'core-block-patterns' );
 	}
 
 	/**

@@ -274,6 +274,7 @@ class Settings {
 			'smtp',
 			'cache',
 			'no_ai_features',
+			'no_block_patterns',
 		];
 
 		return null === $data ? ! in_array( $name, $default_disabled, true ) : in_array( $name, $data['features'] ?? [], true );
