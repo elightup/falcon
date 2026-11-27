@@ -3,7 +3,7 @@ Contributors: elightup, rilwis, truongwp, paracetamol27
 Tags: optimize, performance, speed, tweaks, admin
 Requires at least: 6.7
 Tested up to: 7.1
-Stable tag: 2.12.2
+Stable tag: 2.13.0
 Requires PHP: 7.4
 License: GPLv2 or later
 
@@ -145,6 +145,10 @@ Please report security bugs found in the source code of the Falcon – WordPress
 == Screenshots ==
 
 == Changelog ==
+
+= 2.13.0 - 2026-11-27 =
+
+- Add option to disable remote and core block patterns (#30)
 
 = 2.12.2 - 2026-11-17 =
 

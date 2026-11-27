@@ -1,3 +1,7 @@
+### 2.13.0 - 2026-11-27
+
+- Add option to disable remote and core block patterns (#30)
+
 ### 2.12.2 - 2026-11-17
 
 - Fix WooCommerce still sending the "Password Changed" email to the admin when password change emails are disabled

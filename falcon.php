@@ -3,7 +3,7 @@
  * Plugin Name:       Falcon
  * Plugin URI:        https://wpfalcon.pro
  * Description:       WordPress optimizations & tweaks
- * Version:           2.12.2
+ * Version:           2.13.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            eLightUp
