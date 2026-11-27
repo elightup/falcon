@@ -75,6 +75,7 @@ Control the editor, comments, media, and publishing behavior.
 **[Editor](https://wpfalcon.pro/features/content/editor/)**
 
 - Disable the block editor (Gutenberg) and use the classic editor
+- Disable remote and core block patterns
 - Disable post revisions
 - Disable texturize (smart quotes and auto formatting)
 
